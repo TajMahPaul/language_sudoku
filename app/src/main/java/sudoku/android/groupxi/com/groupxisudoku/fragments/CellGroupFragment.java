@@ -43,6 +43,7 @@ public class CellGroupFragment extends Fragment {
                          R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9};
         for (int textView1 : textViews) {
             TextView textView = view.findViewById(textView1);
+            //textView.setText("1");
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -58,6 +59,11 @@ public class CellGroupFragment extends Fragment {
     }
 
     public void setValue(int position, int value) {
+        int textViews[] = new int[]{R.id.textView1, R.id.textView2, R.id.textView3, R.id.textView4,
+                R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9};
+        TextView textview = view.findViewById(textViews[position]);
+        String text = String.valueOf(value);
+        textview.setText(text);
 
     }
 

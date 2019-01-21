@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
     }
 
     private ArrayList<Board> readGameBoards(int difficulty) {
+        //read different game initial template from res/raw based on the level of difficulty
         ArrayList<Board> boards = new ArrayList<>();
         int fileId;
         if (difficulty == 1) {
@@ -153,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return boards;
     }
 
