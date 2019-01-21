@@ -8,11 +8,11 @@
     <TableLayout
         android:layout_width="384dp"
         android:layout_height="384dp"
-        android:layout_marginLeft="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
         <TableRow
             android:layout_width="match_parent"
@@ -105,6 +105,62 @@
 
     </TableLayout>
 
+    <LinearLayout
+        android:layout_width="405dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94">
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="1"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="2"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="3"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="4"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="5"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="6"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="7"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="8"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="9"/>
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -112,11 +168,11 @@
         android:layout_marginLeft="16dp"
         android:onClick="onGoBackButtonClicked"
         android:text="@string/go_back_button"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintVertical_bias="0.985" />
 
     <Button
         android:id="@+id/buttonShowInstructions"
@@ -125,24 +181,23 @@
         android:layout_marginLeft="200dp"
         android:onClick="onShowInstructionsButtonClicked"
         android:text="@string/show_instructions"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965"
-        android:layout_marginStart="200dp" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/buttonCheckBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="180dp"
+        android:layout_marginLeft="100dp"
         android:text="@string/check_board"
-        android:visibility="invisible"
         android:onClick="onCheckBoardButtonClicked"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822"
-        android:layout_marginStart="180dp" />
+        app:layout_constraintVertical_bias="0.822" />
 
 </android.support.constraint.ConstraintLayout>
