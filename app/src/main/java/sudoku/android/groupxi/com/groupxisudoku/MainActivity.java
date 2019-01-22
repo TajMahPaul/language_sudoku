@@ -18,9 +18,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
+import sudoku.android.groupxi.com.groupxisudoku.model.Pair;
 
 /**
  * Created by Knut on 19.11.2017.
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
     private Board startBoard;
     private Board currentBoard;
     private Button[] num_buttons = new Button [9];
+    private List<Pair> list = new ArrayList<Pair>();
 
 
     @Override
