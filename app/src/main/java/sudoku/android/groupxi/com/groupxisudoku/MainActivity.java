@@ -28,11 +28,13 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 public class MainActivity extends AppCompatActivity implements CellGroupFragment.OnFragmentInteractionListener {
     private final String TAG = "GameActivity";
-    private TextView clickedCell;
-    private int clickedGroup;
-    private int clickedCellId;
+    private TextView clickedCell = null;
+    private int clickedGroup = -1;
+    private int clickedCellId = -1;
     private Board startBoard;
     private Board currentBoard;
+    private Button[] num_buttons = new Button [9];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,31 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
                 }
             }
         }
+
+        //add function to number buttons
+        num_buttons[0] = (Button) findViewById(R.id.num_button1);
+        num_buttons[1] = (Button) findViewById(R.id.num_button2);
+        num_buttons[2] = (Button) findViewById(R.id.num_button3);
+        num_buttons[3] = (Button) findViewById(R.id.num_button4);
+        num_buttons[4] = (Button) findViewById(R.id.num_button5);
+        num_buttons[5] = (Button) findViewById(R.id.num_button6);
+        num_buttons[6] = (Button) findViewById(R.id.num_button7);
+        num_buttons[7] = (Button) findViewById(R.id.num_button8);
+        num_buttons[8] = (Button) findViewById(R.id.num_button9);
+        for(int i = 0; i < 9; i++){
+            final int finalI = i;
+            final int finalI1 = i;
+            num_buttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Button temp_button = (Button) v;
+                    String text = (String) temp_button.getText();
+                    clickedCell.setText(text);
+
+                }
+            });
+        }
+
     }
 
     private ArrayList<Board> readGameBoards(int difficulty) {
@@ -235,15 +262,16 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
 
     @Override
     public void onFragmentInteraction(int groupId, int cellId, View view) {
-        clickedCell = (TextView) view;
-        clickedGroup = groupId;
-        clickedCellId = cellId;
         Log.i(TAG, "Clicked group " + groupId + ", cell " + cellId);
         if (!isStartPiece(groupId, cellId)) {
-            Intent intent = new Intent("me.kirkhorn.knut.ChooseNumberActivity");
-            startActivityForResult(intent, 1);
+            clickedCell = (TextView) view;
+            clickedGroup = groupId;
+            clickedCellId = cellId;
         } else {
             Toast.makeText(this, getString(R.string.start_piece_error), Toast.LENGTH_SHORT).show();
+            clickedCell = null;
+            clickedGroup = 0;
+            clickedCellId = 0;
         }
     }
 }

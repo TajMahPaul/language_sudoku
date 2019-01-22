@@ -72,6 +72,7 @@ public class CellGroupFragment extends Fragment {
         return true;
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
