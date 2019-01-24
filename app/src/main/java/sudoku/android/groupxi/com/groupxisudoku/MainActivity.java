@@ -78,30 +78,32 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
         }
 
         //add function to number buttons
-        num_buttons[0] = (Button) findViewById(R.id.num_button1);
-        num_buttons[1] = (Button) findViewById(R.id.num_button2);
-        num_buttons[2] = (Button) findViewById(R.id.num_button3);
-        num_buttons[3] = (Button) findViewById(R.id.num_button4);
-        num_buttons[4] = (Button) findViewById(R.id.num_button5);
-        num_buttons[5] = (Button) findViewById(R.id.num_button6);
-        num_buttons[6] = (Button) findViewById(R.id.num_button7);
-        num_buttons[7] = (Button) findViewById(R.id.num_button8);
-        num_buttons[8] = (Button) findViewById(R.id.num_button9);
+        num_buttons[0] = findViewById(R.id.num_button1);
+        num_buttons[1] = findViewById(R.id.num_button2);
+        num_buttons[2] = findViewById(R.id.num_button3);
+        num_buttons[3] = findViewById(R.id.num_button4);
+        num_buttons[4] = findViewById(R.id.num_button5);
+        num_buttons[5] = findViewById(R.id.num_button6);
+        num_buttons[6] = findViewById(R.id.num_button7);
+        num_buttons[7] = findViewById(R.id.num_button8);
+        num_buttons[8] = findViewById(R.id.num_button9);
         for(int i = 0; i < 9; i++){
             final int finalI = i+1;
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //check if a cell has been selected
                     if(clickedGroup != 0){
                         int row = ((clickedGroup-1)/3)*3 + clickedCellId / 3;
                         int column = (clickedGroup-1)%3*3 + clickedCellId % 3;
-                        String temp = "position" + String.valueOf(row) + "and" + String.valueOf(column);
-                        Toast.makeText(MainActivity.this, temp, Toast.LENGTH_SHORT).show();
+                        //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
                             currentBoard.setValue(row,column, finalI);
                             Button temp_button = (Button) v;
                             String text = (String) temp_button.getText();
                             clickedCell.setText(text);
+                            clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+                            clickedCell = null;
                         }else{
                             Toast.makeText(MainActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
                         }
@@ -251,10 +253,17 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
     @Override
     public void onFragmentInteraction(int groupId, int cellId, View view) {
         Log.i(TAG, "Clicked group " + groupId + ", cell " + cellId);
+
+        //if there's selected cell previously, reset the background of that cell
+        if(clickedCell != null){
+            clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+        }
+
         if (!isStartPiece(groupId, cellId)) {
             clickedCell = (TextView) view;
             clickedGroup = groupId;
             clickedCellId = cellId;
+            view.setBackgroundResource(R.drawable.table_border_cell_selected);
         } else {
             Toast.makeText(this, getString(R.string.start_piece_error), Toast.LENGTH_SHORT).show();
             clickedCell = null;
