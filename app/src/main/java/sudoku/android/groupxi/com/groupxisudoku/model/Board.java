@@ -40,33 +40,28 @@ public class Board {
         return true;
     }
 
-    public boolean isBoardCorrect() {
-        // Check horizontal
-        for (int i = 0; i < gameCells.length; i++) {
-            ArrayList<Integer> numbers = new ArrayList<>();
-            for (int j = 0; j < gameCells[i].length; j++) {
-                int number = gameCells[i][j];
-                if (numbers.contains(number)) {
-                    return false;
-                } else {
-                    numbers.add(number);
-                }
+    //before set value use this function to check if this value can set in the board
+    public boolean isBoardCorrect(int row, int column, int value) {
+        //check horizontally and vertically
+        for (int i = 0; i < 9; i++) {
+            if(gameCells[row][i] == value){
+                return false;
+            }
+            if(gameCells[i][column] == value){
+                return false;
             }
         }
 
-        // Check vertical
-        for (int i = 0; i < gameCells.length; i++) {
-            ArrayList<Integer> numbers = new ArrayList<>();
-            for (int j = 0; j < gameCells[i].length; j++) {
-                int number = gameCells[j][i];
-                if (numbers.contains(number)) {
+        //check group
+        int g_row = row/3*3;
+        int g_column = column/3*3;
+        for(int i = g_row; i < g_row+3; i++){
+            for(int j = g_column; j < g_column+3; j++){
+                if(gameCells[i][j] == value){
                     return false;
-                } else {
-                    numbers.add(number);
                 }
             }
         }
-
         // Check each group is in CellGroupFragment class for easier code
         // returns true if horizontal and vertical lines are correct
         return true;
