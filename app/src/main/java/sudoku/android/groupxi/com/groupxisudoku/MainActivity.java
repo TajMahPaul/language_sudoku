@@ -24,10 +24,6 @@ import sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 import sudoku.android.groupxi.com.groupxisudoku.model.Pair;
 
-/**
- * Created by Knut on 19.11.2017.
- */
-
 public class MainActivity extends AppCompatActivity implements CellGroupFragment.OnFragmentInteractionListener {
     private final String TAG = "GameActivity";
     private TextView clickedCell = null;
