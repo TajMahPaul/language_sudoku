@@ -13,6 +13,7 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="143dp"
         android:layout_height="84dp"
+        android:onClick="playButton"
         android:text="Play"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="227dp" />
