@@ -24,7 +24,9 @@ import sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 import sudoku.android.groupxi.com.groupxisudoku.model.Pair;
 
-public class MainActivity extends AppCompatActivity implements CellGroupFragment.OnFragmentInteractionListener {
+
+
+public class GameActivity extends AppCompatActivity implements CellGroupFragment.OnFragmentInteractionListener {
     private final String TAG = "GameActivity";
     private TextView clickedCell = null;
     private int clickedGroup = 0;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);
@@ -74,17 +76,11 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
         }
 
         //add function to number buttons
-        num_buttons[0] = findViewById(R.id.num_button1);
-        num_buttons[1] = findViewById(R.id.num_button2);
-        num_buttons[2] = findViewById(R.id.num_button3);
-        num_buttons[3] = findViewById(R.id.num_button4);
-        num_buttons[4] = findViewById(R.id.num_button5);
-        num_buttons[5] = findViewById(R.id.num_button6);
-        num_buttons[6] = findViewById(R.id.num_button7);
-        num_buttons[7] = findViewById(R.id.num_button8);
-        num_buttons[8] = findViewById(R.id.num_button9);
+        int numButtonsId[] = new int[]{R.id.num_button1, R.id.num_button2, R.id.num_button3, R.id.num_button4,
+                R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9};
         for(int i = 0; i < 9; i++){
             final int finalI = i+1;
+            num_buttons[i] = findViewById(numButtonsId[i]);
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,15 +97,15 @@ public class MainActivity extends AppCompatActivity implements CellGroupFragment
                             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
                             clickedCell = null;
                         }else{
-                            Toast.makeText(MainActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
                         }
 
                     }else{
-                        Toast.makeText(MainActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        Toast.makeText(MainActivity.this, "game over", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GameActivity.this, "game over", Toast.LENGTH_SHORT).show();
                     }
 
                 }
