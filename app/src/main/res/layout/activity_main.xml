@@ -4,16 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBackgroundColor"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/playButton"
-        android:layout_width="84dp"
+        android:layout_width="184dp"
         android:layout_height="84dp"
-        android:text="Play"
+        android:text="@string/play_button"
+        android:elevation="10dp"
+        android:background="@drawable/table_border_cell"
+        android:stateListAnimator="@null"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="not ready"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.7"/>
 </android.support.constraint.ConstraintLayout>

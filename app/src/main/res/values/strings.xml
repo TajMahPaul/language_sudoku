@@ -32,4 +32,5 @@
     <string name="check_board">Check board</string>
     <string name="board_correct">Board is correct</string>
     <string name="board_incorrect">Board is not correct</string>
+    <string name="play_button">Play</string>
 </resources>
