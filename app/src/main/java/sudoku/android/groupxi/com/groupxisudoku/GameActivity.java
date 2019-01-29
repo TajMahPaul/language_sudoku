@@ -272,4 +272,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
 
     public static class MainActivity {
     }
+
+    public static class SettingsActivity {
+    }
 }

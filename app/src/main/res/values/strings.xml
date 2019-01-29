@@ -32,4 +32,9 @@
     <string name="check_board">Check board</string>
     <string name="board_correct">Board is correct</string>
     <string name="board_incorrect">Board is not correct</string>
+
+    <string-array name="planets_array">
+        <item>Chinese</item>
+        <item>Korean</item>
+    </string-array>
 </resources>

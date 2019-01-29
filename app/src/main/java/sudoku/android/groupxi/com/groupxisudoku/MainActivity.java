@@ -15,8 +15,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    // play
     public void playButton(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    // settings
+    public void settingsButton(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
