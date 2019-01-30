@@ -33,4 +33,15 @@
     <string name="board_correct">Board is correct</string>
     <string name="board_incorrect">Board is not correct</string>
     <string name="play_button">Play</string>
+
+    <string name="Chinese_one">一</string>
+    <string name="Chinese_two">二</string>
+    <string name="Chinese_three">三</string>
+    <string name="Chinese_four">四</string>
+    <string name="Chinese_five">五</string>
+    <string name="Chinese_six">六</string>
+    <string name="Chinese_seven">七</string>
+    <string name="Chinese_eight">八</string>
+    <string name="Chinese_nine">九</string>
+
 </resources>
