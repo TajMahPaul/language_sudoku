@@ -1,6 +1,7 @@
 package sudoku.android.groupxi.com.groupxisudoku;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -34,11 +35,13 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     private Board startBoard;
     private Board currentBoard;
     private Button[] num_buttons = new Button [9];
-    private List<Pair> list = new ArrayList<Pair>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Resources res = getResources();
+        String[] native_strings = res.getStringArray(R.array.native_array);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         int difficulty = getIntent().getIntExtra("difficulty", 0);
@@ -70,7 +73,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
                 int currentValue = currentBoard.getValue(i, j);
 
                 if (currentValue != 0) {
-                    tempCellGroupFragment.setValue(groupPosition, currentValue);
+                    tempCellGroupFragment.setValue(groupPosition, native_strings[currentValue - 1]);
                 }
             }
         }

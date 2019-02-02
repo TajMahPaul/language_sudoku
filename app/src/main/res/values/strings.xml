@@ -43,5 +43,15 @@
     <string name="Chinese_seven">七</string>
     <string name="Chinese_eight">八</string>
     <string name="Chinese_nine">九</string>
-
+    <string-array name="native_array">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+    </string-array>
 </resources>

@@ -57,12 +57,11 @@ public class CellGroupFragment extends Fragment {
         this.groupId = groupId;
     }
 
-    public void setValue(int position, int value) {
+    public void setValue(int position, String value) {
         int textViews[] = new int[]{R.id.textView1, R.id.textView2, R.id.textView3, R.id.textView4,
                 R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9};
         TextView textview = view.findViewById(textViews[position]);
-        String text = String.valueOf(value);
-        textview.setText(text);
+        textview.setText(value);
 
     }
 
