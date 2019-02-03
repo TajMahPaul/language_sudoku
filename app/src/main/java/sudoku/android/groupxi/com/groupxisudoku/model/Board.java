@@ -2,9 +2,6 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Knut on 22.11.2017.
- */
 
 public class Board {
     private int[][] gameCells = new int[9][9];

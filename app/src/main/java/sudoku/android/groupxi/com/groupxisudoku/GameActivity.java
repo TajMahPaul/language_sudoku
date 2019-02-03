@@ -249,6 +249,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             int row = ((clickedGroup-1)/3)*3 + clickedCellId / 3;
             int column = (clickedGroup-1)%3*3 + clickedCellId % 3;
             currentBoard.setValue(row,column, 0);
+            clickedCell.setBackgroundResource(R.drawable.table_border_cell);
         }
     }
 }
