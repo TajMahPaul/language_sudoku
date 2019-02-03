@@ -99,16 +99,18 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
                             clickedCell.setText(text);
                             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
                             clickedCell = null;
+                            clickedGroup = 0;
+                            clickedCellId = 0;
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
+
                         }
 
-                    }else{
-                        Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
                     }
 
                     if(currentBoard.isBoardFull() == true){
                         Toast.makeText(GameActivity.this, "game over", Toast.LENGTH_SHORT).show();
+                        onGoBackButtonClicked();
                     }
 
                 }
@@ -214,36 +216,10 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     }
 
 
-    public void onGoBackButtonClicked(View view) {
+    public void onGoBackButtonClicked() {
         finish();
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            int row = ((clickedGroup-1)/3)*3 + (clickedCellId/3);
-            int column = ((clickedGroup-1)%3)*3 + ((clickedCellId)%3);
-
-            if (data.getBooleanExtra("removePiece", false)) {
-                clickedCell.setText("");
-                clickedCell.setBackground(getResources().getDrawable(R.drawable.table_border_cell));
-                currentBoard.setValue(row, column, 0);
-            } else {
-                int number = data.getIntExtra("chosenNumber", 1);
-                clickedCell.setText(String.valueOf(number));
-                currentBoard.setValue(row, column, number);
-
-                boolean isUnsure = data.getBooleanExtra("isUnsure", false);
-                if (isUnsure) {
-                    clickedCell.setBackground(getResources().getDrawable(R.drawable.table_border_cell_unsure));
-                } else {
-                    clickedCell.setBackground(getResources().getDrawable(R.drawable.table_border_cell));
-                }
-            }
-        }
-    }
 
     @Override
     public void onFragmentInteraction(int groupId, int cellId, View view) {
@@ -264,6 +240,15 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             clickedCell = null;
             clickedGroup = 0;
             clickedCellId = 0;
+        }
+    }
+
+    public void deleteButton(View view){
+        if(clickedGroup != 0){
+            clickedCell.setText("");
+            int row = ((clickedGroup-1)/3)*3 + clickedCellId / 3;
+            int column = (clickedGroup-1)%3*3 + clickedCellId % 3;
+            currentBoard.setValue(row,column, 0);
         }
     }
 }

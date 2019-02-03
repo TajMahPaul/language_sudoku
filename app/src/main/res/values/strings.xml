@@ -43,6 +43,7 @@
     <string name="Chinese_seven">七</string>
     <string name="Chinese_eight">八</string>
     <string name="Chinese_nine">九</string>
+
     <string-array name="native_array">
         <item>One</item>
         <item>Two</item>
