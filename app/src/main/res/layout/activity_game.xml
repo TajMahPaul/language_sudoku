@@ -129,35 +129,35 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="一"/>
+                android:text="狗"/>
 
             <Button
                 android:id="@+id/num_button2"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="二"/>
+                android:text="嗨"/>
 
             <Button
                 android:id="@+id/num_button3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="三"/>
+                android:text="家"/>
 
             <Button
                 android:id="@+id/num_button4"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="四"/>
+                android:text="腕"/>
 
             <Button
                 android:id="@+id/num_button5"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="五"/>
+                android:text="午餐"/>
         </TableRow>
 
         <TableRow
@@ -169,28 +169,28 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="六" />
+                android:text="哥哥" />
 
             <Button
                 android:id="@+id/num_button7"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="七" />
+                android:text="工作" />
 
             <Button
                 android:id="@+id/num_button8"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="八" />
+                android:text="休息" />
 
             <Button
                 android:id="@+id/num_button9"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="九" />
+                android:text="学习" />
 
             <Button
                 android:id="@+id/delete_button"
