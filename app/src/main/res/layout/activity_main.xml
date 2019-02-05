@@ -26,10 +26,10 @@
         <Button
             android:id="@+id/playButton"
             style="@android:style/Widget.Button"
-            android:layout_width="301dp"
+            android:layout_width="310dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:background="@drawable/button_border"
+            android:background="@drawable/rounded_button"
             android:onClick="playButton"
             android:text="New Game"
             android:textColor="#FFFFFF" />
@@ -37,10 +37,10 @@
         <Button
             android:id="@+id/resumeButton"
             style="@android:style/Widget.Button"
-            android:layout_width="299dp"
+            android:layout_width="308dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:background="@drawable/button_border"
+            android:background="@drawable/rounded_button"
             android:onClick="playButton"
             android:text="Resume"
             android:textColor="#FFFFFF" />
@@ -51,7 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
-        android:background="@drawable/button_border"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_button"
         android:onClick="settingsButton"
         android:text="Settings"
         android:textColor="#FFFFFF"/>
@@ -60,7 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:background="@drawable/button_border"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_button"
         android:text="Info"
         android:textColor="#FFFFFF"/>
 </FrameLayout>
