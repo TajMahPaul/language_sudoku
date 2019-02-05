@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation = "vertical"
     android:gravity = "center"
+    android:background="#212121"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -13,44 +14,53 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:text="Xi"
+            android:textColor="#80D8FF"
+            android:textSize="80dp" />
+
         <Button
             android:id="@+id/playButton"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="143dp"
-            android:layout_height="84dp"
+            style="@android:style/Widget.Button"
+            android:layout_width="301dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_border"
             android:onClick="playButton"
-            android:text="Play"
-            tools:layout_editor_absoluteX="121dp"
-            tools:layout_editor_absoluteY="227dp" />
+            android:text="New Game"
+            android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/rankingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Rankings"
-            tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="334dp" />
+            android:id="@+id/resumeButton"
+            style="@android:style/Widget.Button"
+            android:layout_width="299dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_border"
+            android:onClick="playButton"
+            android:text="Resume"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
-
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
+        android:background="@drawable/button_border"
         android:onClick="settingsButton"
         android:text="Settings"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="464dp" />
-
+        android:textColor="#FFFFFF"/>
     <Button
-        android:id="@+id/helpButton"
+        android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:text="Help"
-        tools:layout_editor_absoluteX="298dp"
-        tools:layout_editor_absoluteY="464dp" />
-
+        android:background="@drawable/button_border"
+        android:text="Info"
+        android:textColor="#FFFFFF"/>
 </FrameLayout>
