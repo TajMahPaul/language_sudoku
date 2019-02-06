@@ -36,23 +36,23 @@
 
     <string name="Chinese_dog">狗</string>
     <string name="Chinese_hi">嗨</string>
-    <string name="Chinese_home">家</string>
+    <string name="Chinese_toy">玩具</string>
     <string name="Chinese_wrist">腕</string>
-    <string name="Chinese_lunch">午餐</string>
-    <string name="Chinese_brother">哥哥</string>
+    <string name="Chinese_pig">猪</string>
+    <string name="Chinese_cat">猫</string>
     <string name="Chinese_work">工作</string>
     <string name="Chinese_rest">休息</string>
-    <string name="Chinese_learn">学习</string>
+    <string name="Chinese_boy">男孩</string>
 
     <string-array name="native_array">
-        <item>dog</item>
+        <item>Dog</item>
         <item>Hi</item>
-        <item>Home</item>
-        <item>wrist</item>
-        <item>lunch</item>
-        <item>brother</item>
-        <item>work</item>
-        <item>rest</item>
-        <item>learn</item>
+        <item>Toy</item>
+        <item>Wrist</item>
+        <item>Pig</item>
+        <item>Cat</item>
+        <item>Work</item>
+        <item>Rest</item>
+        <item>Boy</item>
     </string-array>
 </resources>

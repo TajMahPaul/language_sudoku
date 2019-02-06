@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:background="#212121"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="384dp"
@@ -114,6 +118,7 @@
         android:layout_height="181dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -151,7 +156,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
-                android:text="家"
+                android:text="玩具"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -171,7 +176,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
-                android:text="午餐"
+                android:text="猪"
                 android:textColor="#FFFFFF" />
         </TableRow>
 
@@ -186,7 +191,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
-                android:text="哥哥"
+                android:text="猫"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -216,7 +221,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
-                android:text="学习"
+                android:text="男孩"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -232,5 +237,5 @@
                 android:textSize="17sp" />
         </TableRow>
     </TableLayout>
-
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
