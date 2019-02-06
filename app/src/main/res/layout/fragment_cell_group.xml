@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/table_border_group"
-    tools:context="sudoku.android.groupxi.com.groupxisudoku.CellGroupFragment">
+    tools:context="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment">
 
     <TableRow
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="2dp"
             android:text=""
+            android:textColor="#FFFFFF"
             android:tag="0"
             android:layout_marginStart="2dp" />
 
@@ -37,7 +38,8 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/table_border_cell"
             android:tag="1"
-            android:text="" />
+            android:text=""
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -52,6 +54,7 @@
             android:background="@drawable/table_border_cell"
             android:tag="2"
             android:text=""
+            android:textColor="#FFFFFF"
             android:layout_marginEnd="1dp" />
     </TableRow>
 
@@ -73,6 +76,7 @@
             android:background="@drawable/table_border_cell"
             android:tag="3"
             android:text=""
+            android:textColor="#FFFFFF"
             android:layout_marginStart="2dp" />
 
         <TextView
@@ -85,7 +89,8 @@
             android:textAlignment="center"
             android:background="@drawable/table_border_cell"
             android:tag="4"
-            android:text="" />
+            android:text=""
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -99,6 +104,7 @@
             android:background="@drawable/table_border_cell"
             android:tag="5"
             android:text=""
+            android:textColor="#FFFFFF"
             android:layout_marginEnd="1dp" />
     </TableRow>
 
@@ -121,6 +127,7 @@
             android:background="@drawable/table_border_cell"
             android:tag="6"
             android:text=""
+            android:textColor="#FFFFFF"
             android:layout_marginStart="2dp" />
 
         <TextView
@@ -134,7 +141,8 @@
             android:layout_marginBottom="2dp"
             android:background="@drawable/table_border_cell"
             android:tag="7"
-            android:text="" />
+            android:text=""
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/textView9"
@@ -149,6 +157,7 @@
             android:background="@drawable/table_border_cell"
             android:tag="8"
             android:text=""
+            android:textColor="#FFFFFF"
             android:layout_marginEnd="1dp" />
     </TableRow>
 
