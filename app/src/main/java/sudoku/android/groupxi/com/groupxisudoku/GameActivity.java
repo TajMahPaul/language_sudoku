@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -44,6 +45,14 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
+
+        /*resume game, not ready yet
+        if(intent.getBooleanExtra("resume_game", false)){
+            onResume();
+        }*/
+
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);
@@ -53,7 +62,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
                 R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
         for (int i = 1; i < 10; i++) {
-            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i-1]);
+            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i - 1]);
             thisCellGroupFragment.setGroupId(i);
         }
 
@@ -221,6 +230,18 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     }
 
 
+    //return button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onFragmentInteraction(int groupId, int cellId, View view) {
         Log.i(TAG, "Clicked group " + groupId + ", cell " + cellId);
@@ -262,5 +283,15 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             currentBoard.setValue(row,column, 0);
             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
         }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+
     }
 }

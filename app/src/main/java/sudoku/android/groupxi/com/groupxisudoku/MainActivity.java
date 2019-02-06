@@ -18,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
     // play
     public void playButton(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("resume_game", false);
+        startActivity(intent);
+    }
+
+    public void resumeButton(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("resume_game", true);
         startActivity(intent);
     }
 
