@@ -18,6 +18,8 @@ public class CellGroupFragment extends Fragment {
     private int groupId;
     private OnFragmentInteractionListener mListener;
     private View view;
+    private int textViews[];
+    private TextView selectedTextview;
 
     public CellGroupFragment() {
         // Required empty public constructor
@@ -39,7 +41,7 @@ public class CellGroupFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_cell_group, container, false);
 
         //Set textview click listeners
-        int textViews[] = new int[]{R.id.textView1, R.id.textView2, R.id.textView3, R.id.textView4,
+        this.textViews = new int[]{R.id.textView1, R.id.textView2, R.id.textView3, R.id.textView4,
                          R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9};
         for (int textView1 : textViews) {
             TextView textView = view.findViewById(textView1);
@@ -58,16 +60,9 @@ public class CellGroupFragment extends Fragment {
     }
 
     public void setValue(int position, String value) {
-        int textViews[] = new int[]{R.id.textView1, R.id.textView2, R.id.textView3, R.id.textView4,
-                R.id.textView5, R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9};
-        TextView textview = view.findViewById(textViews[position]);
+        TextView textview = view.findViewById(this.textViews[position]);
         textview.setText(value);
 
-    }
-
-    public boolean checkGroupCorrect() {
-
-        return true;
     }
 
     @Override
@@ -89,5 +84,21 @@ public class CellGroupFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(int groupId, int cellId, View view);
+    }
+
+    public void selectTextview(CharSequence text){
+        for(int i = 0; i < 9; i++){
+            TextView textview = view.findViewById(this.textViews[i]);
+            if(textview.getText() == text){
+                textview.setBackgroundResource(R.drawable.table_border_cell_selected);
+                selectedTextview = textview;
+            }
+        }
+    }
+
+    public void unselectTextview(){
+        if(selectedTextview != null){
+            selectedTextview.setBackgroundResource(R.drawable.table_border_cell);
+        }
     }
 }

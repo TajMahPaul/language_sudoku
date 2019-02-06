@@ -225,18 +225,29 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     public void onFragmentInteraction(int groupId, int cellId, View view) {
         Log.i(TAG, "Clicked group " + groupId + ", cell " + cellId);
 
+        int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
+                R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
+
         //if there's selected cell previously, reset the background of that cell
+        for(int i = 0; i < 9; i++){
+            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i]);
+            thisCellGroupFragment.unselectTextview();
+        }
         if(clickedCell != null){
             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
         }
 
+        //set clicked cell background
+        clickedCell = (TextView) view;
         if (!isStartPiece(groupId, cellId)) {
-            clickedCell = (TextView) view;
             clickedGroup = groupId;
             clickedCellId = cellId;
             view.setBackgroundResource(R.drawable.table_border_cell_selected);
         } else {
-            Toast.makeText(this, getString(R.string.start_piece_error), Toast.LENGTH_SHORT).show();
+            for(int i = 0; i < 9; i++){
+                CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i]);
+                thisCellGroupFragment.selectTextview(clickedCell.getText());
+            }
             clickedCell = null;
             clickedGroup = 0;
             clickedCellId = 0;
