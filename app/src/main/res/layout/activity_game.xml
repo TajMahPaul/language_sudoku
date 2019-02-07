@@ -10,233 +10,230 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="384dp"
-        android:layout_height="384dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28">
 
-        <TableRow
-            android:id="@+id/tableRow1"
+        <Spinner
+            android:id="@+id/language_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="53dp" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="384dp"
+            android:layout_height="383dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28">
+
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="128dp">
+
+                <fragment
+                    android:id="@+id/cellGroupFragment"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="0" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment2"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="1" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment3"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="2" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="128dp">
+
+                <fragment
+                    android:id="@+id/cellGroupFragment4"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="3" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment5"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="4" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment6"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="5" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="128dp">
+
+                <fragment
+                    android:id="@+id/cellGroupFragment7"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="6" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment8"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="7" />
+
+                <fragment
+                    android:id="@+id/cellGroupFragment9"
+                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_weight="1"
+                    android:tag="8" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="128dp">
+            android:layout_height="169dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7">
 
-            <fragment
-                android:id="@+id/cellGroupFragment"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="0" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
-            <fragment
-                android:id="@+id/cellGroupFragment2"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="1" />
+                <Button
+                    android:id="@+id/num_button1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-            <fragment
-                android:id="@+id/cellGroupFragment3"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="2" />
+                <Button
+                    android:id="@+id/num_button2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-        </TableRow>
+                <Button
+                    android:id="@+id/num_button3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="128dp">
+                <Button
+                    android:id="@+id/num_button4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-            <fragment
-                android:id="@+id/cellGroupFragment4"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="3" />
+                <Button
+                    android:id="@+id/num_button5"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
 
-            <fragment
-                android:id="@+id/cellGroupFragment5"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="4" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
-            <fragment
-                android:id="@+id/cellGroupFragment6"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="5" />
-        </TableRow>
+                <Button
+                    android:id="@+id/num_button6"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="128dp">
+                <Button
+                    android:id="@+id/num_button7"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-            <fragment
-                android:id="@+id/cellGroupFragment7"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="6" />
+                <Button
+                    android:id="@+id/num_button8"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-            <fragment
-                android:id="@+id/cellGroupFragment8"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="7" />
+                <Button
+                    android:id="@+id/num_button9"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
 
-            <fragment
-                android:id="@+id/cellGroupFragment9"
-                android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_weight="1"
-                android:tag="8" />
-        </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="181dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.98">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <Button
-                android:id="@+id/num_button1"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="狗"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="嗨"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button3"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="玩具"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button4"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="腕"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button5"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="猪"
-                android:textColor="#FFFFFF" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <Button
-                android:id="@+id/num_button6"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="猫"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button7"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="工作"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button8"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="休息"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button9"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:text="男孩"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/delete_button"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:onClick="deleteButton"
-                android:text="X"
-                android:textColor="#FFFFFF"
-                android:textSize="17sp" />
-        </TableRow>
-    </TableLayout>
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:onClick="deleteButton"
+                    android:text="X"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

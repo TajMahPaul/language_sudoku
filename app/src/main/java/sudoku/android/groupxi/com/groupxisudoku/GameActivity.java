@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,16 +45,49 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         Resources res = getResources();
         String[] native_strings = res.getStringArray(R.array.native_array);
 
+
+        // make sure you do this first!!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent intent = getIntent();
 
+        //Spinner logic
+        Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.array_languages, R.layout.spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        /*resume game, not ready yet
-        if(intent.getBooleanExtra("resume_game", false)){
-            onResume();
-        }*/
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int Buttons[] = new int[]{R.id.num_button1, R.id.num_button2, R.id.num_button3, R.id.num_button4,
+                        R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8, R.id.num_button9};
+
+                Resources res = getResources();
+
+                if (position == 0){
+                    String[] language_strings = res.getStringArray(R.array.chinese_array);
+                    for (int i = 0; i < 9; i++) {
+                        Button button = (Button)findViewById(Buttons[i]);
+                        button.setText(language_strings[i]);
+                    }
+                }else if (position == 1){
+                    String[] language_strings = res.getStringArray(R.array.spanish_array);
+                    for (int i = 0; i < 9; i++) {
+                        Button button = (Button)findViewById(Buttons[i]);
+                        button.setText(language_strings[i]);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
@@ -63,7 +98,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
                 R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
         for (int i = 1; i < 10; i++) {
-            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i - 1]);
+            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i-1]);
             thisCellGroupFragment.setGroupId(i);
         }
 
@@ -231,45 +266,22 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     }
 
 
-    //return button
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onFragmentInteraction(int groupId, int cellId, View view) {
         Log.i(TAG, "Clicked group " + groupId + ", cell " + cellId);
 
-        int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
-                R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
-
         //if there's selected cell previously, reset the background of that cell
-        for(int i = 0; i < 9; i++){
-            CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i]);
-            thisCellGroupFragment.unselectTextview();
-        }
         if(clickedCell != null){
             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
         }
 
-        //set clicked cell background
-        clickedCell = (TextView) view;
         if (!isStartPiece(groupId, cellId)) {
+            clickedCell = (TextView) view;
             clickedGroup = groupId;
             clickedCellId = cellId;
             view.setBackgroundResource(R.drawable.table_border_cell_selected);
         } else {
-            for(int i = 0; i < 9; i++){
-                CellGroupFragment thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[i]);
-                thisCellGroupFragment.selectTextview(clickedCell.getText());
-            }
+            Toast.makeText(this, getString(R.string.start_piece_error), Toast.LENGTH_SHORT).show();
             clickedCell = null;
             clickedGroup = 0;
             clickedCellId = 0;
@@ -284,15 +296,5 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             currentBoard.setValue(row,column, 0);
             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
         }
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-
     }
 }
