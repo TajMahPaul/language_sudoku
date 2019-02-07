@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/native_language_text"
@@ -18,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Hello, I speak..."
             android:textColor="#FFFFFF"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/native_language_selector"
@@ -31,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="and I want to learn..."
             android:textColor="#FFFFFF"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/foreign_language_selector"
