@@ -8,7 +8,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +45,50 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         Resources res = getResources();
         String[] native_strings = res.getStringArray(R.array.native_array);
 
+
+        // make sure you do this first!!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //Spinner logic
+        Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.array_languages, R.layout.spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int Buttons[] = new int[]{R.id.num_button1, R.id.num_button2, R.id.num_button3, R.id.num_button4,
+                        R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8, R.id.num_button9};
+
+                Resources res = getResources();
+
+                if (position == 0){
+                    String[] language_strings = res.getStringArray(R.array.chinese_array);
+                    for (int i = 0; i < 9; i++) {
+                        Button button = (Button)findViewById(Buttons[i]);
+                        button.setText(language_strings[i]);
+                    }
+                }else if (position == 1){
+                    String[] language_strings = res.getStringArray(R.array.spanish_array);
+                    for (int i = 0; i < 9; i++) {
+                        Button button = (Button)findViewById(Buttons[i]);
+                        button.setText(language_strings[i]);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);

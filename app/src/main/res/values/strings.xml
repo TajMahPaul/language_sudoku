@@ -44,6 +44,30 @@
     <string name="Chinese_rest">休息</string>
     <string name="Chinese_boy">男孩</string>
 
+    <string-array name="spanish_array">
+        <item name="spanish_dog">Perro</item>
+        <item name="spanish_hi">Hola</item>
+        <item name="spanish_toy">Juguete</item>
+        <item name="spanish_wrist">Muñeca</item>
+        <item name="spanish_pig">Cerdo</item>
+        <item name="spanish_cat">Gato</item>
+        <item name="spanish_work">Trabajo</item>
+        <item name="spanish_rest">Descanso</item>
+        <item name="spanish_boy">Niño</item>
+    </string-array>
+
+    <string-array name="chinese_array">
+        <item name="Chinese_dog">狗</item>
+        <item name="Chinese_hi">嗨</item>
+        <item name="Chinese_toy">玩具</item>
+        <item name="Chinese_wrist">腕</item>
+        <item name="Chinese_pig">猪</item>
+        <item name="Chinese_cat">猫</item>
+        <item name="Chinese_work">工作</item>
+        <item name="Chinese_rest">休息</item>
+        <item name="Chinese_boy">男孩</item>
+    </string-array>
+
     <string-array name="native_array">
         <item>Dog</item>
         <item>Hi</item>
@@ -54,5 +78,10 @@
         <item>Work</item>
         <item>Rest</item>
         <item>Boy</item>
+    </string-array>
+
+    <string-array name="array_languages">
+        <item>Chinese</item>
+        <item>Spanish</item>
     </string-array>
 </resources>
