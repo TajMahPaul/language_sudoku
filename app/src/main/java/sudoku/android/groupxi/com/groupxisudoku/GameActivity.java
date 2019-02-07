@@ -48,6 +48,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
 
+
         /*resume game, not ready yet
         if(intent.getBooleanExtra("resume_game", false)){
             onResume();

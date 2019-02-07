@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation = "vertical"
-    android:gravity = "center"
     android:background="#212121"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,6 +46,7 @@
             android:textColor="#FFFFFF" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
         android:background="@drawable/rounded_button"
         android:onClick="settingsButton"
         android:text="Settings"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF" />
+
     <Button
         android:id="@+id/infoButton"
         android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="30dp"
         android:background="@drawable/rounded_button"
+        android:clickable="false"
         android:text="Info"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF" />
 </FrameLayout>

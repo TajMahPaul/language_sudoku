@@ -13,6 +13,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Pop up window for Info
+        Button info = (Button) findViewById(R.id.infoButton);
+        info.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,PopupInfo.class));
+            }
+        });
     }
 
     // play

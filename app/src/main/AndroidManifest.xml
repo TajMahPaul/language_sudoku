@@ -32,6 +32,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
         </activity>
+        <activity android:name=".PopupInfo"
+            android:theme="@style/AppTheme.CustomTheme"
+            ></activity>
     </application>
 
 </manifest>
