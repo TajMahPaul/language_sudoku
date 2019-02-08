@@ -281,7 +281,16 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             clickedCellId = cellId;
             view.setBackgroundResource(R.drawable.table_border_cell_selected);
         } else {
-            Toast.makeText(this, getString(R.string.start_piece_error), Toast.LENGTH_SHORT).show();
+            int row = ((groupId-1)/3)*3 + (cellId/3);
+            int column = ((groupId-1)%3)*3 + ((cellId)%3);
+            int num = currentBoard.getValue(row, column);
+            //if(    ){
+                String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
+                Toast.makeText(this, chinese_strings[num - 1], Toast.LENGTH_SHORT).show();
+            //}else{
+                //String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
+                //Toast.makeText(this, chinese_strings[num - 1], Toast.LENGTH_SHORT).show();
+            //}
             clickedCell = null;
             clickedGroup = 0;
             clickedCellId = 0;

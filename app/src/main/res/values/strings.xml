@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Group Xi Sudoku</string>
     <string name="sudoku">Sudoku</string>
-    <string name="norwegian_description">A picture of a norwegian flag</string>
-    <string name="british_description">A picture of a british flag</string>
 
     <string name="new_game">Start New Game</string>
     <string name="add_new_board">Add new board</string>
@@ -11,12 +9,6 @@
     <string name="fail_new_board">Failed to save new board</string>
     <string name="show_instructions">Show instructions</string>
     <string name="choose_language">Choose language:</string>
-
-    <string name="instructions">Instructions</string>
-    <string name="instructions_1">1. In Sudoku it is intended to place all the remaining pieces on the board. The numbers range from 1 to 9 (in 9x9 Sudoku).</string>
-    <string name="instructions_2">2. The board is separated into several squares, and inside each of them it is only allowed to place one of each number.</string>
-    <string name="instructions_3">3. It is only allowed to place one of each number at each row, both horizontal and vertical.</string>
-    <string name="go_back_button">Go back</string>
 
     <string name="choose_difficulty">Choose difficulty:</string>
     <string name="difficulty_easy">Easy</string>
