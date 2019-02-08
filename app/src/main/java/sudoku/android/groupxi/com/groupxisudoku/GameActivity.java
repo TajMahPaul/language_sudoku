@@ -35,23 +35,23 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     private TextView clickedCell = null;
     private int clickedGroup = 0;
     private int clickedCellId = 0;
-    private Board startBoard;
-    private Board currentBoard;
+    public Board startBoard;
+    public Board currentBoard;
     private Button[] num_buttons = new Button [9];
-
+    public int swap = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Resources res = getResources();
-        String[] native_strings = res.getStringArray(R.array.native_array);
-
-
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Resources res = getResources();
+        String[] native_strings = res.getStringArray(R.array.native_array);
+        String[] chinese_strings = res.getStringArray(R.array.chinese_array);
+
 
         //Spinner logic
-        Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
+        /*Spinner spinner = (Spinner) findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.array_languages, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
                 // your code here
             }
 
-        });
+        });*/
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
@@ -129,6 +129,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         for(int i = 0; i < 9; i++){
             final int finalI = i+1;
             num_buttons[i] = findViewById(numButtonsId[i]);
+            num_buttons[i].setText(chinese_strings[i]);
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -284,13 +285,14 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             int row = ((groupId-1)/3)*3 + (cellId/3);
             int column = ((groupId-1)%3)*3 + ((cellId)%3);
             int num = currentBoard.getValue(row, column);
-            //if(    ){
+            if(swap == 0){
                 String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
                 Toast.makeText(this, chinese_strings[num - 1], Toast.LENGTH_SHORT).show();
-            //}else{
-                //String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
-                //Toast.makeText(this, chinese_strings[num - 1], Toast.LENGTH_SHORT).show();
-            //}
+            }else{
+                String[] native_strings = getResources().getStringArray(R.array.native_array);
+                Toast.makeText(this, native_strings[num - 1], Toast.LENGTH_SHORT).show();
+
+            }
             clickedCell = null;
             clickedGroup = 0;
             clickedCellId = 0;
@@ -304,6 +306,50 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
             int column = (clickedGroup-1)%3*3 + clickedCellId % 3;
             currentBoard.setValue(row,column, 0);
             clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+        }
+    }
+
+    public void swapButton(View view){
+        String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
+        String[] native_strings = getResources().getStringArray(R.array.native_array);
+        int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
+                R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
+        CellGroupFragment thisCellGroupFragment;
+        if(swap == 0){
+            for(int i = 0; i < 9; i++){
+                num_buttons[i].setText(native_strings[i]);
+            }
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    if(startBoard.getValue(i,j) != 0){
+                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+j/3]);
+                        Log.i(TAG, "Clicked group ");
+                        thisCellGroupFragment.setValue((i%3)*3+(j%3), chinese_strings[startBoard.getValue(i,j)-1]);
+
+                    }else if(currentBoard.getValue(i,j) != 0){
+                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+j/3]);
+                        thisCellGroupFragment.setValue((i%3)*3+(j%3), native_strings[currentBoard.getValue(i,j)-1]);
+                    }
+                }
+            }
+            swap = 1;
+        }else{
+            for(int i = 0; i < 9; i++){
+                num_buttons[i].setText(chinese_strings[i]);
+            }
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    if(startBoard.getValue(i,j) != 0){
+                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+(j/3)]);
+                        thisCellGroupFragment.setValue((i%3)*3+(j%3), native_strings[startBoard.getValue(i,j)-1]);
+
+                    }else if(currentBoard.getValue(i,j) != 0){
+                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+(j/3)]);
+                        thisCellGroupFragment.setValue((i%3)*3+(j%3), chinese_strings[currentBoard.getValue(i,j)-1]);
+                    }
+                }
+            }
+            swap = 0;
         }
     }
 }

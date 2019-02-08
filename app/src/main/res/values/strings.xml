@@ -23,7 +23,7 @@
     <string name="start_piece_error">Can not change start piece</string>
     <string name="check_board">Check board</string>
     <string name="board_correct">Board is correct</string>
-    <string name="board_incorrect">Board is not correct</string>
+    <string name="board_incorrect">wrong answer</string>
     <string name="play_button">Play</string>
 
     <string name="Chinese_dog">狗</string>
