@@ -1,3 +1,10 @@
+User story: As a language learner, I want to be able to learn multiple langugages in the app.
+
+Example: Support more languages in the word pair and create a language selection menu.
+
+Status: Planning
+
+
 User story: As a new citizen, I want to improve my pronounciation.
 
 Example: The user can speak to the application and select a word.
