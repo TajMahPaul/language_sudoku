@@ -1,3 +1,45 @@
+User story: As a application tester, I want the game to be free of bugs.
+
+Example: Create test cases for each class to verify that they are working correctly.
+
+Status: Planning
+
+
+User story: As a language learner, I want to listen to the pronounciation of each word.
+
+Example: When a user selects a word, the pronounciation of that word is played.
+
+Status: Planning
+
+
+User story: As a sudoku player, I want the word selection to take up two rows.
+
+Example: Rearrange buttons to take up two rows, including a erase button.
+
+Status: Complete
+
+
+User story: As a sudoku player, I want the grid borders to be clearly defined.
+
+Example: Add lines and margin between fragments.
+
+Status: Complete
+
+
+User story: As a designer, I want all rectangle buttons to be rounded.
+
+Example: Implement a natural curve to rectangle buttons.
+
+Status: Complete
+
+
+User story: As a game developer, I want to see the version number of the game and the team developing the game.
+
+Example: Include an info button showing team members and current version number.
+
+Status: In progress
+
+
 User story: As a language learner, I want to be able to learn multiple langugages in the app.
 
 Example: Support more languages in the word pair and create a language selection menu.
