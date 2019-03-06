@@ -1,3 +1,8 @@
+User story: As a designer, I want word selection buttons to be circular.
+
+Example: Implement a new layout for circular buttons.
+
+
 User story: As a application tester, I want every button to respond to clicks.
 
 Example: Change button color when it is pressed.
