@@ -1,3 +1,17 @@
+User story: As a application tester, I want every button to respond to clicks.
+
+Example: Change button color when it is pressed.
+
+Status: Complete
+
+
+User story: As a sudoku player, I want to be able to play the game in landscape or portrait mode.
+
+Example: Create XML model for landscape mode.
+
+Status: Planning
+
+
 User story: As a application tester, I want the game to be free of bugs.
 
 Example: Create test cases for each class to verify that they are working correctly.
