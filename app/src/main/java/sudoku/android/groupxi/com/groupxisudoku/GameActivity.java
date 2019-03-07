@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     public Board currentBoard;
     private Button[] num_buttons = new Button [9];
     public int swap = 0;
-
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // make sure you do this first!!
