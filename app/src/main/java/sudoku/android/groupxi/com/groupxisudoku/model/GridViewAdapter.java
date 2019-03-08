@@ -1,4 +1,4 @@
-package sudoku.android.groupxi.com.groupxisudoku;
+package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.Toast;
+
 import java.util.List;
+
+import sudoku.android.groupxi.com.groupxisudoku.R;
 
 
 public class GridViewAdapter extends BaseAdapter {
@@ -21,8 +22,8 @@ public class GridViewAdapter extends BaseAdapter {
 
     int language; // 0 for native and 1 for Chinese
 
-    boolean clicked = false;
-    Button clickedCell = null;
+    boolean clicked = false; // if a cell has been clicked
+    Button clickedCell = null; // reference of the clicked cell
     int row;
     int column;
 
@@ -64,6 +65,7 @@ public class GridViewAdapter extends BaseAdapter {
             button = new Button (mContext);
             button.setBackgroundResource(R.drawable.table_border_cell);
             button.setTextColor(Color.WHITE);
+
             // set string on board
             if(boardNumber.get(position) != 0) {
                 button.setText(current_strings[boardNumber.get(position)-1]);
@@ -71,6 +73,7 @@ public class GridViewAdapter extends BaseAdapter {
                 button.setText("");
             }
 
+            // set up button function
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,10 +96,12 @@ public class GridViewAdapter extends BaseAdapter {
                     }
                 }
             });
+
         }else{
 
             button = (Button)convertView;
         }
+
         return button;
     }
 

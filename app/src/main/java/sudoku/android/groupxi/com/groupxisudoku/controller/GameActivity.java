@@ -1,4 +1,4 @@
-package sudoku.android.groupxi.com.groupxisudoku;
+package sudoku.android.groupxi.com.groupxisudoku.controller;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
+import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 
@@ -29,7 +31,8 @@ public class GameActivity extends AppCompatActivity {
     public int language = 0; // 0 for native and 1 for chinese on board
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
-    //test
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // make sure you do this first!!
@@ -47,14 +50,14 @@ public class GameActivity extends AppCompatActivity {
         currentBoard = new Board();
         currentBoard.copyValues(startBoard.getGameCells());
 
-        //Appear all values from the current board
+        //add board number into a list
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 boardNumber.add(currentBoard.getValue(i, j));
             }
         }
 
-
+        // set up gridView adapter
         adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language,this);
         gridView.setAdapter(adapter);
 
@@ -98,6 +101,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
+        // add function for delete button
         Button deleteButton = findViewById(R.id.delete_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
