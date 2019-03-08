@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="sudoku.android.groupxi.com.groupxisudoku">
 
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:xlargeScreens="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
