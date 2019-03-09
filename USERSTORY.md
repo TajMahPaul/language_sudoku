@@ -1,13 +1,6 @@
-
-
 User story: As a language learner, I want to listen to the pronunciation of each word.
 
-Example: When a user selects a word, the pronunciation of that word is played.
-
-
-User story: As a language learner, I want to listen to the pronunciation of each word.
-
-Example: When a user selects a word, the pronunciation of that word is played.
+Example: If toggled on, the pronunciation of a word is played whenever the user selects a word. Otherwise, no sound is played.
 
 
 User story: As an application tester, I want the game to be free of bugs.
