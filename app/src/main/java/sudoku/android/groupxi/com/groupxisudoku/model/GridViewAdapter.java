@@ -27,7 +27,6 @@ public class GridViewAdapter extends BaseAdapter {
     int row;
     int column;
 
-
     public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, Context context) {
         this.boardNumber = isSource;
         this.originalNumber = isSource;
