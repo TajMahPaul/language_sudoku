@@ -1,5 +1,6 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -84,7 +85,11 @@ public class GameActivity extends AppCompatActivity {
             final int finalI = i+1;
             final int curI = i;
             num_buttons[i] = findViewById(numButtonsId[i]);
-            num_buttons[i].setText(chinese_strings[i]);
+            if(language == 0) {
+                num_buttons[i].setText(chinese_strings[i]);
+            }else{
+                num_buttons[i].setText(native_strings[i]);
+            }
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
