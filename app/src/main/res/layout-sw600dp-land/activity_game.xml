@@ -156,7 +156,17 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
+        <ToggleButton
+            android:id="@+id/voice"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:contentDescription='"Text to Speech"'
+            android:text="ToggleButton"
+            tools:layout_editor_absoluteX="615dp"
+            tools:layout_editor_absoluteY="0dp" />
+        
         <GridView
             android:id="@+id/gridView"
             android:layout_width="585dp"
