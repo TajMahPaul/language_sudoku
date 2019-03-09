@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.R;
@@ -25,9 +28,12 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 
 public class GameActivity extends AppCompatActivity {
+    TextToSpeech t1;
     private final String TAG = "GameActivity";
     public Board startBoard;
     public Board currentBoard;
+
+
     private Button[] num_buttons = new Button [9];
     public int language = 0; // 0 for native and 1 for chinese on board
     List<Integer> boardNumber = new ArrayList<>();
@@ -40,17 +46,26 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Resources res = getResources();
-        String[] native_strings = res.getStringArray(R.array.native_array);
+        final String[] native_strings = res.getStringArray(R.array.native_array);
         String[] chinese_strings = res.getStringArray(R.array.chinese_array);
         GridView gridView = findViewById(R.id.gridView);
-        Intent intent = getIntent();
-        language = intent.getIntExtra("language", 0);
+        final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board();
         currentBoard.copyValues(startBoard.getGameCells());
+
+        //initialize text to speech
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t1.setLanguage(Locale.CHINESE);
+                }
+            }
+        });
 
         //add board number into a list
         for (int i = 0; i < 9; i++) {
@@ -68,6 +83,7 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9};
         for(int i = 0; i < 9; i++){
             final int finalI = i+1;
+            final int curI = i;
             num_buttons[i] = findViewById(numButtonsId[i]);
             if(language == 0) {
                 num_buttons[i].setText(chinese_strings[i]);
@@ -77,6 +93,15 @@ public class GameActivity extends AppCompatActivity {
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    Button temp_button = (Button) v;
+                    String text = (String) temp_button.getText();
+                    if(toggle.isChecked()){
+                        t1.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                    }
+
+
+
                     //check if a cell has been selected
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
@@ -84,8 +109,7 @@ public class GameActivity extends AppCompatActivity {
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
                             currentBoard.setValue(row,column, finalI);
-                            Button temp_button = (Button) v;
-                            String text = (String) temp_button.getText();
+
                             Button clickedButton = adapter.getClickedCell();
                             clickedButton.setText(text);
                             adapter.setClicked(false);
