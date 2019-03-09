@@ -1,10 +1,13 @@
-package sudoku.android.groupxi.com.groupxisudoku;
+package sudoku.android.groupxi.com.groupxisudoku.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import sudoku.android.groupxi.com.groupxisudoku.PopupInfo;
+import sudoku.android.groupxi.com.groupxisudoku.R;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
@@ -18,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,PopupInfo.class));
+                startActivity(new Intent(MainActivity.this, PopupInfo.class));
             }
         });
     }

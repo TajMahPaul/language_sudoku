@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="sudoku.android.groupxi.com.groupxisudoku">
 
-    <supports-screens
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:xlargeScreens="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,26 +11,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".controller.GameActivity"
+            android:parentActivityName=".controller.MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GameActivity" />
+                android:value=".controller.GameActivity" />
         </activity>
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".controller.SettingsActivity"
+            android:parentActivityName=".controller.MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value=".controller.SettingsActivity" />
         </activity>
         <activity android:name=".PopupInfo"
             android:theme="@style/AppTheme.CustomTheme"

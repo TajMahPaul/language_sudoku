@@ -5,20 +5,18 @@
     android:layout_width="match_parent"
     android:background="#212121"
     android:layout_height="match_parent">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212121">
-
+    android:background="#212121"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TableLayout
         android:layout_width="300dp"
         android:layout_height="412dp"
         android:layout_gravity="center|top"
-        android:layout_marginTop="90dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="230dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,7 +26,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="90dp">
+            android:layout_height="60dp">
 
             <Button
                 android:id="@+id/num_button1"
@@ -38,7 +36,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button2"
@@ -48,7 +46,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button3"
@@ -58,7 +56,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
 
         </TableRow>
@@ -75,7 +73,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button5"
@@ -85,7 +83,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button6"
@@ -95,7 +93,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -110,7 +108,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button8"
@@ -120,7 +118,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/num_button9"
@@ -130,7 +128,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circular_button"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -148,132 +146,40 @@
                 android:onClick="deleteButton"
                 android:text="X"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="18sp" />
         </TableRow>
     </TableLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/swapButton"
+        <ToggleButton
+            android:id="@+id/voice"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="60dp"
-            android:onClick="swapButton"
-            android:text="swap"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:layout_gravity="right"
+            android:checked="true"
+            android:contentDescription='"Text to Speech"'
+            android:text="ToggleButton"
+            tools:layout_editor_absoluteX="615dp"
+            tools:layout_editor_absoluteY="0dp" />
+        
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="585dp"
+            android:layout_height="495dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="200dp"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:textAlignment="center"
+            android:minHeight="10dp"
+            android:numColumns="9">
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="576dp"
-            android:layout_height="450dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="190dp"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28">
-
-
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <fragment
-                    android:id="@+id/cellGroupFragment"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="0" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment2"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="1" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment3"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="2" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="128dp">
-
-                <fragment
-                    android:id="@+id/cellGroupFragment4"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="3" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment5"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="4" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment6"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="5" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <fragment
-                    android:id="@+id/cellGroupFragment7"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="6" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment8"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="7" />
-
-                <fragment
-                    android:id="@+id/cellGroupFragment9"
-                    android:name="sudoku.android.groupxi.com.groupxisudoku.fragments.CellGroupFragment"
-                    android:layout_width="128dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:tag="8" />
-            </TableRow>
-
-        </TableLayout>
+        </GridView>
 
 
     </LinearLayout>
