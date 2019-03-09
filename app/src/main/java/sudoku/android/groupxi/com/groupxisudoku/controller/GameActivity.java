@@ -1,5 +1,6 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,8 @@ public class GameActivity extends AppCompatActivity {
         String[] native_strings = res.getStringArray(R.array.native_array);
         String[] chinese_strings = res.getStringArray(R.array.chinese_array);
         GridView gridView = findViewById(R.id.gridView);
-
+        Intent intent = getIntent();
+        language = intent.getIntExtra("language", 0);
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
@@ -67,7 +69,11 @@ public class GameActivity extends AppCompatActivity {
         for(int i = 0; i < 9; i++){
             final int finalI = i+1;
             num_buttons[i] = findViewById(numButtonsId[i]);
-            num_buttons[i].setText(chinese_strings[i]);
+            if(language == 0) {
+                num_buttons[i].setText(chinese_strings[i]);
+            }else{
+                num_buttons[i].setText(native_strings[i]);
+            }
             num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

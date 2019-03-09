@@ -11,6 +11,7 @@ import sudoku.android.groupxi.com.groupxisudoku.R;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
+    private int language = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PopupInfo.class));
             }
         });
+
+        final Button languageButton = findViewById(R.id.languageButton);
+        languageButton.setText("English");
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(language == 0){
+                    language = 1;
+                    languageButton.setText("Chinese");
+                }else{
+                    language = 0;
+                    languageButton.setText("English");
+                }
+            }
+        });
     }
 
     // play
     public void playButton(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("resume_game", false);
+        intent.putExtra("language", language);
         startActivity(intent);
     }
 
