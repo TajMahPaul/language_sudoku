@@ -1,3 +1,8 @@
+User story: As a language learner, I want to be able to swap the languages being used in the game.
+
+Example: Include a swap button to switch between English and Chinese.
+
+
 User story: As a language learner, I want to listen to the pronunciation of each word.
 
 Example: If toggled on, the pronunciation of a word is played whenever the user selects a word. Otherwise, no sound is played.
@@ -46,7 +51,7 @@ Example: Change color scheme to night mode.
 
 User story: As a travel enthusiast, I want to learn new languages.
 
-Example: The user can select between two languages that they want to learn.
+Example: The user can select a language that they want to learn.
 
 
 
