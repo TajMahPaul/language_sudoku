@@ -1,20 +1,42 @@
+
+
+User story: As a language learner, I want to listen to the pronunciation of each word.
+
+Example: When a user selects a word, the pronunciation of that word is played.
+
+
+User story: As a language learner, I want to listen to the pronunciation of each word.
+
+Example: When a user selects a word, the pronunciation of that word is played.
+
+
+User story: As an application tester, I want the game to be free of bugs.
+
+Example: Create test cases for board to verify that all functions are working correctly.
+
+
+User story: As a Sudoku player, I want to be able to play the game in landscape or portrait mode.
+
+Example: Create XML model for landscape mode, with support for tablets.
+
+
 User story: As a designer, I want word selection buttons to be circular.
 
 Example: Implement a new layout for circular buttons.
 
 
-User story: As a application tester, I want every button to respond to clicks.
+User story: As an application tester, I want every button to respond to clicks.
 
 Example: Change button color when it is pressed.
 
 
-User story: As a sudoku player, I want the word selection to take up two rows.
+User story: As a Sudoku player, I want the word selection to take up two rows.
 
 Example: Rearrange buttons to take up two rows, including a erase button.
 
 
 
-User story: As a sudoku player, I want the grid borders to be clearly defined.
+User story: As a Sudoku player, I want the grid borders to be clearly defined.
 
 Example: Add lines and margin between fragments.
 
@@ -27,11 +49,6 @@ Example: Implement a natural curve to rectangle buttons.
 User story: As a tester, I want to play the game in night mode.
 
 Example: Change color scheme to night mode.
-
-
-User story: As a sudoku player, I want cells containing the same number to be highlighted.
-
-Example: When "cat" is selected, all cells containing "cat" are highlighted.
 
 
 User story: As a travel enthusiast, I want to learn new languages.
