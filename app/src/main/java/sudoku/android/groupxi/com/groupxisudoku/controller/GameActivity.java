@@ -29,6 +29,7 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 public class GameActivity extends AppCompatActivity {
     TextToSpeech t1;
+    TextToSpeech t2;
     private final String TAG = "GameActivity";
     public Board startBoard;
     public Board currentBoard;
@@ -52,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
         final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
+        final int language = getIntent().getIntExtra("language", 0);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board();
@@ -63,6 +65,15 @@ public class GameActivity extends AppCompatActivity {
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
                     t1.setLanguage(Locale.CHINESE);
+                }
+            }
+        });
+
+        t2=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t2.setLanguage(Locale.ENGLISH);
                 }
             }
         });
@@ -97,7 +108,12 @@ public class GameActivity extends AppCompatActivity {
                     Button temp_button = (Button) v;
                     String text = (String) temp_button.getText();
                     if(toggle.isChecked()){
-                        t1.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                        if (language == 0){
+                            t1.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                        }else{
+                            t2.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                        }
+
                     }
 
 
