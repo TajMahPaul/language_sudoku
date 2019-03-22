@@ -54,6 +54,7 @@ public class GameActivity extends AppCompatActivity {
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         final int language = getIntent().getIntExtra("language", 0);
+        int size = getIntent().getIntExtra("size", 9);
         ArrayList<Board> boards = readGameBoards(difficulty);
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board();
