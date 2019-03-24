@@ -1,8 +1,3 @@
-User story: As a teacher, I want to specify a list of word pairs for my students to practice this week.
-
-Example: A teacher can create text file containing the practice schedule, and students can import that file. They will be reminded by the application which word pair to practice.
-
-
 User story: As a student working with a textbook, I want to load pairs of words to practice from each chapter of the book.
 
 Example: When a user imports a word pair, a "bulk import" option is available and the system automatically groups the word pairs from each chapter.
@@ -25,12 +20,7 @@ Example: When a user selects a Sudoku cell that is part of the pre-filled config
 
 User story: As a teacher, I want to specify a list of word pairs for my students to practice this week.
 
-Example: When a teacher wishes to provide a word list for practice with the Sudoku app, the teacher may send the pairs of words to practice as a CSV file
-
-
-Example: When a student selects import word list, the system will parse and store the given word list and update the word list submenu with the name of the word list.
-
-Example: When a student selects a word list from the word list submenu, puzzles will be generated using word pairs from that list.
+Example: When a teacher wishes to provide a word list for practice with the Sudoku app, the teacher may send the pairs of words to practice as a CSV file. When a student selects import word list, the system will parse and store the given word list and update the word list submenu with the name of the word list. When a student selects a word list from the word list submenu, puzzles will be generated using word pairs from that list.
 
 
 User story: As a language learner, I want to listen to the pronunciation of each word.
