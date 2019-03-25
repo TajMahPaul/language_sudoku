@@ -14,6 +14,10 @@ public class Board {
         gameCells[row][column] = value;
     }
 
+    public int getValue(int row, int column) {
+        return gameCells[row][column];
+    }
+
     public int[][] getGameCells() {
         return gameCells;
     }
@@ -21,7 +25,7 @@ public class Board {
     public void copyValues(int[][] newGameCells) {
         for (int i = 0; i < newGameCells.length; i++) {
             for (int j = 0; j < newGameCells[i].length; j++) {
-                gameCells[i][j] = newGameCells[i][j];
+                setValue(i,j,newGameCells[i][j]);
             }
         }
     }
@@ -29,7 +33,7 @@ public class Board {
     public boolean isBoardFull() {
         for (int i = 0; i < gameCells.length; i++) {
             for (int j = 0; j < gameCells[i].length; j++) {
-                if (gameCells[i][j] == 0) {
+                if (getValue(i,j) == 0) {
                     return false;
                 }
             }
@@ -41,10 +45,7 @@ public class Board {
     public boolean isBoardCorrect(int row, int column, int value) {
         //check horizontally and vertically
         for (int i = 0; i < 9; i++) {
-            if(gameCells[row][i] == value){
-                return false;
-            }
-            if(gameCells[i][column] == value){
+            if(getValue(row,i) == value || getValue(i,column) == value){
                 return false;
             }
         }
@@ -54,7 +55,7 @@ public class Board {
         int g_column = column/3*3;
         for(int i = g_row; i < g_row+3; i++){
             for(int j = g_column; j < g_column+3; j++){
-                if(gameCells[i][j] == value){
+                if(getValue(i,j) == value){
                     return false;
                 }
             }
@@ -62,10 +63,6 @@ public class Board {
         // Check each group is in CellGroupFragment class for easier code
         // returns true if horizontal and vertical lines are correct
         return true;
-    }
-
-    public int getValue(int row, int column) {
-        return gameCells[row][column];
     }
 
     @Override
@@ -76,14 +73,12 @@ public class Board {
                 if (j == 0) {
                     temp.append("\n");
                 }
-
-                int currentNumber = gameCells[i][j];
+                int currentNumber = getValue(i,j);
                 if (currentNumber == 0) {
                     temp.append("-");
                 } else {
                     temp.append(currentNumber);
                 }
-
                 if (j != (gameCells[i].length-1)) {
                     temp.append(" ");
                 }
