@@ -36,7 +36,7 @@ public class BoardTest {
         int[][] SVTestee = testee.getGameCells();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                assertEquals(SVTestee, i*9+j+1);
+                assertEquals(SVTestee[i][j], i*9+j+1);
             }
         }
     }
@@ -87,11 +87,10 @@ public class BoardTest {
         assertTrue(testee.isBoardCorrect(0, 8, 9));
         assertFalse(testee.isBoardCorrect(0, 8, 1));
         for (int i = 0; i < 8; i++) {
-            testee.setValue(i, 0, i+1);
+            testee.setValue(i, 0, 9-i);
         }
-        testee.setValue(0, 0, 1);
-        assertTrue(testee.isBoardCorrect(8, 0, 9));
-        assertFalse(testee.isBoardCorrect(8, 0, 1));
+        assertTrue(testee.isBoardCorrect(8, 0, 1));
+        assertFalse(testee.isBoardCorrect(8, 0, 9));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 testee.setValue(i, j, i*3+j+1);
