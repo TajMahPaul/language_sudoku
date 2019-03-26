@@ -99,6 +99,14 @@ public class BoardTest {
         testee.setValue(2, 2, 0);
         assertTrue(testee.isBoardCorrect(2, 2, 9));
         assertFalse(testee.isBoardCorrect(2, 2, 1));
+        for (int i = 3; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                testee.setValue(i, j, (i-3)*3+j+1);
+            }
+        }
+        testee.setValue(5, 2, 0);
+        assertTrue(testee.isBoardCorrect(5, 2, 9));
+        assertFalse(testee.isBoardCorrect(5, 2, 1));
     }
 
     @Test
