@@ -11,19 +11,7 @@ public class BoardTest {
     private Board testee = new Board();
 
     @Test
-    public void getSetTest() {
-        // getter and setter functions
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                testee.setValue(i, j, i*9+j+1);
-                assertEquals(testee.getValue(i, j), i*9+j+1);
-            }
-        }
-    }
-
-    @Test
-    public void copyValuesTest() {
-        // copyValues function
+    public void getValueTest() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 tester[i][j] = i * 9 + j + 1;
@@ -35,6 +23,33 @@ public class BoardTest {
                 assertEquals(testee.getValue(i, j), i*9+j+1);
             }
         }
+    }
+
+    @Test
+    public void setValueTest() {
+        // getter and setter functions
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                testee.setValue(i, j, i*9+j+1);
+            }
+        }
+        int[][] SVTestee = testee.getGameCells();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertEquals(SVTestee, i*9+j+1);
+            }
+        }
+    }
+
+
+    @Test
+    public void copyValuesTest() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                tester[i][j] = i * 9 + j + 1;
+            }
+        }
+        testee.copyValues(tester);
         // getGameCells function
         int[][] GCTestee = testee.getGameCells();
         for (int i = 0; i < 9; i++) {
