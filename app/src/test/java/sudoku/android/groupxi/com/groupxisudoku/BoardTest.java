@@ -15,8 +15,8 @@ public class BoardTest {
         // getter and setter functions
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                testee.setValue(i, j, i * 9 + j + 1);
-                assertEquals(testee.getValue(i, j), i * 9 + j + 1);
+                testee.setValue(i, j, i*9+j+1);
+                assertEquals(testee.getValue(i, j), i*9+j+1);
             }
         }
     }
@@ -32,14 +32,14 @@ public class BoardTest {
         testee.copyValues(tester);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                assertEquals(testee.getValue(i, j), i * 9 + j + 1);
+                assertEquals(testee.getValue(i, j), i*9+j+1);
             }
         }
         // getGameCells function
         int[][] GCTestee = testee.getGameCells();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                assertEquals(GCTestee[i][j], i * 9 + j + 1);
+                assertEquals(GCTestee[i][j], i*9+j+1);
             }
         }
     }
@@ -67,19 +67,19 @@ public class BoardTest {
     public void isBoardCorrectTest() {
         // isBoardCorrect function
         for (int i = 0; i < 8; i++) {
-            testee.setValue(0, i, i + 1);
+            testee.setValue(0, i, i+1);
         }
         assertTrue(testee.isBoardCorrect(0, 8, 9));
         assertFalse(testee.isBoardCorrect(0, 8, 1));
         for (int i = 0; i < 8; i++) {
-            testee.setValue(i, 0, i + 1);
+            testee.setValue(i, 0, i+1);
         }
         testee.setValue(0, 0, 1);
         assertTrue(testee.isBoardCorrect(8, 0, 9));
         assertFalse(testee.isBoardCorrect(8, 0, 1));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                testee.setValue(i, j, i * 3 + j + 1);
+                testee.setValue(i, j, i*3+j+1);
             }
         }
         testee.setValue(2, 2, 0);
@@ -97,14 +97,14 @@ public class BoardTest {
         }
         assertEquals(testee.toString(),
                 "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -" +
-                "\n- - - - - - - - -");
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -" +
+                        "\n- - - - - - - - -");
         // random numbers
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
