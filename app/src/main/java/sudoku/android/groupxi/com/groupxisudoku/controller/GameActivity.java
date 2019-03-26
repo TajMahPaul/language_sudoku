@@ -1,6 +1,5 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,6 @@ import android.widget.ToggleButton;
 import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,12 +49,11 @@ public class GameActivity extends AppCompatActivity {
         GridView gridView = findViewById(R.id.gridView);
         final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
-        int difficulty = getIntent().getIntExtra("difficulty", 0);
         final int language = getIntent().getIntExtra("language", 0);
         int size = getIntent().getIntExtra("size", 9);
-        ArrayList<Board> boards = readGameBoards(difficulty);
+        ArrayList<Board> boards = readGameBoards(size);
         startBoard = chooseRandomBoard(boards);
-        currentBoard = new Board();
+        currentBoard = new Board(size);
         currentBoard.copyValues(startBoard.getGameCells());
 
         //initialize text to speech
@@ -80,20 +76,21 @@ public class GameActivity extends AppCompatActivity {
         });
 
         //add board number into a list
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 boardNumber.add(currentBoard.getValue(i, j));
             }
         }
 
         // set up gridView adapter
-        adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language,this);
+        gridView.setNumColumns(size);
+        adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language, size,this);
         gridView.setAdapter(adapter);
 
         //add function to number buttons
         int numButtonsId[] = new int[]{R.id.num_button1, R.id.num_button2, R.id.num_button3, R.id.num_button4,
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9};
-        for(int i = 0; i < 9; i++){
+        for(int i = 0; i < size; i++){
             final int finalI = i+1;
             final int curI = i;
             num_buttons[i] = findViewById(numButtonsId[i]);
@@ -166,16 +163,20 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<Board> readGameBoards(int difficulty) {
+    private ArrayList<Board> readGameBoards(int size) {
         //read different game initial template from res/raw based on the level of difficulty
         ArrayList<Board> boards = new ArrayList<>();
         int fileId;
-        if (difficulty == 1) {
-            fileId = R.raw.normal;
-        } else if (difficulty == 0) {
-            fileId = R.raw.easy;
-        } else {
-            fileId = R.raw.hard;
+
+        // choose different file based on grid size
+        if(size == 4) {
+            fileId = R.raw.size4;
+        }else if(size == 6) {
+            fileId = R.raw.size6;
+        }else if(size == 9){
+            fileId = R.raw.size9;
+        }else{
+            fileId = R.raw.size12;
         }
 
         InputStream inputStream = getResources().openRawResource(fileId);
@@ -183,11 +184,11 @@ public class GameActivity extends AppCompatActivity {
         try {
             String line = bufferedReader.readLine();
             while (line != null) {
-                Board board = new Board();
+                Board board = new Board(size);
                 // read all lines in the board
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < size; i++) {
                     String rowCells[] = line.split(" ");
-                    for (int j = 0; j < 9; j++) {
+                    for (int j = 0; j < size; j++) {
                         if (rowCells[j].equals("-")) {
                             board.setValue(i, j, 0);
                         } else {
@@ -205,48 +206,48 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //reading from internal storage (/data/data/<package-name>/files)
-        String fileName = "boards-";
-        if (difficulty == 0) {
-            fileName += "easy";
-        } else if (difficulty == 1) {
-            fileName += "normal";
-        } else {
-            fileName += "hard";
-        }
+//        String fileName = "boards-";
+//        if (difficulty == 0) {
+//            fileName += "easy";
+//        } else if (difficulty == 1) {
+//            fileName += "normal";
+//        } else {
+//            fileName += "hard";
+//        }
 
-        FileInputStream fileInputStream;
-        try {
-            fileInputStream = this.openFileInput(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader internalBufferedReader = new BufferedReader(inputStreamReader);
-            String line = internalBufferedReader.readLine();
-            line = internalBufferedReader.readLine();
-            while (line != null) {
-                Board board = new Board();
-                // read all lines in the board
-                for (int i = 0; i < 9; i++) {
-                    String rowCells[] = line.split(" ");
-                    for (int j = 0; j < 9; j++) {
-                        if (rowCells[j].equals("-")) {
-                            board.setValue(i, j, 0);
-                        } else {
-                            board.setValue(i, j, Integer.parseInt(rowCells[j]));
-                        }
-                    }
-                    line = internalBufferedReader.readLine();
-                    if (line == null) {
-                        break;
-                    }
-                }
-                boards.add(board);
-                line = internalBufferedReader.readLine();
-            }
-            internalBufferedReader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        FileInputStream fileInputStream;
+//        try {
+//            fileInputStream = this.openFileInput(fileName);
+//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+//            BufferedReader internalBufferedReader = new BufferedReader(inputStreamReader);
+//            String line = internalBufferedReader.readLine();
+//            line = internalBufferedReader.readLine();
+//            while (line != null) {
+//                Board board = new Board();
+//                // read all lines in the board
+//                for (int i = 0; i < 9; i++) {
+//                    String rowCells[] = line.split(" ");
+//                    for (int j = 0; j < 9; j++) {
+//                        if (rowCells[j].equals("-")) {
+//                            board.setValue(i, j, 0);
+//                        } else {
+//                            board.setValue(i, j, Integer.parseInt(rowCells[j]));
+//                        }
+//                    }
+//                    line = internalBufferedReader.readLine();
+//                    if (line == null) {
+//                        break;
+//                    }
+//                }
+//                boards.add(board);
+//                line = internalBufferedReader.readLine();
+//            }
+//            internalBufferedReader.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         return boards;
     }

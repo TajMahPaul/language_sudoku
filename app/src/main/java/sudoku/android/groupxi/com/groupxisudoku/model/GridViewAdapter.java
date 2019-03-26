@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class GridViewAdapter extends BaseAdapter {
     String[] native_strings;
     String[] chinese_strings;
     String[] current_strings;
+    int size;
 
     int language; // 0 for native and 1 for Chinese
 
@@ -27,12 +30,13 @@ public class GridViewAdapter extends BaseAdapter {
     int row;
     int column;
 
-    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, Context context) {
+    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, Context context) {
         this.boardNumber = isSource;
         this.originalNumber = isSource;
         this.native_strings = native_strings;
         this.chinese_strings = chinese_strings;
         this.language = language;
+        this.size = size;
         this.mContext = context;
         if(language == 0){
             current_strings = native_strings;
@@ -64,6 +68,17 @@ public class GridViewAdapter extends BaseAdapter {
             button = new Button (mContext);
             button.setBackgroundResource(R.drawable.table_border_cell);
             button.setTextColor(Color.WHITE);
+
+            // set size of each cell
+            if(size == 4){
+                button.setLayoutParams(new GridView.LayoutParams(220, 220));
+            }else if(size == 6){
+                button.setLayoutParams(new GridView.LayoutParams(160, 160));
+            }else if(size == 9){
+                button.setLayoutParams(new GridView.LayoutParams(115, 115));
+            }else{
+
+            }
 
             // set string on board
             if(boardNumber.get(position) != 0) {
