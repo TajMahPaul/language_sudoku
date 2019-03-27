@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
     int[][] tester = new int[9][9];
-    private Board testee = new Board();
+    private Board testee = new Board(9);
 
     @Test
     public void getValueTest() {

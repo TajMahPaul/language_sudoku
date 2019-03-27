@@ -14,7 +14,7 @@ public class Board {
     public Board(int size) {
         this.size = size;
         this.gameCells = new int [size][size];
-        Log.e(TAG, "Board: "+ String.valueOf(size));
+        //Log.e(TAG, "Board: "+ String.valueOf(size));
 
     }
 
@@ -79,7 +79,7 @@ public class Board {
         int sub_column = column/g_column;
         for(int i = sub_row; i < sub_row+g_row; i++){
             for(int j = sub_column; j < sub_column+g_column; j++){
-                if(gameCells[i][j] == value){
+                if(getValue(i,j) == value){
                     return false;
                 }
             }

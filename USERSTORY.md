@@ -42,8 +42,8 @@ Example: When a user selects a Sudoku cell that is part of the pre-filled config
 User story: As a teacher, I want to specify a list of word pairs for my students to practice this week.
 Example: When a teacher wishes to provide a word list for practice with the Sudoku app, the teacher may send the pairs of words to practice as a CSV file. When a student selects import word list, the system will parse and store the given word list and update the word list submenu with the name of the word list. When a student selects a word list from the word list submenu, puzzles will be generated using word pairs from that list.
 
-User story: As a Sudoku player, I want to play the game in night mode.
-Example: When a user starts the application, every layout the user sees is in the night mode color scheme.
+User story: As a Sudoku player, I want to play the game in dark mode.
+Example: When a user starts the application, every layout the user sees is in the dark mode color scheme.
 
 User story: As a travel enthusiast, I want to learn new languages.
 Example: Before the users start a new game, they can select a language that they want to learn.
