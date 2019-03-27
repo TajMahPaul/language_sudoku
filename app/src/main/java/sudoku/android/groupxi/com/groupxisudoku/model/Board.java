@@ -1,6 +1,10 @@
 package sudoku.android.groupxi.com.groupxisudoku.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 
 public class Board {
@@ -10,6 +14,8 @@ public class Board {
     public Board(int size) {
         this.size = size;
         this.gameCells = new int [size][size];
+        Log.e(TAG, "Board: "+ String.valueOf(size));
+
     }
 
     public void setValue(int row, int column, int value) {

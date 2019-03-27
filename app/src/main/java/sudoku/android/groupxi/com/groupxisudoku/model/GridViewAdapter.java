@@ -103,8 +103,8 @@ public class GridViewAdapter extends BaseAdapter {
                         button.setBackgroundResource(R.drawable.table_border_cell_selected);
                         clicked = true;
                         clickedCell = button;
-                        row = position / 9;
-                        column = position % 9;
+                        row = position / size;
+                        column = position % size;
                     }else{
 
                     }
