@@ -1,182 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#212121"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#212121">
 
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="360dp"
-    android:background="#212121"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-    <TableLayout
-        android:layout_width="200dp"
-        android:layout_height="275dp"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <Button
-                android:id="@+id/num_button1"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button2"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button3"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <Button
-                android:id="@+id/num_button4"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button5"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button6"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <Button
-                android:id="@+id/num_button7"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button8"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/num_button9"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:textColor="#FFFFFF" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-
-            <Button
-                android:id="@+id/delete_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/circular_button"
-                android:onClick="deleteButton"
-                android:text="X"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-        </TableRow>
-    </TableLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="685dp"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:background="#212121"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <ToggleButton
-            android:id="@+id/voice"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:checked="true"
-            android:contentDescription='"Text to Speech"'
-            android:text="ToggleButton"
-            tools:layout_editor_absoluteX="615dp"
-            tools:layout_editor_absoluteY="0dp" />
+
         <GridView
             android:id="@+id/gridView"
-            android:layout_width="390dp"
-            android:layout_height="330dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="130dp"
+            android:layout_width="474dp"
+            android:layout_height="323dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:horizontalSpacing="0dp"
+            android:isScrollContainer="false"
+            android:columnWidth="5dp"
+            android:numColumns="9"
             android:textAlignment="center"
-            android:minHeight="10dp"
-            android:numColumns="9">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
 
         </GridView>
 
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="190dp"
+            android:layout_height="245dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="78dp">
+
+                <Button
+                    android:id="@+id/num_button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <Button
+                    android:id="@+id/num_button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <Button
+                    android:id="@+id/num_button7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/num_button9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="154dp"
+                android:layout_height="60dp">
+
+
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button"
+                    android:onClick="deleteButton"
+                    android:text="X"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp" />
+            </TableRow>
+        </TableLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
-</ScrollView>

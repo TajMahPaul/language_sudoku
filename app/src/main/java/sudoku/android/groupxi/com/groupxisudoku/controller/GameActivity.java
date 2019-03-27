@@ -37,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
 
     private Button[] num_buttons = new Button [9];
     public int language = 0; // 0 for native and 1 for chinese on board
+    public int row, column;
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
 
@@ -50,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
         final String[] native_strings = res.getStringArray(R.array.native_array);
         String[] chinese_strings = res.getStringArray(R.array.chinese_array);
         GridView gridView = findViewById(R.id.gridView);
-        final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
+        //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
         int difficulty = getIntent().getIntExtra("difficulty", 0);
         final int language = getIntent().getIntExtra("language", 0);
@@ -107,6 +108,8 @@ public class GameActivity extends AppCompatActivity {
 
                     Button temp_button = (Button) v;
                     String text = (String) temp_button.getText();
+
+                    /*
                     if(toggle.isChecked()){
                         if (language == 0){
                             t1.speak(text, TextToSpeech.QUEUE_FLUSH, null);
@@ -115,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
                         }
 
                     }
-
+                    */
 
 
                     //check if a cell has been selected
@@ -128,6 +131,9 @@ public class GameActivity extends AppCompatActivity {
 
                             Button clickedButton = adapter.getClickedCell();
                             clickedButton.setText(text);
+                            row = adapter.getRow();
+                            column = adapter.getColumn();
+
                             adapter.setClicked(false);
                             adapter.uncheckClickedCell();
 

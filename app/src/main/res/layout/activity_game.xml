@@ -1,58 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212121"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+    android:background="#212121">
 
-        <ToggleButton
-            android:id="@+id/voice"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="50dp"
-            android:checked="true"
-            android:contentDescription='"Text to Speech"'
-            android:text="ToggleButton" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="414dp"
+        android:layout_height="612dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <GridView
             android:id="@+id/gridView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="382dp"
+            android:layout_height="445dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:columnWidth="10dp"
             android:gravity="center"
             android:horizontalSpacing="0dp"
-            android:numColumns="9">
+            android:numColumns="9"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.347">
 
         </GridView>
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="169dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
+            android:id="@+id/tableLayout2"
+            android:layout_width="310dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.7">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/num_button1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -60,8 +68,8 @@
 
                 <Button
                     android:id="@+id/num_button2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -69,8 +77,8 @@
 
                 <Button
                     android:id="@+id/num_button3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -78,8 +86,8 @@
 
                 <Button
                     android:id="@+id/num_button4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -87,8 +95,8 @@
 
                 <Button
                     android:id="@+id/num_button5"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -97,12 +105,12 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/num_button6"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -110,8 +118,8 @@
 
                 <Button
                     android:id="@+id/num_button7"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -119,8 +127,8 @@
 
                 <Button
                     android:id="@+id/num_button8"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -128,8 +136,8 @@
 
                 <Button
                     android:id="@+id/num_button9"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -137,8 +145,8 @@
 
                 <Button
                     android:id="@+id/delete_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/circular_button"
@@ -147,5 +155,5 @@
                     android:textSize="17sp" />
             </TableRow>
         </TableLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

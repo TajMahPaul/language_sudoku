@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 
 import java.util.List;
 
@@ -62,10 +63,13 @@ public class GridViewAdapter extends BaseAdapter {
         final Button button;
         if(convertView == null){
             button = new Button (mContext);
-            button.setBackgroundResource(R.drawable.table_border_cell);
-            button.setTextColor(Color.WHITE);
+            setCellBackground(button, position);
 
-            // set string on board
+            button.setTextColor(Color.WHITE);
+            button.setHeight(2);
+
+
+            // set string on board;
             if(boardNumber.get(position) != 0) {
                 button.setText(current_strings[boardNumber.get(position)-1]);
             }else{
@@ -78,7 +82,8 @@ public class GridViewAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     //uncheck selected cell
                     if(clickedCell != null){
-                        clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+                        setCellBackground(clickedCell, row, column);
+                        //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
                         clickedCell = null;
                     }
 
@@ -100,8 +105,19 @@ public class GridViewAdapter extends BaseAdapter {
 
             button = (Button)convertView;
         }
-
+        //setMargins(button,0,0,8,0);
+        setCellBackground(button, position);
+        button.setTextColor(Color.WHITE);
+        button.setHeight(2);
         return button;
+    }
+
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
     }
 
     public boolean isClicked() {
@@ -124,9 +140,37 @@ public class GridViewAdapter extends BaseAdapter {
         this.clicked = clicked;
     }
 
+    private void setCellBackground(Button button, int row, int column){
+        if( ( (row+1)%3 == 0 && (row+1)%9 != 0) && (column+1)%3 == 0 && (column+1)%9 != 0) {
+            button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
+        }
+        else if ((column+1)%3 == 0 && (column+1)%9 != 0){
+            button.setBackgroundResource(R.drawable.table_border_cell_right);
+        }
+        else if((row+1)%3 == 0 && (row+1)%9 != 0) {
+            button.setBackgroundResource(R.drawable.table_border_cell_bottom);
+        }
+        else {
+            button.setBackgroundResource(R.drawable.table_border_cell);
+        }
+    }
+    private void setCellBackground(Button button, int position){
+        if( ( (position/9 + 1)%3 == 0 && (position/9+1)%9 != 0) && (position+1)%3 == 0 && (position+1)%9 != 0) {
+            button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
+        }
+        else if ((position+1)%3 == 0 && (position+1)%9 != 0 ){
+            button.setBackgroundResource(R.drawable.table_border_cell_right);
+        }
+        else if( (position/9 + 1)%3 == 0 && (position/9+1)%9 != 0){
+            button.setBackgroundResource(R.drawable.table_border_cell_bottom);
+        }
+        else{
+            button.setBackgroundResource(R.drawable.table_border_cell);
+        }
+    }
     public void uncheckClickedCell() {
         if(clickedCell != null){
-            clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+            setCellBackground(clickedCell, row, column);
             clickedCell = null;
         }
     }
