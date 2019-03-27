@@ -24,6 +24,10 @@ public class Board {
         }
     }
 
+    public int getValue(int row, int column) {
+        return gameCells[row][column];
+    }
+
     public int[][] getGameCells() {
         return gameCells;
     }
@@ -31,15 +35,15 @@ public class Board {
     public void copyValues(int[][] newGameCells) {
         for (int i = 0; i < newGameCells.length; i++) {
             for (int j = 0; j < newGameCells[i].length; j++) {
-                gameCells[i][j] = newGameCells[i][j];
+                setValue(i,j,newGameCells[i][j]);
             }
         }
     }
 
     public boolean isBoardFull() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (gameCells[i][j] == 0) {
+        for (int i = 0; i < gameCells.length; i++) {
+            for (int j = 0; j < gameCells[i].length; j++) {
+                if (getValue(i,j) == 0) {
                     return false;
                 }
             }
@@ -50,11 +54,8 @@ public class Board {
     //before set value use this function to check if this value can set in the board
     public boolean isBoardCorrect(int row, int column, int value) {
         //check horizontally and vertically
-        for (int i = 0; i < size; i++) {
-            if(gameCells[row][i] == value){
-                return false;
-            }
-            if(gameCells[i][column] == value){
+        for (int i = 0; i < 9; i++) {
+            if(getValue(row,i) == value || getValue(i,column) == value){
                 return false;
             }
         }
@@ -87,10 +88,6 @@ public class Board {
         return true;
     }
 
-    public int getValue(int row, int column) {
-        return gameCells[row][column];
-    }
-
     @Override
     public String toString() {
         StringBuilder temp = new StringBuilder();
@@ -99,14 +96,12 @@ public class Board {
                 if (j == 0) {
                     temp.append("\n");
                 }
-
-                int currentNumber = gameCells[i][j];
+                int currentNumber = getValue(i,j);
                 if (currentNumber == 0) {
                     temp.append("-");
                 } else {
                     temp.append(currentNumber);
                 }
-
                 if (j != (gameCells[i].length-1)) {
                     temp.append(" ");
                 }
