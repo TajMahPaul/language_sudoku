@@ -18,32 +18,39 @@ Given: that the user is filling in the grid in listening comprehension mode,
 When: the users presses a cell and hears the word "vert"
 Then: the user does not see the word "vert" anywhere on the game grid.
 
-User story: As a vocabulary learner practicing at home, I want to use my tablet for Sudoku vocabulary practice, so that the words will be conveniently displayed in larger, easier to read fonts.
-Example: The application includes models designed specifically for tablets.
+Given: that the user uses a tablet for Sudoku vocabulary practice,
+When: the user is practicing his vocabulary at home
+Then: the words will be conveniently displayed in larger, easier to read fonts.
 
-User story: As a vocabulary learner taking the bus, I want to use my phone in landscape mode for Sudoku vocabulary practice, so that longer words are displayed in a larger font that standard mode.
-Example: The application includes models for both landscape and portrait viewing.
+Given: that the user uses his phone in landscape mode for Sudoku vocabulary practice,
+When: the user is practicing his vocabulary while taking the bus
+Then: longer words are displayed in a larger font than standard mode.
 
-User story: As a teacher, I want to specify a list of word pairs for my students to practice this week.
-Example: Teachers can send out a CSV file with word pairs and timestamps to students which can be imported into the application. When the students start a new game, the application would select word pairs based on the timestamps and today's date.
+Given: that the user is a student working with a textbook,
+When: the user wants to practice from each chapter of the book
+Then: the user can load pairs of words into the application to practice.
 
-User story: As a student working with a textbook, I want to load pairs of words to practice from each chapter of the book.
-Example: Users can "bulk import" word pairs and the system automatically groups the word pairs by chapter.
+Given: that the user is using the Sudoku app,
+When: the user is having difficulty recognizing some of the vocabulary words
+Then: those words will be used more often in the practice puzzles.
 
-User story: As a student, I want the Sudoku app to keep track of the vocabulary words that I am having difficulty recognizing so that they will be used more often in my practice puzzles.
-Example: Maintain a list of words that the user is learning and the count number of times the user uses that word correctly and incorrectly.
+Given: that the user is practicing his understanding of spoken words in the language he is learning,
+and listening comprehension mode is enabled
+When: the user presses a number
+Then: the corresponding word in the language that he is learning will be read out.
 
-User story: As a student who wants to practice my understanding of spoken words in the language that I am learning, I want a listening comprehension mode. In this mode, numbers will appear in the pre-filled cells.
-Example: When a user presses the number, the corresponding word in the language that he/she is learning will be read out. The user can then test his/her listening comprehension by entering the English translation of the word into an appropriate puzzle cell.
+Given: that the user is filling in the grid in reading comprehension mode,
+When: the user selects a Sudoku cell that is part of the pre-filled configuration of a puzzle
+Then: the translation of that word is momentarily displayed.
 
-User story: As a language learner, I want to be able to peek at the correct translation of a word, so that I can try to remember it in filling out the puzzle.
-Example: When a user selects a Sudoku cell that is part of the pre-filled configuration of a puzzle, the translation of that word is momentarily displayed.
+Given: that the user specifies a list of word pairs for his students to practice this week,
+When: a teacher wish to provide a word list for practice with the Sudoku app
+Then: the teacher may send the pairs of words to practice as a CSV file.
 
-User story: As a teacher, I want to specify a list of word pairs for my students to practice this week.
-Example: When a teacher wishes to provide a word list for practice with the Sudoku app, the teacher may send the pairs of words to practice as a CSV file. When a student selects import word list, the system will parse and store the given word list and update the word list submenu with the name of the word list. When a student selects a word list from the word list submenu, puzzles will be generated using word pairs from that list.
+Given: that the user specifies a list of word pairs for his students to practice this week,
+When: a student selects import word list
+Then: the system will parse and store the given word list and update the word list submenu with the name of the word list
 
-User story: As a Sudoku player, I want to play the game in dark mode.
-Example: When a user starts the application, every layout the user sees is in the dark mode color scheme.
-
-User story: As a travel enthusiast, I want to learn new languages.
-Example: Before the users start a new game, they can select a language that they want to learn.
+Given: that the user specifies a list of word pairs for his students to practice this week,
+When: a student selects a word list from the word list submenu
+Then: puzzles will be generated using word pairs from that list
