@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.app.Dialog;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 
@@ -41,6 +39,21 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     language = 0;
                     languageButton.setText("English");
+                }
+            }
+        });
+
+        final Button difficultyButton = findViewById(R.id.difficultyButton);
+        difficultyButton.setText("  easy  ");
+        difficultyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(difficultyButton.getText() == "  easy  "){
+                    difficultyButton.setText("  medium  ");
+                }else if(difficultyButton.getText() == "  medium  "){
+                    difficultyButton.setText("  difficult  ");
+                }else if(difficultyButton.getText() == "  difficult  "){
+                    difficultyButton.setText("  easy  ");
                 }
             }
         });
@@ -92,9 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
-//        Intent intent = new Intent(this, GameActivity.class);
-//        intent.putExtra("language", language);
-//        startActivity(intent);
     }
 
     public void resumeButton(View view) {

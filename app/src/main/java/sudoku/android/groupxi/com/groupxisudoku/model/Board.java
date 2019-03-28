@@ -54,7 +54,7 @@ public class Board {
     //before set value use this function to check if this value can set in the board
     public boolean isBoardCorrect(int row, int column, int value) {
         //check horizontally and vertically
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < size; i++) {
             if(getValue(row,i) == value || getValue(i,column) == value){
                 return false;
             }
