@@ -1,8 +1,10 @@
-package sudoku.android.groupxi.com.groupxisudoku;
+package sudoku.android.groupxi.com.groupxisudoku.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+
+import sudoku.android.groupxi.com.groupxisudoku.R;
 
 public class PopupInfo extends Activity {
 
