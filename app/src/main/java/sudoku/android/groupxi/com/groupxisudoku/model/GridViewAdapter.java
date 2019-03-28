@@ -20,6 +20,7 @@ public class GridViewAdapter extends BaseAdapter {
     String[] native_strings;
     String[] chinese_strings;
     String[] current_strings;
+    String[] not_current_strings;
 
     int language; // 0 for native and 1 for Chinese
 
@@ -37,8 +38,10 @@ public class GridViewAdapter extends BaseAdapter {
         this.mContext = context;
         if(language == 0){
             current_strings = native_strings;
+            not_current_strings = chinese_strings;
         }else{
             current_strings = chinese_strings;
+            not_current_strings = native_strings;
         }
 
     }
@@ -61,54 +64,59 @@ public class GridViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final Button button;
+
         if(convertView == null){
             button = new Button (mContext);
-            setCellBackground(button, position);
 
-            button.setTextColor(Color.WHITE);
-            button.setHeight(2);
-
-
-            // set string on board;
-            if(boardNumber.get(position) != 0) {
-                button.setText(current_strings[boardNumber.get(position)-1]);
-            }else{
-                button.setText("");
-            }
-
-            // set up button function
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //uncheck selected cell
-                    if(clickedCell != null){
-                        setCellBackground(clickedCell, row, column);
-                        //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
-                        clickedCell = null;
-                    }
-
-
-                    if(originalNumber.get(position) == 0) {
-                        //if the cell is not original
-                        button.setBackgroundResource(R.drawable.table_border_cell_selected);
-                        clicked = true;
-                        clickedCell = button;
-                        row = position / 9;
-                        column = position % 9;
-                    }else{
-
-                    }
-                }
-            });
 
         }else{
 
             button = (Button)convertView;
         }
         //setMargins(button,0,0,8,0);
+        //setCellBackground(button, position);
+        //button.setTextColor(Color.WHITE);
         setCellBackground(button, position);
+
         button.setTextColor(Color.WHITE);
-        button.setHeight(2);
+
+
+        // set string on board;
+        if(boardNumber.get(position) != 0 && boardNumber.get(position) > 0) {
+            button.setText(current_strings[boardNumber.get(position)-1]);
+        }
+        else if(boardNumber.get(position) != 0 && boardNumber.get(position) < 0){
+            button.setText(not_current_strings[-1*(boardNumber.get(position)-1)]);
+        }
+        else{
+
+            button.setText("");
+        }
+
+        // set up button function
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //uncheck selected cell
+                if(clickedCell != null){
+                    setCellBackground(clickedCell, row, column);
+                    //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+                    clickedCell = null;
+                }
+
+
+                if(originalNumber.get(position) == 0) {
+                    //if the cell is not original
+                    button.setBackgroundResource(R.drawable.table_border_cell_selected);
+                    clicked = true;
+                    clickedCell = button;
+                    row = position / 9;
+                    column = position % 9;
+                }else{
+
+                }
+            }
+        });
         return button;
     }
 
@@ -173,5 +181,8 @@ public class GridViewAdapter extends BaseAdapter {
             setCellBackground(clickedCell, row, column);
             clickedCell = null;
         }
+    }
+    public void updateBoardNumber(int position, int value){
+        boardNumber.set(position, value);
     }
 }

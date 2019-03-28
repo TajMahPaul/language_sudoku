@@ -40,6 +40,7 @@ public class GameActivity extends AppCompatActivity {
     public int row, column;
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
+    int size = 9;
 
 
     @Override
@@ -133,9 +134,10 @@ public class GameActivity extends AppCompatActivity {
                             clickedButton.setText(text);
                             row = adapter.getRow();
                             column = adapter.getColumn();
-
                             adapter.setClicked(false);
                             adapter.uncheckClickedCell();
+                            int pos = row*size+(column);
+                            adapter.updateBoardNumber(pos, -finalI);
 
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
