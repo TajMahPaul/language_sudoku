@@ -54,3 +54,11 @@ Then: the system will parse and store the given word list and update the word li
 Given: that the user specifies a list of word pairs for his students to practice this week,
 When: a student selects a word list from the word list submenu
 Then: puzzles will be generated using word pairs from that list
+
+Given: that the user wants to select a grid size for his Sudoku practice,
+When: the user initiates the game
+Then: the application displays a pop up which allows the user to select a grid size.
+
+Given: that the user wants to track his students' language learner progress,
+When: the user clicks on the leaderboard button
+Then: the application displays every student's statistics
