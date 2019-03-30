@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
             }else{
                 num_buttons[i].setText(native_strings[i]);
             }
-            num_buttons[i].setOnClickListener(new View.OnClickListener() {
+                num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
