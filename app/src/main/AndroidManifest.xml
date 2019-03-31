@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".controller.GameActivity"
             android:parentActivityName=".controller.MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -28,6 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controller.GameActivity" />
         </activity>
+
         <activity android:name=".controller.SettingsActivity"
             android:parentActivityName=".controller.MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -35,11 +37,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controller.SettingsActivity" />
         </activity>
+
         <activity android:name=".controller.PopupInfo"
             android:theme="@style/AppTheme.CustomTheme"
             ></activity>
     <activity android:name=".controller.FileAndDirectoryActivity"
-        ></activity>
+        android:parentActivityName=".controller.MainActivity">
+        </activity>
     </application>
 
 </manifest>

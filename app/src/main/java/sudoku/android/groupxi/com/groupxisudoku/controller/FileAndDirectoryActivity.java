@@ -58,9 +58,12 @@ public class FileAndDirectoryActivity extends ListActivity {
     }
     void ListDir(File f) {
         File[] files = f.listFiles();
-        for(File file : files) {
-            fileList.add(file.getPath());
+        if (files != null ){
+            for(File file : files) {
+                fileList.add(file.getPath());
+            }
         }
+
 
 
         ArrayAdapter<String> directoryList = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, fileList);
