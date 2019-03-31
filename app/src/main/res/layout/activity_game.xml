@@ -10,7 +10,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="414dp"
-        android:layout_height="612dp"
+        android:layout_height="599dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
         <GridView
             android:id="@+id/gridView"
             android:layout_width="382dp"
-            android:layout_height="445dp"
+            android:layout_height="449dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -33,25 +33,28 @@
             android:horizontalSpacing="0dp"
             android:numColumns="9"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
-            app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+            android:verticalSpacing="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.347">
+            app:layout_constraintVertical_bias="0.059">
 
         </GridView>
 
         <TableLayout
             android:id="@+id/tableLayout2"
-            android:layout_width="310dp"
-            android:layout_height="140dp"
+            android:layout_width="319dp"
+            android:layout_height="122dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <TableRow
                 android:layout_width="match_parent"

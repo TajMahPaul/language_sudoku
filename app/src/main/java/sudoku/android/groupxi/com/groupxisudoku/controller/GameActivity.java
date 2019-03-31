@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
     public int row, column;
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
-    int size = 9;
+
 
 
     @Override
@@ -52,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
         final int language = getIntent().getIntExtra("language", 0);
-        int size = getIntent().getIntExtra("size", 9);
+        final int size = getIntent().getIntExtra("size", 9);
         ArrayList<Board> boards = readGameBoards(size);
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board(size);

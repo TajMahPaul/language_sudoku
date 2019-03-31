@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.GridView;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class GridViewAdapter extends BaseAdapter {
     Button clickedCell = null; // reference of the clicked cell
     int row;
     int column;
+    int square_height;
+    int square_width;
 
     public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, Context context) {
         this.boardNumber = isSource;
@@ -46,8 +49,27 @@ public class GridViewAdapter extends BaseAdapter {
             current_strings = chinese_strings;
             not_current_strings = native_strings;
         }
+        if (size == 4){
+            square_height=2;
+            square_width=2;
+        }
+        else if(size == 6){
+            square_width=3;
+            square_height=2;
 
+        }
+        else if(size == 9){
+            square_width=3;
+            square_height=3;
+
+        }
+        else if(size == 12){
+            square_width=4;
+            square_height=3;
+
+        }
     }
+
 
     @Override
     public int getCount() {
@@ -70,15 +92,15 @@ public class GridViewAdapter extends BaseAdapter {
         if(convertView == null){
             button = new Button (mContext);
             // set size of each cell
-            if(size == 4){
-                button.setLayoutParams(new GridView.LayoutParams(220, 220));
-            }else if(size == 6){
-                button.setLayoutParams(new GridView.LayoutParams(160, 160));
-            }else if(size == 9){
-                button.setLayoutParams(new GridView.LayoutParams(115, 115));
-            }else{
-
-            }
+//            if(size == 4){
+//                button.setLayoutParams(new GridView.LayoutParams(220, 220) );
+//            }else if(size == 6){
+//                button.setLayoutParams(new GridView.LayoutParams(160, 160));
+//            }else if(size == 9){
+//                button.setLayoutParams(new GridView.LayoutParams(115, 115));
+//            }else{
+//
+//            }
 
         }else{
 
@@ -154,13 +176,13 @@ public class GridViewAdapter extends BaseAdapter {
     }
 
     private void setCellBackground(Button button, int row, int column){
-        if( ( (row+1)%3 == 0 && (row+1)%9 != 0) && (column+1)%3 == 0 && (column+1)%9 != 0) {
+        if( ( (row+1)%square_height == 0 && (row+1)%size != 0) && (column+1)%square_width == 0 && (column+1)%size != 0) {
             button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
         }
-        else if ((column+1)%3 == 0 && (column+1)%9 != 0){
+        else if ((column+1)%square_width == 0 && (column+1)%size != 0){
             button.setBackgroundResource(R.drawable.table_border_cell_right);
         }
-        else if((row+1)%3 == 0 && (row+1)%9 != 0) {
+        else if((row+1)%square_height == 0 && (row+1)%size != 0) {
             button.setBackgroundResource(R.drawable.table_border_cell_bottom);
         }
         else {
@@ -168,13 +190,13 @@ public class GridViewAdapter extends BaseAdapter {
         }
     }
     private void setCellBackground(Button button, int position){
-        if( ( (position/9 + 1)%3 == 0 && (position/9+1)%9 != 0) && (position+1)%3 == 0 && (position+1)%9 != 0) {
+        if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
             button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
         }
-        else if ((position+1)%3 == 0 && (position+1)%9 != 0 ){
+        else if ((position+1)%square_width == 0 && (position+1)%size != 0 ){
             button.setBackgroundResource(R.drawable.table_border_cell_right);
         }
-        else if( (position/9 + 1)%3 == 0 && (position/9+1)%9 != 0){
+        else if( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0){
             button.setBackgroundResource(R.drawable.table_border_cell_bottom);
         }
         else{
