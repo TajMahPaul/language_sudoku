@@ -179,12 +179,14 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(adapter.isClicked()){
+                    Log.d(TAG, "onClick: delete");
                     Button clickedButton = adapter.getClickedCell();
                     clickedButton.setText("");
                     adapter.uncheckClickedCell();
                     int row = adapter.getRow();
                     int column = adapter.getColumn();
                     currentBoard.setValue(row,column, 0);
+
                 }
             }
         });
