@@ -15,8 +15,10 @@ public class WordPair {
 
     public String getForeignWord() { return foreign_word; }
 
-    public void incrementIncorrectCount () { incorrect_count++; }
+    public void incrementIncorrectCount() { incorrect_count++; }
 
     public int getIncorrectCount() { return incorrect_count; }
+
+    public void resetIncorrectCount() { incorrect_count = 0; }
 
 }

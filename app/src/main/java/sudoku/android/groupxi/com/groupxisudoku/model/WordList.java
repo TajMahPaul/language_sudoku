@@ -59,8 +59,14 @@ public class WordList {
         current_list_capacity = INITIAL_LIST_CAPACITY;
     }
 
+    public void resetWordPairIncorrectCount(String native_word, String foreign_word) {
+        int index = findWordPairIndex(native_word, foreign_word);
+        if (index != -1)
+            list[index].resetIncorrectCount();
+    }
+
     public WordPair[] createRanking(int size) {
-        WordPair tmpList[] = new WordPair[size];
+        WordPair tmpList[] = new WordPair[word_count];
         // first copy words with non-zero count to tmpList
         int valid_count = 0;
         for (int i = 0; i < word_count; i++) {
@@ -76,11 +82,12 @@ public class WordList {
         WordPair rankList[] = new WordPair[size];
         for (int i = 0; i < size; i++) {
             WordPair candidate = tmpList[i];
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < valid_count; j++) {
                 if (tmpList[i].getIncorrectCount() < tmpList[j].getIncorrectCount())
                     candidate = tmpList[j];
             }
             rankList[i] = candidate;
+            rankList[i].resetIncorrectCount();
         }
         return rankList;
     }

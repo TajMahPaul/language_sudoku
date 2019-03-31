@@ -45,5 +45,8 @@ public class WordPairTest {
             testPair.incrementIncorrectCount();
             assertEquals(testPair.getIncorrectCount(), (double) i+1, 0);
         }
+        // now reset
+        testPair.resetIncorrectCount();
+        assertEquals(testPair.getIncorrectCount(), 0);
     }
 }
