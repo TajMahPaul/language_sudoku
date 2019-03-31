@@ -31,6 +31,7 @@ public class WordListTest {
                 assertEquals(testList.getWordPairIncorrectCount(tmp_native, tmp_foreign), j+1);
             }
         }
+        // create a ranking of size 12
         rank = testList.createRanking(12);
         assertNotEquals(rank, null);
         for (int i = 0; i < 12; i++) {
@@ -56,6 +57,7 @@ public class WordListTest {
         assertNotEquals(testList.getWordPairIncorrectCount(nativeStr,"Hola!"), 0);
         assertEquals(testList.getWordPairIncorrectCount(nativeStr,"Hola!"), -1);
         assertEquals(testList.getWordPairIncorrectCount("Hello",foreignStr), -1);
+        // increment count and test again
         testList.incrementWordPairIncorrectCount(nativeStr, foreignStr);
         assertEquals(testList.getWordPairIncorrectCount(nativeStr,foreignStr), 1);
         assertNotEquals(testList.getWordPairIncorrectCount("",""), 0);
@@ -66,5 +68,44 @@ public class WordListTest {
         testList.resetWordPairIncorrectCount(nativeStr, foreignStr);
         rank = testList.createRanking(8);
         assertTrue(rank == null);
+    }
+
+    @Test
+    public void avoidDuplicatesTest() {
+        testList = new WordList();
+        nativeStr = "no";
+        foreignStr = "duplicates";
+        // add first one
+        testList.appendWordPair(nativeStr,foreignStr);
+        assertEquals(testList.getWordCount(), 1);
+        // add the same word pair multiple times
+        for (int i = 0; i < 10; i++) {
+            testList.appendWordPair(nativeStr,foreignStr);
+            assertEquals(testList.getWordCount(), 1);
+        }
+        // check that other words can be added
+        nativeStr = "yes";
+        testList.appendWordPair(nativeStr,foreignStr);
+        assertEquals(testList.getWordCount(), 2);
+    }
+
+    @Test
+    public void expansionStressTest() {
+        testList = new WordList();
+        nativeStr = "stress";
+        foreignStr = "test";
+        // start at 16 and expand all the way to 8192
+        String tmp_native, tmp_foreign;
+        for (int i = 16; i < 8193; i *= 2) {
+            for (int j = 0; j < i+1; j++) {
+                Integer obj = new Integer(j);
+                tmp_native = nativeStr + obj.toString(j);
+                tmp_foreign = foreignStr + obj.toString(j);
+                testList.appendWordPair(tmp_native, tmp_foreign);
+                assertEquals(testList.getWordCount(), j+1);
+            }
+            testList.resetWordList();
+            assertEquals(testList.getWordCount(), 0);
+        }
     }
 }

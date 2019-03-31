@@ -18,14 +18,14 @@ public class WordPairTest {
         testPair = new WordPair(nativeStr, foreignStr);
         assertEquals(testPair.getNativeWord(), nativeStr);
         assertEquals(testPair.getForeignWord(), foreignStr);
-        assertEquals(testPair.getIncorrectCount(), (double) 0, 0);
+        assertEquals(testPair.getIncorrectCount(), 0);
         // increment count
         testPair.incrementIncorrectCount();
-        assertEquals(testPair.getIncorrectCount(), (double) 1, 0);
+        assertEquals(testPair.getIncorrectCount(), 1);
         // increment some more
         for (int i = 0; i < 9; i++) {
             testPair.incrementIncorrectCount();
-            assertEquals(testPair.getIncorrectCount(), (double) i+2, 0);
+            assertEquals(testPair.getIncorrectCount(), i+2);
         }
     }
 
@@ -37,16 +37,30 @@ public class WordPairTest {
         testPair = new WordPair(nativeStr, foreignStr);
         assertEquals(testPair.getNativeWord(), nativeStr);
         assertEquals(testPair.getForeignWord(), foreignStr);
-        assertEquals(testPair.getIncorrectCount(), (double) 0, 0);
+        assertEquals(testPair.getIncorrectCount(), 0);
         assertNotEquals(testPair.getNativeWord(), foreignStr);
         assertNotEquals(testPair.getForeignWord(), nativeStr);
         // increment 1000 times
         for (int i = 0; i < 1000; i++) {
             testPair.incrementIncorrectCount();
-            assertEquals(testPair.getIncorrectCount(), (double) i+1, 0);
+            assertEquals(testPair.getIncorrectCount(), i+1);
         }
         // now reset
         testPair.resetIncorrectCount();
         assertEquals(testPair.getIncorrectCount(), 0);
+    }
+
+    @Test
+    public void stressTest() {
+        nativeStr = "stress";
+        foreignStr = "test";
+        testPair = new WordPair(nativeStr, foreignStr);
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 0; j < i; j++)
+                testPair.incrementIncorrectCount();
+            assertEquals(testPair.getIncorrectCount(), i);
+            testPair.resetIncorrectCount();
+            assertEquals(testPair.getIncorrectCount(), 0);
+        }
     }
 }
