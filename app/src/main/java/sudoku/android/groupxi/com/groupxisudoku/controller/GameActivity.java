@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
 
-
+    public long start_time;
 
 
     @Override
@@ -95,6 +95,9 @@ public class GameActivity extends AppCompatActivity {
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board(size);
         currentBoard.copyValues(startBoard.getGameCells());
+
+        // start timer
+        start_time = System.nanoTime();
 
         //initialize text to speech
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -183,7 +186,10 @@ public class GameActivity extends AppCompatActivity {
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        Toast.makeText(GameActivity.this, "game over", Toast.LENGTH_SHORT).show();
+                        long time_passed = System.nanoTime() - start_time;
+                        Toast.makeText(GameActivity.this,
+                                "You beat the game in: " + Long.toString(time_passed/1000000000)+ " seconds.",
+                                Toast.LENGTH_SHORT).show();
                         onGoBackButtonClicked();
                     }
 
