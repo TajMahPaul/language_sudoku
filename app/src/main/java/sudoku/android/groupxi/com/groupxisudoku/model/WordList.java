@@ -4,30 +4,59 @@ import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
 
 public class WordList {
 
-    private int LIST_CAPACITY = 50, word_count = 0;
+    private static final int INITIAL_LIST_CAPACITY = 16;
+
+    private int current_list_capacity, word_count;
 
     private WordPair list[];
 
-    public void WordList() {
-        list = new WordPair[LIST_CAPACITY];
+    private int findWordPairIndex(String native_word, String foreign_word) {
+        for (int i = 0; i < word_count; i++) {
+            if (list[i].getNativeWord().equals(native_word) && list[i].getForeignWord().equals(foreign_word))
+                return i;
+        }
+        return -1;
     }
+
+    public WordList() {
+        current_list_capacity = INITIAL_LIST_CAPACITY;
+        list = new WordPair[current_list_capacity];
+        word_count = 0;
+    }
+
+    public int getWordCount() { return word_count; }
 
     public void appendWordPair(String native_word, String foreign_word) {
         list[word_count++] = new WordPair(native_word, foreign_word);
-        if (word_count >= LIST_CAPACITY)
+        if (word_count >= current_list_capacity)
             expandWordList();
     }
 
+    public void incrementWordPairIncorrectCount(String native_word, String foreign_word) {
+        int index = findWordPairIndex(native_word, foreign_word);
+        if (index != -1)
+            list[index].incrementIncorrectCount();
+    }
+
+    public int getWordPairIncorrectCount(String native_word, String foreign_word) {
+        int index = findWordPairIndex(native_word, foreign_word);
+        if (index == -1)
+            return -1;
+        return list[index].getIncorrectCount();
+    }
+
     public void expandWordList() {
-        WordPair newList[] = new WordPair[LIST_CAPACITY * 2];
-        for (int i = 0; i < LIST_CAPACITY; i++)
+        WordPair newList[] = new WordPair[current_list_capacity * 2];
+        for (int i = 0; i < current_list_capacity; i++)
             newList[i] = list[i];
         list = newList;
-        LIST_CAPACITY *= 2;
+        current_list_capacity *= 2;
     }
 
     public void resetWordList() {
-        list = new WordPair[LIST_CAPACITY];
+        list = new WordPair[current_list_capacity];
+        word_count = 0;
+        current_list_capacity = INITIAL_LIST_CAPACITY;
     }
 
     public WordPair[] createRanking(int size) {

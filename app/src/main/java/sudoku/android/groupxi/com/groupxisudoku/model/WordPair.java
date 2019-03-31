@@ -2,7 +2,7 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 public class WordPair {
 
-    private double incorrect_count;
+    private int incorrect_count;
     private String native_word, foreign_word;
 
     public WordPair(String native_word, String foreign_word){
@@ -17,6 +17,6 @@ public class WordPair {
 
     public void incrementIncorrectCount () { incorrect_count++; }
 
-    public double getIncorrectCount() { return incorrect_count; }
+    public int getIncorrectCount() { return incorrect_count; }
 
 }

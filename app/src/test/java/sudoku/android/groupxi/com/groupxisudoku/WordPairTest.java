@@ -8,11 +8,12 @@ import static org.junit.Assert.*;
 
 public class WordPairTest {
     WordPair testPair;
-
+    String nativeStr, foreignStr;
 
     @Test
-    public void overallTest() {
-        String nativeStr = "Native", foreignStr = "Foreign";
+    public void English2EnglishTest() {
+        nativeStr = "Native";
+        foreignStr = "Foreign";
         // create a new pair
         testPair = new WordPair(nativeStr, foreignStr);
         assertEquals(testPair.getNativeWord(), nativeStr);
@@ -25,6 +26,24 @@ public class WordPairTest {
         for (int i = 0; i < 9; i++) {
             testPair.incrementIncorrectCount();
             assertEquals(testPair.getIncorrectCount(), (double) i+2, 0);
+        }
+    }
+
+    @Test
+    public void English2ChineseTest() {
+        nativeStr = "Test";
+        foreignStr = "测试";
+        // create a new pair
+        testPair = new WordPair(nativeStr, foreignStr);
+        assertEquals(testPair.getNativeWord(), nativeStr);
+        assertEquals(testPair.getForeignWord(), foreignStr);
+        assertEquals(testPair.getIncorrectCount(), (double) 0, 0);
+        assertNotEquals(testPair.getNativeWord(), foreignStr);
+        assertNotEquals(testPair.getForeignWord(), nativeStr);
+        // increment 1000 times
+        for (int i = 0; i < 1000; i++) {
+            testPair.incrementIncorrectCount();
+            assertEquals(testPair.getIncorrectCount(), (double) i+1, 0);
         }
     }
 }
