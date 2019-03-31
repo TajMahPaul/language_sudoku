@@ -44,10 +44,30 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_game);
         Resources res = getResources();
-        final String[] native_strings = res.getStringArray(R.array.native_array);
-        String[] chinese_strings = res.getStringArray(R.array.chinese_array);
+
+        int source = getIntent().getIntExtra("source",1);
+
+        //Log.d("1",source);
+        String[] native_strings = new String[9];
+        String[] chinese_strings = new String[9];
+
+        if(source == 2){
+            //Log.d("2",source);
+            List<LanguageSample> word_list = (List<LanguageSample>) getIntent().getSerializableExtra("word_list");
+            for (int i = 0; i<9; i++){
+                native_strings[i] = word_list.get(i).getLang_a();
+                chinese_strings[i] = word_list.get(i).getLang_b();
+
+            }
+        }else{
+            native_strings = res.getStringArray(R.array.native_array);
+            chinese_strings = res.getStringArray(R.array.chinese_array);
+        }
+
+
         GridView gridView = findViewById(R.id.gridView);
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 

@@ -6,11 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
+import android.app.Dialog;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 
@@ -44,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
                     language = 0;
                     languageButton.setText("English");
                 }
+            }
+        });
+
+        Button uploadButton = findViewById(R.id.Uploadbutton);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FileAndDirectoryActivity.class));
             }
         });
 
@@ -93,11 +113,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+
+
                 if(isTablet(MainActivity.this) == false && size == 12){
                     Toast.makeText(MainActivity.this, "not tablet, can't use 12x12 grid", Toast.LENGTH_SHORT).show();
                 }else{
                     intent.putExtra("size", size);
                     intent.putExtra("language", language);
+                    intent.putExtra("source", 1);
                     startActivity(intent);
                 }
 
@@ -112,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+//        Intent intent = new Intent(this, GameActivity.class);
+//        intent.putExtra("language", language);
+//        startActivity(intent);
     }
 
     public void resumeButton(View view) {
