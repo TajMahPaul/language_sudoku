@@ -2,6 +2,7 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -10,11 +11,14 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.controller.GameActivity;
 import sudoku.android.groupxi.com.groupxisudoku.controller.MainActivity;
+
+import static android.content.ContentValues.TAG;
 
 
 public class GridViewAdapter extends BaseAdapter {
@@ -39,8 +43,8 @@ public class GridViewAdapter extends BaseAdapter {
     int width;
 
     public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
-        this.boardNumber = isSource;
-        this.originalNumber = isSource;
+        this.boardNumber = new ArrayList<Integer>(isSource);
+        this.originalNumber = new ArrayList<Integer>(isSource);
         this.native_strings = native_strings;
         this.chinese_strings = chinese_strings;
         this.language = language;
@@ -155,7 +159,7 @@ public class GridViewAdapter extends BaseAdapter {
                         row = position / size;
                         column = position % size;
                     }else{
-
+                        Log.d(TAG, "onClick: nothing selected " + originalNumber.get(position));
                     }
                 }
             });
@@ -197,6 +201,7 @@ public class GridViewAdapter extends BaseAdapter {
             button.setBackgroundResource(R.drawable.table_border_cell);
         }
     }
+
     private void setCellBackground(Button button, int position){
         if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
             button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
@@ -211,6 +216,7 @@ public class GridViewAdapter extends BaseAdapter {
             button.setBackgroundResource(R.drawable.table_border_cell);
         }
     }
+
     public void uncheckClickedCell() {
         if(clickedCell != null){
             setCellBackground(clickedCell, row, column);
