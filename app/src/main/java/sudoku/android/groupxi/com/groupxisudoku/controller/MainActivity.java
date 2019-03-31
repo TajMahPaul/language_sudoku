@@ -4,11 +4,22 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 import android.app.Dialog;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 
@@ -17,10 +28,17 @@ public class MainActivity extends AppCompatActivity {
     private int language = 0;
     private int size = 9;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Uploading the csv file
+        //readLanguageData();
+
+
+
+
         //Pop up window for Info
         Button info = (Button) findViewById(R.id.infoButton);
         info.setOnClickListener(new View.OnClickListener()  {
@@ -44,7 +62,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button uploadButton = findViewById(R.id.Uploadbutton);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FileAndDirectoryActivity.class));
+            }
+        });
     }
+
+
+
+
+
 
     // play
     public void playButton(View view) {
@@ -79,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra("size", size);
                 intent.putExtra("language", language);
+                intent.putExtra("source", 1);
                 startActivity(intent);
 
             }

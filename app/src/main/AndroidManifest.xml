@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="sudoku.android.groupxi.com.groupxisudoku">
+    
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -35,6 +38,8 @@
         <activity android:name=".controller.PopupInfo"
             android:theme="@style/AppTheme.CustomTheme"
             ></activity>
+    <activity android:name=".controller.FileAndDirectoryActivity"
+        ></activity>
     </application>
 
 </manifest>
