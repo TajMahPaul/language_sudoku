@@ -13,6 +13,8 @@ import android.widget.GridView;
 import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
+import sudoku.android.groupxi.com.groupxisudoku.controller.GameActivity;
+import sudoku.android.groupxi.com.groupxisudoku.controller.MainActivity;
 
 
 public class GridViewAdapter extends BaseAdapter {
@@ -33,8 +35,10 @@ public class GridViewAdapter extends BaseAdapter {
     int column;
     int square_height;
     int square_width;
+    int height;
+    int width;
 
-    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, Context context) {
+    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
         this.boardNumber = isSource;
         this.originalNumber = isSource;
         this.native_strings = native_strings;
@@ -42,6 +46,9 @@ public class GridViewAdapter extends BaseAdapter {
         this.language = language;
         this.size = size;
         this.mContext = context;
+        this.height = height;
+        this.width = width;
+
         if(language == 0){
             current_strings = native_strings;
             not_current_strings = chinese_strings;
@@ -112,6 +119,7 @@ public class GridViewAdapter extends BaseAdapter {
         setCellBackground(button, position);
 
         button.setTextColor(Color.WHITE);
+        button.setMinimumHeight((height)/size);
 
 
 

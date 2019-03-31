@@ -3,6 +3,7 @@ package sudoku.android.groupxi.com.groupxisudoku.controller;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,8 +36,10 @@ public class GameActivity extends AppCompatActivity {
     private Button[] num_buttons = new Button [9];
     public int language = 0; // 0 for native and 1 for chinese on board
     public int row, column;
+    public int height, width;
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
+
 
 
 
@@ -47,6 +50,21 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         Resources res = getResources();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float density = metrics.density;
+
+        width = Math.round(metrics.widthPixels);
+        height = Math.round(metrics.heightPixels);
+
+        if (width < height){
+            height = Math.round((height*6)/10);
+        }else{
+            height = Math.round((height*7)/10);
+        }
+
+
 
         int source = getIntent().getIntExtra("source",1);
 
@@ -106,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
 
         // set up gridView adapter
         gridView.setNumColumns(size);
-        adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language, size,this);
+        adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language, size,height,width,this);
         gridView.setAdapter(adapter);
 
         //add function to number buttons
