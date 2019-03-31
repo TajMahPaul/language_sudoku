@@ -59,12 +59,16 @@ Given: that the user wants to select a different grid size for his Sudoku practi
 When: the user initiates the game
 Then: the application displays a pop up which prompts the user to select a grid size.
 
+Given: that the user wants to practice Sudoku vocabulary with a more difficult puzzle,
+When: the user is in the main menu of the application
+Then: the user see the "difficulty" button and can click on it to change the difficulty (easy, medium, difficult)
+
 Given: that the user wants to track his students' language learner progress,
 When: the user clicks on the leaderboard button
 Then: the application displays every student's statistics (XP, words learned, words that the student is having trouble with)
 
 Given: that the user needs an encouragement to practice Sudoku vocabulary regularly,
-When: the user has solved a Sudoku puzzle for 3 consecutive days
+When: the user has solved at least one Sudoku puzzle for the last 3 consecutive days
 Then: the application rewards the user with a 3 day streak.
 
 Given: that the user wants to set a daily goal of 50 XP per day for Sudoku vocabulary practice,
