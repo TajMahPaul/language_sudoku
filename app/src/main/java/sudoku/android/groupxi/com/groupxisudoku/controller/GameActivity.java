@@ -162,6 +162,7 @@ public class GameActivity extends AppCompatActivity {
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
                         int column = adapter.getColumn();
+
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
                             currentBoard.setValue(row,column, finalI);
