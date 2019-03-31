@@ -31,8 +31,8 @@ When: the user wants to practice from each chapter of the book
 Then: the user can load pairs of words into the application to practice.
 
 Given: that the user is using the Sudoku app,
-When: the user is having difficulty recognizing some of the vocabulary words
-Then: those words will be used more often in the practice puzzles.
+When: the user is having difficulty recognizing the word "vocabulary"
+Then: the word "vocabulary" will be used more often in the practice puzzles.
 
 Given: that the user is practicing his understanding of spoken words in the language he is learning,
 and listening comprehension mode is enabled
@@ -55,10 +55,34 @@ Given: that the user specifies a list of word pairs for his students to practice
 When: a student selects a word list from the word list submenu
 Then: puzzles will be generated using word pairs from that list
 
-Given: that the user wants to select a grid size for his Sudoku practice,
+Given: that the user wants to select a different grid size for his Sudoku practice,
 When: the user initiates the game
-Then: the application displays a pop up which allows the user to select a grid size.
+Then: the application displays a pop up which prompts the user to select a grid size.
 
 Given: that the user wants to track his students' language learner progress,
 When: the user clicks on the leaderboard button
-Then: the application displays every student's statistics
+Then: the application displays every student's statistics (XP, words learned, words that the student is having trouble with)
+
+Given: that the user needs an encouragement to practice Sudoku vocabulary regularly,
+When: the user has solved a Sudoku puzzle for 3 consecutive days
+Then: the application rewards the user with a 3 day streak.
+
+Given: that the user wants to set a daily goal of 50 XP per day for Sudoku vocabulary practice,
+When: the user enters the settings menu
+Then: the user can select (50 XP per day) to stay motivated while learning a language.
+
+Given: that the user is having trouble memorizing some words in a foreign language,
+When: the user enters the "Flash Cards" menu
+Then: for each word pair in a word category, the word is displayed in the user' native language
+
+Given: that the user is having trouble memorizing the word "abbigliamento"
+and that word pair is (clothing, abbigliamento)
+and that the user enters the "Flash Card" menu
+When: the user clicks on the card containing the English word "clothing"
+Then: the card is flipped and "abbigliamento" is displayed
+
+Given: that the user is having trouble memorizing the word "abbigliamento"
+and that word pair is (clothing, abbigliamento)
+and that the card containing "clothing" is flipped
+When: the user clicks on the voice button
+Then: the user hears "abbigliamento" read out and pronounced in Italian.
