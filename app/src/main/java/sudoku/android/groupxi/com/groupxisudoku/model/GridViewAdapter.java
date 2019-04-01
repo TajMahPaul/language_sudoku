@@ -131,7 +131,11 @@ public class GridViewAdapter extends BaseAdapter {
 
         // set string on board;
         if(currentNumber.get(position) != 0 && currentNumber.get(position) > 0) {
-            button.setText(current_strings[currentNumber.get(position)-1]);
+            if(isListening == true){
+                button.setText(String.valueOf(currentNumber.get(position)));
+            }else {
+                button.setText(current_strings[currentNumber.get(position)-1]);
+            }
         }
         else if(currentNumber.get(position) != 0 && currentNumber.get(position) < 0){
             button.setText(not_current_strings[-1*(currentNumber.get(position)+1)]);
@@ -147,7 +151,7 @@ public class GridViewAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //uncheck selected cell
                 if(isListening == true){
-                    if(button.getText() != ""){
+                    if(currentNumber.get(position) > 0){
 
                     }
                 }else{
@@ -238,19 +242,6 @@ public class GridViewAdapter extends BaseAdapter {
         currentNumber.set(position, value);
     }
 
-    public void setListeningMode() {
-        if(isListening == false){
-            if(clickedCell != null){
-                setCellBackground(clickedCell, row, column);
-                //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
-                clickedCell = null;
-            }
-            isListening = true;
-
-        }else{
-            isListening = false;
-        }
-    }
 
 
 }

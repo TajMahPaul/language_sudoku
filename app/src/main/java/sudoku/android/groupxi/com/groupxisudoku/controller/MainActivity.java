@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     private int language = 0;
     private int size = 9;
+    private boolean isListening = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        final Button listeningButton = findViewById(R.id.Listening);
+        listeningButton.setText("Listening Mode: Off");
+        listeningButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listeningButton.getText() == "Listening Mode: Off"){
+                    listeningButton.setText("Listening Mode: On");
+                    isListening = true;
+                }else {
+                    listeningButton.setText("Listening Mode: Off");
+                    isListening = false;
+                }
+            }
+        });
     }
 
     // play
@@ -127,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("size", size);
                     intent.putExtra("language", language);
                     intent.putExtra("source", 1);
+                    intent.putExtra("listening", isListening);
                     startActivity(intent);
                 }
 

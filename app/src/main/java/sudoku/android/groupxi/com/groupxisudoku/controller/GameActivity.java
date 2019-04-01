@@ -55,6 +55,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", 9);
+        final boolean isListening = getIntent().getBooleanExtra("listening", false);
         num_buttons = new Button [size];
 
         if(savedInstanceState!=null) {
@@ -148,7 +149,7 @@ public class GameActivity extends AppCompatActivity {
 
         // set up gridView adapter
         gridView.setNumColumns(size);
-        adapter = new GridViewAdapter(boardNumber, currentNumber, native_strings, chinese_strings, language, size,height,width,this);
+        adapter = new GridViewAdapter(boardNumber, currentNumber, native_strings, chinese_strings, language, size,height,width, isListening, this);
         gridView.setAdapter(adapter);
 
         //add function to number buttons
