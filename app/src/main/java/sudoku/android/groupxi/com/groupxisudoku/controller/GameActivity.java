@@ -27,6 +27,7 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 
 public class GameActivity extends AppCompatActivity {
+
     TextToSpeech t1;
     TextToSpeech t2;
     private final String TAG = "GameActivity";
@@ -42,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
     List<Integer> currentNumber = new ArrayList<>();
     GridViewAdapter adapter;
 
-
+    public long start_time;
 
 
     @Override
@@ -103,6 +104,16 @@ public class GameActivity extends AppCompatActivity {
 
         GridView gridView = findViewById(R.id.gridView);
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
+
+        final int language = getIntent().getIntExtra("language", 0);
+        final int size = getIntent().getIntExtra("size", 9);
+        ArrayList<Board> boards = readGameBoards(size);
+        startBoard = chooseRandomBoard(boards);
+        currentBoard = new Board(size);
+        currentBoard.copyValues(startBoard.getGameCells());
+
+        // start timer
+        start_time = System.nanoTime();
 
         //initialize text to speech
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -170,6 +181,7 @@ public class GameActivity extends AppCompatActivity {
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
                         int column = adapter.getColumn();
+
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
                             currentBoard.setValue(row,column, -finalI);
@@ -191,7 +203,10 @@ public class GameActivity extends AppCompatActivity {
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        Toast.makeText(GameActivity.this, "game over", Toast.LENGTH_SHORT).show();
+                        long time_passed = System.nanoTime() - start_time;
+                        Toast.makeText(GameActivity.this,
+                                "You beat the game in: " + Long.toString(time_passed/1000000000)+ " seconds.",
+                                Toast.LENGTH_SHORT).show();
                         onGoBackButtonClicked();
                     }
 

@@ -74,6 +74,36 @@
         <item>Boy</item>
     </string-array>
 
+    <string-array name="native_array_listening">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Orange</item>
+        <item>Pink</item>
+        <item>Yellow</item>
+        <item>White</item>
+        <item>Black</item>
+        <item>Cyan</item>
+        <item>Grey</item>
+        <item>Brown</item>
+    </string-array>
+
+    <string-array name="native_array_listening_fr">
+        <item>Rouge</item>
+        <item>Bleu</item>
+        <item>Vert</item>
+        <item>violet</item>
+        <item>Orange</item>
+        <item>Rose</item>
+        <item>Jaune</item>
+        <item>Blanc</item>
+        <item>Noir</item>
+        <item>Cyan</item>
+        <item>Gris</item>
+        <item>Marron</item>
+    </string-array>
+
     <string-array name="array_languages">
         <item>Chinese</item>
         <item>Spanish</item>
