@@ -34,6 +34,7 @@ public class GridViewAdapter extends BaseAdapter {
     int language; // 0 for native and 1 for Chinese
 
     boolean clicked = false; // if a cell has been clicked
+    boolean isListening = false;
     Button clickedCell = null; // reference of the clicked cell
     int row;
     int column;
@@ -42,7 +43,7 @@ public class GridViewAdapter extends BaseAdapter {
     int height;
     int width;
 
-    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
+    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, boolean isListening, Context context) {
         this.originalNumber = new ArrayList<Integer>(isSource1);
         this.currentNumber = new ArrayList<Integer>(isSource2);
         this.native_strings = native_strings;
@@ -52,6 +53,7 @@ public class GridViewAdapter extends BaseAdapter {
         this.mContext = context;
         this.height = height;
         this.width = width;
+        this.isListening = isListening;
 
         if(language == 0){
             current_strings = native_strings;
@@ -144,11 +146,16 @@ public class GridViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //uncheck selected cell
-                if(clickedCell != null){
-                    setCellBackground(clickedCell, row, column);
-                    //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
-                    clickedCell = null;
-                }
+                if(isListening == true){
+                    if(button.getText() != ""){
+
+                    }
+                }else{
+                    if(clickedCell != null){
+                        setCellBackground(clickedCell, row, column);
+                        //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+                        clickedCell = null;
+                    }
 
 
                     if(originalNumber.get(position) == 0) {
@@ -161,8 +168,11 @@ public class GridViewAdapter extends BaseAdapter {
                     }else{
                         Log.d(TAG, "onClick: nothing selected " + originalNumber.get(position));
                     }
+
                 }
-            });
+
+            }
+        });
 
         return button;
     }
@@ -226,6 +236,20 @@ public class GridViewAdapter extends BaseAdapter {
     }
     public void updateBoardNumber(int position, int value){
         currentNumber.set(position, value);
+    }
+
+    public void setListeningMode() {
+        if(isListening == false){
+            if(clickedCell != null){
+                setCellBackground(clickedCell, row, column);
+                //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
+                clickedCell = null;
+            }
+            isListening = true;
+
+        }else{
+            isListening = false;
+        }
     }
 
 
