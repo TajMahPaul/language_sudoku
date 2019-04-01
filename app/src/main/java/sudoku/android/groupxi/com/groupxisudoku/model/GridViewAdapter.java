@@ -265,7 +265,9 @@ public class GridViewAdapter extends BaseAdapter {
         if(clickedCell != null){
 
             setCellBackground(clickedCell, row, column);
+
             clickedCell = null;
+            clicked = false;
         }
     }
     public void updateBoardNumber(int position, int value){
