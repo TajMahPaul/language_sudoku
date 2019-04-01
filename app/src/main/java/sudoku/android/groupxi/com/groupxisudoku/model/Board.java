@@ -58,10 +58,8 @@ public class Board implements Serializable {
             return true;
         //check horizontally and vertically
         for (int i = 0; i < size; i++) {
-            if(Math.abs(getValue(row,i)) == value || Math.abs(getValue(i,column)) == value){
-                Log.d("incorrect", "horizontal or vertical");
+            if(Math.abs(getValue(row,i)) == value || Math.abs(getValue(i,column)) == value)
                 return false;
-            }
         }
 
         int g_row, g_column;
@@ -83,10 +81,8 @@ public class Board implements Serializable {
         int sub_column = column/g_column*g_column;
         for(int i = sub_row; i < sub_row+g_row; i++){
             for(int j = sub_column; j < sub_column+g_column; j++){
-                if(Math.abs(getValue(i,j)) == value){
-                    Log.d("incorrect", "group");
+                if(Math.abs(getValue(i,j)) == value)
                     return false;
-                }
             }
         }
 

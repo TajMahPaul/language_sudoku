@@ -31,8 +31,9 @@ When: the user wants to practice from each chapter of the book
 Then: the user can load pairs of words into the application to practice.
 
 Given: that the user is using the Sudoku app,
-When: the user is having difficulty recognizing the word "vocabulary"
-Then: the word "vocabulary" will be used more often in the practice puzzles.
+and the user is having difficulty recognizing the word "wrist"
+When: the user initiates a new practice puzzle
+Then: the word "wrist" will be used in the new puzzle.
 
 Given: that the user is practicing his understanding of spoken words in the language he is learning,
 and listening comprehension mode is enabled
@@ -55,8 +56,9 @@ Given: that the user specifies a list of word pairs for his students to practice
 When: a student selects a word list from the word list submenu
 Then: puzzles will be generated using word pairs from that list
 
-Given: that the user wants to select a different grid size for his Sudoku practice,
-When: the user initiates the game
+Given: that the user is in the main screen of the application
+and the user wants to select a different grid size for Sudoku practice,
+When: the user clicks on "New Game" to initiates a new game
 Then: the application displays a pop up which prompts the user to select a grid size.
 
 Given: that the user wants to practice Sudoku vocabulary with a more difficult puzzle,
