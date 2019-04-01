@@ -47,16 +47,13 @@ public class FileAndDirectoryActivity extends ListActivity {
     {
         String value = (String) l.getItemAtPosition(position);
         ArrayList<LanguageSample> word_list = readLanguageData(value);
-
         //Log.d("gy", "onListItemClick: 1");
         Bundle bundle = new Bundle();
         bundle.putSerializable("word_list", word_list);
         bundle.putInt("source", 2);
         Intent intent = new Intent(FileAndDirectoryActivity.this, GameActivity.class);
         intent.putExtras(bundle);
-
         //Log.d("gy", "onListItemClick: 2");
-
         startActivity(intent);
 
     }
@@ -67,12 +64,8 @@ public class FileAndDirectoryActivity extends ListActivity {
                 fileList.add(file.getPath());
             }
         }
-
-
-
         ArrayAdapter<String> directoryList = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, fileList);
         listview.setAdapter(directoryList);
-
     }
 
     private ArrayList<LanguageSample> readLanguageData(String Path) {
@@ -109,8 +102,5 @@ public class FileAndDirectoryActivity extends ListActivity {
         }
         return LanguageSamples;
     }
-
-
-
 
 }

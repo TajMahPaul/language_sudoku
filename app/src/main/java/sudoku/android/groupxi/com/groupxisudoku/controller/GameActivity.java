@@ -23,7 +23,8 @@ import java.util.Locale;
 import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
-
+import sudoku.android.groupxi.com.groupxisudoku.model.WordList;
+import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
 
 public class GameActivity extends AppCompatActivity {
     TextToSpeech t1;
@@ -39,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     public int height, width;
     List<Integer> boardNumber = new ArrayList<>();
     GridViewAdapter adapter;
-
+    public String[] native_strings, chinese_strings;
     public long start_time;
 
 
@@ -69,13 +70,13 @@ public class GameActivity extends AppCompatActivity {
         int source = getIntent().getIntExtra("source",1);
 
         //Log.d("1",source);
-        String[] native_strings = new String[9];
-        String[] chinese_strings = new String[9];
+        native_strings = new String[9];
+        chinese_strings = new String[9];
 
         if(source == 2){
             //Log.d("2",source);
             List<LanguageSample> word_list = (List<LanguageSample>) getIntent().getSerializableExtra("word_list");
-            for (int i = 0; i<9; i++){
+            for (int i = 0; i < native_strings.length; i++){
                 native_strings[i] = word_list.get(i).getLang_a();
                 chinese_strings[i] = word_list.get(i).getLang_b();
 
@@ -85,6 +86,11 @@ public class GameActivity extends AppCompatActivity {
             chinese_strings = res.getStringArray(R.array.chinese_array);
         }
 
+        // create WordList
+        final WordList myList = new WordList();
+        for (int i = 0; i < native_strings.length; i++) {
+            myList.appendWordPair(native_strings[i], chinese_strings[i]);
+        }
 
         GridView gridView = findViewById(R.id.gridView);
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
@@ -181,7 +187,9 @@ public class GameActivity extends AppCompatActivity {
 
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
-
+                            myList.incrementWordPairIncorrectCount(native_strings[finalI-1], chinese_strings[finalI-1]);
+                            String log = "Incremented count on pair " + native_strings[finalI-1] + " " + chinese_strings[finalI-1];
+                            Log.d("incorrect count", log);
                         }
 
                     }
