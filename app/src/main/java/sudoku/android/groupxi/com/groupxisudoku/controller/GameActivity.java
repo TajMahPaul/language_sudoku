@@ -105,12 +105,6 @@ public class GameActivity extends AppCompatActivity {
         GridView gridView = findViewById(R.id.gridView);
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
-        final int language = getIntent().getIntExtra("language", 0);
-        final int size = getIntent().getIntExtra("size", 9);
-        ArrayList<Board> boards = readGameBoards(size);
-        startBoard = chooseRandomBoard(boards);
-        currentBoard = new Board(size);
-        currentBoard.copyValues(startBoard.getGameCells());
 
         // start timer
         start_time = System.nanoTime();
