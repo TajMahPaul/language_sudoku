@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -79,6 +80,7 @@ public class GridViewAdapter extends BaseAdapter {
         if (size == 4){
             square_height=2;
             square_width=2;
+
         }
         else if(size == 6){
             square_width=3;
@@ -141,6 +143,18 @@ public class GridViewAdapter extends BaseAdapter {
         button.setTextColor(Color.WHITE);
         button.setMinimumHeight((height)/size);
 
+        //Setting different text sizes for different grid sizes
+        if (size == 4) {
+            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, 60);
+        }
+        else if(size == 6){
+            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40);
+
+        }
+        else if(size == 9){
+            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30);
+
+        }
 
 
         // set string on board;
