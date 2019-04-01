@@ -217,15 +217,18 @@ public class GameActivity extends AppCompatActivity {
                         String minutes = Long.toString(time_passed / 60);
                         String seconds = Long.toString(time_passed % 60);
                         String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
-                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG).show();
+                        Log.d("message", message);
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
                         String filename = "ranking.txt";
                         File file = new File(getFilesDir(), filename);
                         String fileContents = "";
-                        for (int i = 0; i < rank.length; i++) {
-                            fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
-                            Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
+                        if (rank != null) {
+                            for (int i = 0; i < rank.length; i++) {
+                                fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
+                                Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
+                            }
                         }
                         FileOutputStream outputStream;
                         try {
