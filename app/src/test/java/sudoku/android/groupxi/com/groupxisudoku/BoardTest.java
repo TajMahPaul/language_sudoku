@@ -236,7 +236,7 @@ public class BoardTest {
             }
         }
         assertTrue(testee6.isBoardCorrect(2, 0, 7));
-        assertFalse(testee6.isBoardCorrect(2, 0, 1));
+        assertFalse(testee6.isBoardCorrect(2, 0, 2));
         // size 9
         for (int i = 0; i < 8; i++) {
             testee9.setValue(0, i, i+1);
