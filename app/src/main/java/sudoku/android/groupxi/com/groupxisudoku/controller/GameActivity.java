@@ -26,6 +26,7 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 
 public class GameActivity extends AppCompatActivity {
+
     TextToSpeech t1;
     TextToSpeech t2;
     private final String TAG = "GameActivity";
