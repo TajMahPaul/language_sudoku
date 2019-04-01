@@ -13,6 +13,8 @@ import android.widget.ToggleButton;
 import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -175,7 +177,6 @@ public class GameActivity extends AppCompatActivity {
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
                             currentBoard.setValue(row,column, finalI);
-
                             Button clickedButton = adapter.getClickedCell();
                             clickedButton.setText(text);
                             row = adapter.getRow();
@@ -187,6 +188,7 @@ public class GameActivity extends AppCompatActivity {
 
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
+                            // increment incorrect count on that word pair
                             myList.incrementWordPairIncorrectCount(native_strings[finalI-1], chinese_strings[finalI-1]);
                             String log = "Incremented count on pair " + native_strings[finalI-1] + " " + chinese_strings[finalI-1];
                             Log.d("incorrect count", log);
@@ -195,10 +197,29 @@ public class GameActivity extends AppCompatActivity {
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        long time_passed = System.nanoTime() - start_time;
-                        Toast.makeText(GameActivity.this,
-                                "You beat the game in: " + Long.toString(time_passed/1000000000)+ " seconds.",
-                                Toast.LENGTH_SHORT).show();
+                        // compute and display amount of time taken to beat the game
+                        long time_passed = (System.nanoTime() - start_time) / 1000000000;
+                        String minutes = Long.toString(time_passed / 60);
+                        String seconds = Long.toString(time_passed % 60);
+                        String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
+                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_SHORT).show();
+                        // compute top three words the user answered incorrectly and save it to a file
+                        WordPair[] rank = myList.createRanking(size);
+                        String filename = "ranking.txt";
+                        File file = new File(getFilesDir(), filename);
+                        String fileContents = "";
+                        for (int i = 0; i < rank.length; i++) {
+                            fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
+                            Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
+                        }
+                        FileOutputStream outputStream;
+                        try {
+                            outputStream = openFileOutput(filename, MODE_PRIVATE);
+                            outputStream.write(fileContents.getBytes());
+                            outputStream.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         onGoBackButtonClicked();
                     }
 
