@@ -8,11 +8,12 @@
 
     <GridView
         android:id="@+id/gridView"
-        android:layout_width="896dp"
+        android:layout_width="849dp"
         android:layout_height="591dp"
         android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:columnWidth="5dp"
         android:gravity="center"
@@ -20,6 +21,8 @@
         android:isScrollContainer="false"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

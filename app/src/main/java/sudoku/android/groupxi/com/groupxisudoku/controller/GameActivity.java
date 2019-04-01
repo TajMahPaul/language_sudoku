@@ -108,7 +108,7 @@ public class GameActivity extends AppCompatActivity {
 
         // create WordList
         final WordList myList = new WordList();
-        for (int i = 0; i < native_strings.length; i++) {
+        for (int i = 0; i < size; i++) {
             myList.appendWordPair(native_strings[i], chinese_strings[i]);
         }
 
