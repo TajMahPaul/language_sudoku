@@ -13,12 +13,13 @@
         android:layout_height="48dp"
         android:layout_margin="10dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:gravity="center"
         android:text="Upload"
         android:textColor="#FFFFFF"
-        app:layout_constraintBaseline_toBaselineOf="@+id/infoButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Listening"
@@ -109,25 +110,30 @@
         android:layout_width="wrap_content"
         android:layout_height="53dp"
         android:layout_margin="30dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/rounded_button"
         android:onClick="settingsButton"
         android:text="Settings"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/infoButton" />
 
     <Button
         android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_margin="30dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_button"
         android:clickable="false"
         android:text="Info"
         android:textColor="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/settingsButton"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton" />
+        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
