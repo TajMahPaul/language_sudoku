@@ -13,6 +13,8 @@ import android.widget.ToggleButton;
 import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,7 +26,8 @@ import java.util.Locale;
 import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
-
+import sudoku.android.groupxi.com.groupxisudoku.model.WordList;
+import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
     List<Integer> boardNumber = new ArrayList<>();
     List<Integer> currentNumber = new ArrayList<>();
     GridViewAdapter adapter;
-
+    public String[] native_strings, chinese_strings;
     public long start_time;
 
 
@@ -87,13 +90,13 @@ public class GameActivity extends AppCompatActivity {
         int source = getIntent().getIntExtra("source",1);
 
         //Log.d("1",source);
-        String[] native_strings = new String[9];
-        String[] chinese_strings = new String[9];
+        native_strings = new String[9];
+        chinese_strings = new String[9];
 
         if(source == 2){
             //Log.d("2",source);
             List<LanguageSample> word_list = (List<LanguageSample>) getIntent().getSerializableExtra("word_list");
-            for (int i = 0; i<9; i++){
+            for (int i = 0; i < native_strings.length; i++){
                 native_strings[i] = word_list.get(i).getLang_a();
                 chinese_strings[i] = word_list.get(i).getLang_b();
 
@@ -103,6 +106,11 @@ public class GameActivity extends AppCompatActivity {
             chinese_strings = res.getStringArray(R.array.chinese_array);
         }
 
+        // create WordList
+        final WordList myList = new WordList();
+        for (int i = 0; i < native_strings.length; i++) {
+            myList.appendWordPair(native_strings[i], chinese_strings[i]);
+        }
 
         GridView gridView = findViewById(R.id.gridView);
         //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
@@ -195,16 +203,38 @@ public class GameActivity extends AppCompatActivity {
 
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
-
+                            // increment incorrect count on that word pair
+                            myList.incrementWordPairIncorrectCount(native_strings[finalI-1], chinese_strings[finalI-1]);
+                            String log = "Incremented count on pair " + native_strings[finalI-1] + " " + chinese_strings[finalI-1];
+                            Log.d("incorrect count", log);
                         }
 
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        long time_passed = System.nanoTime() - start_time;
-                        Toast.makeText(GameActivity.this,
-                                "You beat the game in: " + Long.toString(time_passed/1000000000)+ " seconds.",
-                                Toast.LENGTH_SHORT).show();
+                        // compute and display amount of time taken to beat the game
+                        long time_passed = (System.nanoTime() - start_time) / 1000000000;
+                        String minutes = Long.toString(time_passed / 60);
+                        String seconds = Long.toString(time_passed % 60);
+                        String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
+                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_SHORT).show();
+                        // compute top three words the user answered incorrectly and save it to a file
+                        WordPair[] rank = myList.createRanking(size);
+                        String filename = "ranking.txt";
+                        File file = new File(getFilesDir(), filename);
+                        String fileContents = "";
+                        for (int i = 0; i < rank.length; i++) {
+                            fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
+                            Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
+                        }
+                        FileOutputStream outputStream;
+                        try {
+                            outputStream = openFileOutput(filename, MODE_PRIVATE);
+                            outputStream.write(fileContents.getBytes());
+                            outputStream.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         onGoBackButtonClicked();
                     }
 

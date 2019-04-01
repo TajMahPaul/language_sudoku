@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(isTablet(MainActivity.this) == false && size == 12){
-                    Toast.makeText(MainActivity.this, "not tablet, can't use 12x12 grid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "12x12 grid is only available on table", Toast.LENGTH_SHORT).show();
                 }else{
                     intent.putExtra("size", size);
                     intent.putExtra("language", language);
