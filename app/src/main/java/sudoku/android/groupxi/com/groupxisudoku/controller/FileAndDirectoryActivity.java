@@ -1,9 +1,13 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
+import android.Manifest;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,15 +48,15 @@ public class FileAndDirectoryActivity extends ListActivity {
         String value = (String) l.getItemAtPosition(position);
         ArrayList<LanguageSample> word_list = readLanguageData(value);
 
-        Log.d("gy", "onListItemClick: 1");
+        //Log.d("gy", "onListItemClick: 1");
         Bundle bundle = new Bundle();
         bundle.putSerializable("word_list", word_list);
         bundle.putInt("source", 2);
         Intent intent = new Intent(FileAndDirectoryActivity.this, GameActivity.class);
         intent.putExtras(bundle);
 
-        Log.d("gy", "onListItemClick: 2");
-        //intent.setClass(FileAndDirectoryActivity.this, GameActivity.class);
+        //Log.d("gy", "onListItemClick: 2");
+
         startActivity(intent);
 
     }
@@ -105,6 +109,8 @@ public class FileAndDirectoryActivity extends ListActivity {
         }
         return LanguageSamples;
     }
+
+
 
 
 }

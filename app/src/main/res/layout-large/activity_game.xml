@@ -5,34 +5,33 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#212121">
 
     <GridView
         android:id="@+id/gridView"
-        android:layout_width="400dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="-1dp"
+        android:layout_width="736dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:columnWidth="10dp"
         android:gravity="center"
         android:horizontalSpacing="0dp"
         android:numColumns="9"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:verticalSpacing="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_weight="0.5">
 
     </GridView>
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="383dp"
-        android:layout_height="151dp"
+        android:layout_width="740dp"
+        android:layout_height="286dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -42,7 +41,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="50">
 
             <Button
@@ -56,7 +55,6 @@
 
             <Button
                 android:id="@+id/num_button2"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -65,7 +63,6 @@
 
             <Button
                 android:id="@+id/num_button3"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -74,7 +71,6 @@
 
             <Button
                 android:id="@+id/num_button4"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -83,7 +79,6 @@
 
             <Button
                 android:id="@+id/num_button5"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -98,7 +93,6 @@
 
             <Button
                 android:id="@+id/num_button6"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -107,7 +101,6 @@
 
             <Button
                 android:id="@+id/num_button7"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -116,7 +109,6 @@
 
             <Button
                 android:id="@+id/num_button8"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -125,7 +117,6 @@
 
             <Button
                 android:id="@+id/num_button9"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -134,7 +125,6 @@
 
             <Button
                 android:id="@+id/delete_button"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -144,5 +134,4 @@
                 android:textSize="17sp" />
         </TableRow>
     </TableLayout>
-
 </android.support.constraint.ConstraintLayout>

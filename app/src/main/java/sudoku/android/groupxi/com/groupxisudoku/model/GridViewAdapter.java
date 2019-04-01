@@ -2,6 +2,7 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -10,13 +11,18 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
+import sudoku.android.groupxi.com.groupxisudoku.controller.GameActivity;
+import sudoku.android.groupxi.com.groupxisudoku.controller.MainActivity;
+
+import static android.content.ContentValues.TAG;
 
 
 public class GridViewAdapter extends BaseAdapter {
-    List<Integer> boardNumber;
+    List<Integer> currentNumber;
     List<Integer> originalNumber;
     Context mContext;
     String[] native_strings;
@@ -33,15 +39,20 @@ public class GridViewAdapter extends BaseAdapter {
     int column;
     int square_height;
     int square_width;
+    int height;
+    int width;
 
-    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, Context context) {
-        this.boardNumber = isSource;
-        this.originalNumber = isSource;
+    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
+        this.originalNumber = new ArrayList<Integer>(isSource1);
+        this.currentNumber = new ArrayList<Integer>(isSource2);
         this.native_strings = native_strings;
         this.chinese_strings = chinese_strings;
         this.language = language;
         this.size = size;
         this.mContext = context;
+        this.height = height;
+        this.width = width;
+
         if(language == 0){
             current_strings = native_strings;
             not_current_strings = chinese_strings;
@@ -73,12 +84,12 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return boardNumber.size();
+        return currentNumber.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return boardNumber.get(position);
+        return currentNumber.get(position);
     }
 
     @Override
@@ -112,15 +123,16 @@ public class GridViewAdapter extends BaseAdapter {
         setCellBackground(button, position);
 
         button.setTextColor(Color.WHITE);
+        button.setMinimumHeight((height)/size);
 
 
 
         // set string on board;
-        if(boardNumber.get(position) != 0 && boardNumber.get(position) > 0) {
-            button.setText(current_strings[boardNumber.get(position)-1]);
+        if(currentNumber.get(position) != 0 && currentNumber.get(position) > 0) {
+            button.setText(current_strings[currentNumber.get(position)-1]);
         }
-        else if(boardNumber.get(position) != 0 && boardNumber.get(position) < 0){
-            button.setText(not_current_strings[-1*(boardNumber.get(position)-1)]);
+        else if(currentNumber.get(position) != 0 && currentNumber.get(position) < 0){
+            button.setText(not_current_strings[-1*(currentNumber.get(position)+1)]);
         }
         else{
 
@@ -147,7 +159,7 @@ public class GridViewAdapter extends BaseAdapter {
                         row = position / size;
                         column = position % size;
                     }else{
-
+                        Log.d(TAG, "onClick: nothing selected " + originalNumber.get(position));
                     }
                 }
             });
@@ -189,6 +201,7 @@ public class GridViewAdapter extends BaseAdapter {
             button.setBackgroundResource(R.drawable.table_border_cell);
         }
     }
+
     private void setCellBackground(Button button, int position){
         if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
             button.setBackgroundResource(R.drawable.table_border_cell_bottom_right);
@@ -203,13 +216,17 @@ public class GridViewAdapter extends BaseAdapter {
             button.setBackgroundResource(R.drawable.table_border_cell);
         }
     }
+
     public void uncheckClickedCell() {
         if(clickedCell != null){
+
             setCellBackground(clickedCell, row, column);
             clickedCell = null;
         }
     }
     public void updateBoardNumber(int position, int value){
-        boardNumber.set(position, value);
+        currentNumber.set(position, value);
     }
+
+
 }

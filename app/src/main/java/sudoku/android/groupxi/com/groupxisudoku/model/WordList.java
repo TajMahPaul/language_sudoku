@@ -27,7 +27,8 @@ public class WordList {
     public int getWordCount() { return word_count; }
 
     public void appendWordPair(String native_word, String foreign_word) {
-        list[word_count++] = new WordPair(native_word, foreign_word);
+        if (findWordPairIndex(native_word, foreign_word) == -1)
+            list[word_count++] = new WordPair(native_word, foreign_word);
         if (word_count >= current_list_capacity)
             expandWordList();
     }

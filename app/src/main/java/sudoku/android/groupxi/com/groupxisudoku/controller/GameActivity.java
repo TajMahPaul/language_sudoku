@@ -3,6 +3,7 @@ package sudoku.android.groupxi.com.groupxisudoku.controller;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +27,7 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 
 
 public class GameActivity extends AppCompatActivity {
+
     TextToSpeech t1;
     TextToSpeech t2;
     private final String TAG = "GameActivity";
@@ -35,18 +38,49 @@ public class GameActivity extends AppCompatActivity {
     private Button[] num_buttons = new Button [9];
     public int language = 0; // 0 for native and 1 for chinese on board
     public int row, column;
+    public int height, width;
     List<Integer> boardNumber = new ArrayList<>();
+    List<Integer> currentNumber = new ArrayList<>();
     GridViewAdapter adapter;
 
+    public long start_time;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
+        final int language = getIntent().getIntExtra("language", 0);
+        final int size = getIntent().getIntExtra("size", 9);
+        if(savedInstanceState!=null) {
+            Log.d(TAG, "onCreate: load saved data");
+            startBoard = (Board) savedInstanceState.getSerializable("originalBoard");
+            currentBoard = (Board) savedInstanceState.getSerializable("currentBoard");
+        }else {
+            ArrayList<Board> boards = readGameBoards(size);
+            startBoard = chooseRandomBoard(boards);
+            currentBoard = new Board(size);
+            currentBoard.copyValues(startBoard.getGameCells());
+
+        }
 
         setContentView(R.layout.activity_game);
         Resources res = getResources();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float density = metrics.density;
+
+        width = Math.round(metrics.widthPixels);
+        height = Math.round(metrics.heightPixels);
+
+        if (width < height){
+            height = Math.round((height*6)/10);
+        }else{
+            height = Math.round((height*7)/10);
+        }
+
+
 
         int source = getIntent().getIntExtra("source",1);
 
@@ -78,6 +112,9 @@ public class GameActivity extends AppCompatActivity {
         currentBoard = new Board(size);
         currentBoard.copyValues(startBoard.getGameCells());
 
+        // start timer
+        start_time = System.nanoTime();
+
         //initialize text to speech
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -100,13 +137,14 @@ public class GameActivity extends AppCompatActivity {
         //add board number into a list
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                boardNumber.add(currentBoard.getValue(i, j));
+                boardNumber.add(startBoard.getValue(i, j));
+                currentNumber.add(currentBoard.getValue(i, j));
             }
         }
 
         // set up gridView adapter
         gridView.setNumColumns(size);
-        adapter = new GridViewAdapter(boardNumber, native_strings, chinese_strings, language, size,this);
+        adapter = new GridViewAdapter(boardNumber, currentNumber, native_strings, chinese_strings, language, size,height,width,this);
         gridView.setAdapter(adapter);
 
         //add function to number buttons
@@ -114,14 +152,13 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9};
         for(int i = 0; i < size; i++){
             final int finalI = i+1;
-            final int curI = i;
             num_buttons[i] = findViewById(numButtonsId[i]);
             if(language == 0) {
                 num_buttons[i].setText(chinese_strings[i]);
             }else{
                 num_buttons[i].setText(native_strings[i]);
             }
-                num_buttons[i].setOnClickListener(new View.OnClickListener() {
+            num_buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -144,9 +181,10 @@ public class GameActivity extends AppCompatActivity {
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
                         int column = adapter.getColumn();
+
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
-                            currentBoard.setValue(row,column, finalI);
+                            currentBoard.setValue(row,column, -finalI);
 
                             Button clickedButton = adapter.getClickedCell();
                             clickedButton.setText(text);
@@ -165,7 +203,10 @@ public class GameActivity extends AppCompatActivity {
                     }
 
                     if(currentBoard.isBoardFull() == true){
-                        Toast.makeText(GameActivity.this, "game over", Toast.LENGTH_SHORT).show();
+                        long time_passed = System.nanoTime() - start_time;
+                        Toast.makeText(GameActivity.this,
+                                "You beat the game in: " + Long.toString(time_passed/1000000000)+ " seconds.",
+                                Toast.LENGTH_SHORT).show();
                         onGoBackButtonClicked();
                     }
 
@@ -290,6 +331,13 @@ public class GameActivity extends AppCompatActivity {
 
     public void onGoBackButtonClicked() {
         finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("originalBoard", startBoard);
+        outState.putSerializable("currentBoard", currentBoard);
     }
 
 
