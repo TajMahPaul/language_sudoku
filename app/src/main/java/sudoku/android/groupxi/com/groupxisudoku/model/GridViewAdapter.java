@@ -121,15 +121,7 @@ public class GridViewAdapter extends BaseAdapter {
         if(convertView == null){
             button = new Button (mContext);
             // set size of each cell
-//            if(size == 4){
-//                button.setLayoutParams(new GridView.LayoutParams(220, 220) );
-//            }else if(size == 6){
-//                button.setLayoutParams(new GridView.LayoutParams(160, 160));
-//            }else if(size == 9){
-//                button.setLayoutParams(new GridView.LayoutParams(115, 115));
-//            }else{
-//
-//            }
+
 
         }else{
 
@@ -184,7 +176,7 @@ public class GridViewAdapter extends BaseAdapter {
                         int number = Integer.parseInt( (String) button.getText() );
                         t1.speak( current_strings[number-1], TextToSpeech.QUEUE_FLUSH, null);
                     }
-                }else{
+                }
                     if(clickedCell != null){
                         setCellBackground(clickedCell, row, column);
                         //clickedCell.setBackgroundResource(R.drawable.table_border_cell);
@@ -203,7 +195,7 @@ public class GridViewAdapter extends BaseAdapter {
                         Log.d(TAG, "onClick: nothing selected " + originalNumber.get(position));
                     }
 
-                }
+
 
             }
         });
