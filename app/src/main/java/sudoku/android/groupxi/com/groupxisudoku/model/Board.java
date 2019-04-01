@@ -2,12 +2,13 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
 
-public class Board {
+public class Board implements Serializable {
     private int[][] gameCells;
     private int size;
 
@@ -57,7 +58,7 @@ public class Board {
             return true;
         //check horizontally and vertically
         for (int i = 0; i < size; i++) {
-            if(getValue(row,i) == value || getValue(i,column) == value){
+            if(Math.abs(getValue(row,i)) == value || Math.abs(getValue(i,column)) == value){
                 return false;
             }
         }
@@ -81,7 +82,7 @@ public class Board {
         int sub_column = column/g_column;
         for(int i = sub_row; i < sub_row+g_row; i++){
             for(int j = sub_column; j < sub_column+g_column; j++){
-                if(getValue(i,j) == value){
+                if(Math.abs(getValue(i,j)) == value){
                     return false;
                 }
             }

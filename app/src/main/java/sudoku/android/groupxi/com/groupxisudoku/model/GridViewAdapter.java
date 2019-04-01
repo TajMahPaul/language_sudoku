@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
 
 
 public class GridViewAdapter extends BaseAdapter {
-    List<Integer> boardNumber;
+    List<Integer> currentNumber;
     List<Integer> originalNumber;
     Context mContext;
     String[] native_strings;
@@ -42,9 +42,9 @@ public class GridViewAdapter extends BaseAdapter {
     int height;
     int width;
 
-    public GridViewAdapter(List<Integer> isSource, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
-        this.boardNumber = new ArrayList<Integer>(isSource);
-        this.originalNumber = new ArrayList<Integer>(isSource);
+    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, Context context) {
+        this.originalNumber = new ArrayList<Integer>(isSource1);
+        this.currentNumber = new ArrayList<Integer>(isSource2);
         this.native_strings = native_strings;
         this.chinese_strings = chinese_strings;
         this.language = language;
@@ -84,12 +84,12 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return boardNumber.size();
+        return currentNumber.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return boardNumber.get(position);
+        return currentNumber.get(position);
     }
 
     @Override
@@ -128,11 +128,11 @@ public class GridViewAdapter extends BaseAdapter {
 
 
         // set string on board;
-        if(boardNumber.get(position) != 0 && boardNumber.get(position) > 0) {
-            button.setText(current_strings[boardNumber.get(position)-1]);
+        if(currentNumber.get(position) != 0 && currentNumber.get(position) > 0) {
+            button.setText(current_strings[currentNumber.get(position)-1]);
         }
-        else if(boardNumber.get(position) != 0 && boardNumber.get(position) < 0){
-            button.setText(not_current_strings[-1*(boardNumber.get(position)-1)]);
+        else if(currentNumber.get(position) != 0 && currentNumber.get(position) < 0){
+            button.setText(not_current_strings[-1*(currentNumber.get(position)+1)]);
         }
         else{
 
@@ -219,11 +219,14 @@ public class GridViewAdapter extends BaseAdapter {
 
     public void uncheckClickedCell() {
         if(clickedCell != null){
+
             setCellBackground(clickedCell, row, column);
             clickedCell = null;
         }
     }
     public void updateBoardNumber(int position, int value){
-        boardNumber.set(position, value);
+        currentNumber.set(position, value);
     }
+
+
 }
