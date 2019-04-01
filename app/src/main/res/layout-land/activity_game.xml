@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212121">
+    android:background="@color/darkBackgroundColor">
 
     <GridView
         android:id="@+id/gridView"
-        android:layout_width="465dp"
+        android:layout_width="475dp"
         android:layout_height="293dp"
+        android:layout_centerInParent="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -18,7 +19,6 @@
         android:horizontalSpacing="0dp"
         android:isScrollContainer="false"
         android:textAlignment="center"
-        android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tableLayout"
         app:layout_constraintHorizontal_bias="0.5"

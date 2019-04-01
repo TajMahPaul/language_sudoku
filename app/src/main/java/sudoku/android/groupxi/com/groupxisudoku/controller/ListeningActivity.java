@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
@@ -43,7 +44,6 @@ public class ListeningActivity extends AppCompatActivity {
 
 
         GridView gridView = findViewById(R.id.gridView);
-        //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", 9);
@@ -51,6 +51,16 @@ public class ListeningActivity extends AppCompatActivity {
         startBoard = chooseRandomBoard(boards);
         currentBoard = new Board(size);
         currentBoard.copyValues(startBoard.getGameCells());
+
+        //initialize text to speech
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t1.setLanguage(Locale.FRENCH);
+                }
+            }
+        });
     }
 
     private ArrayList<Board> readGameBoards(int size) {

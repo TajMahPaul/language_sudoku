@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
     public Board currentBoard;
 
 
-    private Button[] num_buttons = new Button [9];
+    private Button[] num_buttons;
     public int language = 0; // 0 for native and 1 for chinese on board
     public int row, column;
     public int height, width;
@@ -52,6 +52,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", 9);
+        num_buttons = new Button [size];
+
         if(savedInstanceState!=null) {
             Log.d(TAG, "onCreate: load saved data");
             startBoard = (Board) savedInstanceState.getSerializable("originalBoard");
@@ -143,7 +145,9 @@ public class GameActivity extends AppCompatActivity {
 
         //add function to number buttons
         int numButtonsId[] = new int[]{R.id.num_button1, R.id.num_button2, R.id.num_button3, R.id.num_button4,
-                R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9};
+                R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
+                R.id.num_button10, R.id.num_button11, R.id.num_button12};
+
         for(int i = 0; i < size; i++){
             final int finalI = i+1;
             num_buttons[i] = findViewById(numButtonsId[i]);
@@ -254,6 +258,7 @@ public class GameActivity extends AppCompatActivity {
                 for (int i = 0; i < size; i++) {
                     String rowCells[] = line.split(" ");
                     for (int j = 0; j < size; j++) {
+                        Log.d(TAG, "readGameBoards: " + (String)rowCells[j]+ " " + (String.valueOf(i)) + " " +(String.valueOf(j)) ) ;
                         if (rowCells[j].equals("-")) {
                             board.setValue(i, j, 0);
                         } else {

@@ -60,6 +60,9 @@
         <item name="Chinese_work">工作</item>
         <item name="Chinese_rest">休息</item>
         <item name="Chinese_boy">男孩</item>
+        <item name="Chinese_hi">嗨</item>
+        <item name="Chinese_bye">再见</item>
+        <item name="Chinese_cow">牛</item>
     </string-array>
 
     <string-array name="native_array">
@@ -72,6 +75,12 @@
         <item>Work</item>
         <item>Rest</item>
         <item>Boy</item>
+        <item>Work</item>
+        <item>Rest</item>
+        <item>Hi</item>
+        <item>Bye</item>
+        <item>Cow</item>
+
     </string-array>
 
     <string-array name="native_array_listening">
