@@ -26,9 +26,15 @@ Given: that the user uses his phone in landscape mode for Sudoku vocabulary prac
 When: the user is practicing his vocabulary while taking the bus
 Then: longer words are displayed in a larger font than standard mode.
 
-Given: that the user is a student working with a textbook,
+Given: that the user is a student working with a textbook
+and the user is in the main screen of the application
 When: the user wants to practice from each chapter of the book
-Then: the user can load pairs of words into the application to practice.
+Then: the user can click "upload" to load pairs of words into the application to practice.
+
+Given: that the user wants to load pairs of words into the application to practice
+and the user has not given the application permission access the user's files
+When: the user clicks "upload" in the main screen
+Then: the user sees a pop up requesting permission for access
 
 Given: that the user is using the Sudoku app,
 and the user is having difficulty recognizing the word "wrist"
