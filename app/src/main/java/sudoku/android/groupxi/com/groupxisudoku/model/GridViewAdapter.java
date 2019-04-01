@@ -2,26 +2,24 @@ package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
-import sudoku.android.groupxi.com.groupxisudoku.controller.GameActivity;
-import sudoku.android.groupxi.com.groupxisudoku.controller.MainActivity;
 
 import static android.content.ContentValues.TAG;
 
 
 public class GridViewAdapter extends BaseAdapter {
+    TextToSpeech t1;
     List<Integer> currentNumber;
     List<Integer> originalNumber;
     Context mContext;
@@ -58,9 +56,25 @@ public class GridViewAdapter extends BaseAdapter {
         if(language == 0){
             current_strings = native_strings;
             not_current_strings = chinese_strings;
+            t1=new TextToSpeech(context.getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if(status != TextToSpeech.ERROR) {
+                        t1.setLanguage(Locale.ENGLISH);
+                    }
+                }
+            });
         }else{
             current_strings = chinese_strings;
             not_current_strings = native_strings;
+            t1=new TextToSpeech(context.getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if(status != TextToSpeech.ERROR) {
+                        t1.setLanguage(Locale.CHINESE);
+                    }
+                }
+            });
         }
         if (size == 4){
             square_height=2;
@@ -132,6 +146,7 @@ public class GridViewAdapter extends BaseAdapter {
         // set string on board;
         if(currentNumber.get(position) != 0 && currentNumber.get(position) > 0) {
             if(isListening == true){
+
                 button.setText(String.valueOf(currentNumber.get(position)));
             }else {
                 button.setText(current_strings[currentNumber.get(position)-1]);
@@ -152,7 +167,8 @@ public class GridViewAdapter extends BaseAdapter {
                 //uncheck selected cell
                 if(isListening == true){
                     if(currentNumber.get(position) > 0){
-
+                        int number = Integer.parseInt( (String) button.getText() );
+                        t1.speak( current_strings[number-1], TextToSpeech.QUEUE_FLUSH, null);
                     }
                 }else{
                     if(clickedCell != null){
