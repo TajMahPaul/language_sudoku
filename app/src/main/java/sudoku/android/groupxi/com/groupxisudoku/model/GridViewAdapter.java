@@ -186,7 +186,8 @@ public class GridViewAdapter extends BaseAdapter {
 
                     if(originalNumber.get(position) == 0) {
                         //if the cell is not original
-                        button.setBackgroundResource(R.drawable.table_border_cell_selected);
+                        //button.setBackgroundResource(R.drawable.table_border_cell_selected);
+                        setSelectedCellBackground(button, position);
                         clicked = true;
                         clickedCell = button;
                         row = position / size;
@@ -235,6 +236,21 @@ public class GridViewAdapter extends BaseAdapter {
         }
         else {
             button.setBackgroundResource(R.drawable.table_border_cell);
+        }
+    }
+
+    private void setSelectedCellBackground(Button button, int position){
+        if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom_right);
+        }
+        else if ((position+1)%square_width == 0 && (position+1)%size != 0 ){
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_right);
+        }
+        else if( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0){
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom);
+        }
+        else{
+            button.setBackgroundResource(R.drawable.table_border_cell_selected);
         }
     }
 
