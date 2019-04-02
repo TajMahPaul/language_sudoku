@@ -160,9 +160,78 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
                 R.id.num_button10, R.id.num_button11, R.id.num_button12};
 
-        for (int i = size; i < import_size; i++) {
-            Button tmp = findViewById(numButtonsId[i]);
-            tmp.setVisibility(View.INVISIBLE);
+        // check orientation and hide dead buttons
+        Button tmp;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // In portrait
+            if (size == 4) {
+                for (int i = size; i < import_size; i++) {
+                    tmp = findViewById(numButtonsId[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 6) {
+                if (isTablet(GameActivity.this)) {
+                    for (int i = size; i < import_size; i++) {
+                        tmp = findViewById(numButtonsId[i]);
+                        tmp.setVisibility(View.GONE);
+                    }
+                }
+                else {
+                    numButtonsId[3] = R.id.num_button6;
+                    numButtonsId[4] = R.id.num_button7;
+                    numButtonsId[5] = R.id.num_button8;
+                    tmp = findViewById(R.id.num_button4);
+                    tmp.setVisibility(View.GONE);
+                    tmp = findViewById(R.id.num_button5);
+                    tmp.setVisibility(View.INVISIBLE);
+                    tmp = findViewById(R.id.num_button9);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 9 && isTablet(GameActivity.this)) {
+                for (int i = 5; i < 9; i++) {
+                    numButtonsId[i] = numButtonsId[i + 1];
+                }
+                tmp = findViewById(R.id.num_button6);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button11);
+                tmp.setVisibility(View.INVISIBLE);
+                tmp = findViewById(R.id.num_button12);
+                tmp.setVisibility(View.GONE);
+            }
+        } else {
+            // In landscape
+            if (size == 4) {
+                numButtonsId[2] = R.id.num_button4;
+                numButtonsId[3] = R.id.num_button5;
+                int[] GONE = new int[] {R.id.num_button3, R.id.num_button6,
+                        R.id.num_button7, R.id.num_button8, R.id.num_button9,
+                        R.id.num_button10, R.id.num_button11, R.id.num_button12};
+                int n = isTablet(GameActivity.this) ? 8 : 5;
+                for (int i = 0; i < n; i++){
+                    tmp = findViewById(GONE[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 6) {
+                int[] GONE = new int[] {R.id.num_button7, R.id.num_button8, R.id.num_button9,
+                                    R.id.num_button10, R.id.num_button11, R.id.num_button12};
+                int n = isTablet(GameActivity.this) ? 6 : 3;
+                for (int i = 0; i < n; i++){
+                    tmp = findViewById(GONE[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 9 && isTablet(GameActivity.this)) {
+                tmp = findViewById(R.id.num_button10);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button11);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button12);
+                tmp.setVisibility(View.GONE);
+            }
         }
 
         for(int i = 0; i < size; i++){
