@@ -1,5 +1,7 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -53,8 +55,9 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
+        int import_size = isTablet(GameActivity.this) ? 12 : 9;
         final int language = getIntent().getIntExtra("language", 0);
-        final int size = getIntent().getIntExtra("size", 9);
+        final int size = getIntent().getIntExtra("size", import_size);
         final boolean isListening = getIntent().getBooleanExtra("listening", false);
         num_buttons = new Button [size];
 
@@ -91,8 +94,8 @@ public class GameActivity extends AppCompatActivity {
         int source = getIntent().getIntExtra("source",1);
 
         //Log.d("1",source);
-        native_strings = new String[9];
-        chinese_strings = new String[9];
+        native_strings = new String[import_size];
+        chinese_strings = new String[import_size];
 
         if(source == 2){
             //Log.d("2",source);
@@ -371,6 +374,10 @@ public class GameActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putSerializable("originalBoard", startBoard);
         outState.putSerializable("currentBoard", currentBoard);
+    }
+
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
 
