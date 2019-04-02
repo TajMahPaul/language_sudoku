@@ -160,6 +160,11 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
                 R.id.num_button10, R.id.num_button11, R.id.num_button12};
 
+        for (int i = size; i < import_size; i++) {
+            Button tmp = findViewById(numButtonsId[i]);
+            tmp.setVisibility(View.INVISIBLE);
+        }
+
         for(int i = 0; i < size; i++){
             final int finalI = i+1;
             num_buttons[i] = findViewById(numButtonsId[i]);
