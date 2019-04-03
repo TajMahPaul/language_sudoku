@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -295,7 +296,9 @@ public class GameActivity extends AppCompatActivity {
                         String minutes = Long.toString(time_passed / 60);
                         String seconds = Long.toString(time_passed % 60);
                         String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
-                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast t = Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG);
+                        t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        t.show();
                         Log.d("message", message);
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
@@ -303,10 +306,13 @@ public class GameActivity extends AppCompatActivity {
                         File file = new File(getFilesDir(), filename);
                         String fileContents = "";
                         if (rank != null) {
+                            String words_to_improve = "Words to improve: ";
                             for (int i = 0; i < rank.length; i++) {
                                 fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
+                                words_to_improve += "("+rank[i].getNativeWord()+", "+rank[i].getForeignWord()+")    ";
                                 Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
                             }
+                            Toast.makeText(GameActivity.this, words_to_improve, Toast.LENGTH_LONG).show();
                         }
                         FileOutputStream outputStream;
                         try {
