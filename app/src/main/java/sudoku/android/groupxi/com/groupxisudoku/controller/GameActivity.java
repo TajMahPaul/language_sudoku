@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -160,11 +161,81 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
                 R.id.num_button10, R.id.num_button11, R.id.num_button12};
 
-        for (int i = size; i < import_size; i++) {
-            Button tmp = findViewById(numButtonsId[i]);
-            tmp.setVisibility(View.INVISIBLE);
+        // check orientation and hide dead buttons
+        Button tmp;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // In portrait
+            if (size == 4) {
+                for (int i = size; i < import_size; i++) {
+                    tmp = findViewById(numButtonsId[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 6) {
+                if (isTablet(GameActivity.this)) {
+                    for (int i = size; i < import_size; i++) {
+                        tmp = findViewById(numButtonsId[i]);
+                        tmp.setVisibility(View.GONE);
+                    }
+                }
+                else {
+                    numButtonsId[3] = R.id.num_button6;
+                    numButtonsId[4] = R.id.num_button7;
+                    numButtonsId[5] = R.id.num_button8;
+                    tmp = findViewById(R.id.num_button4);
+                    tmp.setVisibility(View.GONE);
+                    tmp = findViewById(R.id.num_button5);
+                    tmp.setVisibility(View.INVISIBLE);
+                    tmp = findViewById(R.id.num_button9);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 9 && isTablet(GameActivity.this)) {
+                for (int i = 5; i < 9; i++) {
+                    numButtonsId[i] = numButtonsId[i + 1];
+                }
+                tmp = findViewById(R.id.num_button6);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button11);
+                tmp.setVisibility(View.INVISIBLE);
+                tmp = findViewById(R.id.num_button12);
+                tmp.setVisibility(View.GONE);
+            }
+        } else {
+            // In landscape
+            if (size == 4) {
+                numButtonsId[2] = R.id.num_button4;
+                numButtonsId[3] = R.id.num_button5;
+                int[] GONE = new int[] {R.id.num_button3, R.id.num_button6,
+                        R.id.num_button7, R.id.num_button8, R.id.num_button9,
+                        R.id.num_button10, R.id.num_button11, R.id.num_button12};
+                int n = isTablet(GameActivity.this) ? 8 : 5;
+                for (int i = 0; i < n; i++){
+                    tmp = findViewById(GONE[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 6) {
+                int[] GONE = new int[] {R.id.num_button7, R.id.num_button8, R.id.num_button9,
+                                    R.id.num_button10, R.id.num_button11, R.id.num_button12};
+                int n = isTablet(GameActivity.this) ? 6 : 3;
+                for (int i = 0; i < n; i++){
+                    tmp = findViewById(GONE[i]);
+                    tmp.setVisibility(View.GONE);
+                }
+            }
+            else if (size == 9 && isTablet(GameActivity.this)) {
+                tmp = findViewById(R.id.num_button10);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button11);
+                tmp.setVisibility(View.GONE);
+                tmp = findViewById(R.id.num_button12);
+                tmp.setVisibility(View.GONE);
+            }
         }
 
+        // initialize buttons
         for(int i = 0; i < size; i++){
             final int finalI = i+1;
             num_buttons[i] = findViewById(numButtonsId[i]);
@@ -226,7 +297,9 @@ public class GameActivity extends AppCompatActivity {
                         String minutes = Long.toString(time_passed / 60);
                         String seconds = Long.toString(time_passed % 60);
                         String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
-                        Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast t = Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG);
+                        t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        t.show();
                         Log.d("message", message);
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
@@ -234,10 +307,13 @@ public class GameActivity extends AppCompatActivity {
                         File file = new File(getFilesDir(), filename);
                         String fileContents = "";
                         if (rank != null) {
+                            String words_to_improve = "Words to improve: ";
                             for (int i = 0; i < rank.length; i++) {
                                 fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
+                                words_to_improve += "("+rank[i].getNativeWord()+", "+rank[i].getForeignWord()+")    ";
                                 Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
                             }
+                            Toast.makeText(GameActivity.this, words_to_improve, Toast.LENGTH_LONG).show();
                         }
                         FileOutputStream outputStream;
                         try {
