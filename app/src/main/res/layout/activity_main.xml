@@ -114,7 +114,7 @@
         android:layout_marginBottom="28dp"
         android:background="@drawable/rounded_button"
         android:onClick="settingsButton"
-        android:text="Settings"
+        android:text="Edit Goal"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

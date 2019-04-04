@@ -10,36 +10,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
-            android:id="@+id/native_language_text"
+            android:id="@+id/goal_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello, I speak..."
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"
+            android:layout_marginBottom="100sp"
+            android:text="Daily Goal settings"
+            android:textColor="@color/accent2"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/Basic"
+            android:layout_width="300sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30sp"
+            android:background="@drawable/rounded_button"
+            android:text="Basic         1 XP per day"
             android:textColor="#FFFFFF"
-            android:textSize="25dp" />
+            android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/native_language_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/foreign_language_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="and I want to learn..."
+        <Button
+            android:id="@+id/Casual"
+            android:layout_width="300sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30sp"
+            android:background="@drawable/rounded_button"
+            android:text="Casual         10 XP per day"
             android:textColor="#FFFFFF"
-            android:textSize="25dp" />
+            android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/foreign_language_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/Regular"
+            android:layout_width="300sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30sp"
+            android:background="@drawable/rounded_button"
+            android:text="Regular         20 XP per day"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/Serious"
+            android:layout_width="300sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30sp"
+            android:background="@drawable/rounded_button"
+            android:text="Serious         30 XP per day"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/Insane"
+            android:layout_width="300sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30sp"
+            android:background="@drawable/rounded_button"
+            android:text="Insane         50 XP per day"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
