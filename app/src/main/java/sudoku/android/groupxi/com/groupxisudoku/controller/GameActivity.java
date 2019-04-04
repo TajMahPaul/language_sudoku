@@ -307,14 +307,14 @@ public class GameActivity extends AppCompatActivity {
                         File file = new File(getFilesDir(), filename);
                         String fileContents = "";
                         if (rank != null) {
-                            String words_to_improve = "Words to improve: ";
+                            fileContents += "\n\nWords to improve:\n";
                             for (int i = 0; i < rank.length; i++) {
-                                fileContents += rank[i].getNativeWord() + " " + rank[i].getForeignWord();
-                                words_to_improve += "("+rank[i].getNativeWord()+", "+rank[i].getForeignWord()+")    ";
+                                fileContents += "("+rank[i].getNativeWord() + ", " + rank[i].getForeignWord() + ")    ";
                                 Log.d("ranking", rank[i].getNativeWord() + " " + rank[i].getForeignWord());
                             }
-                            Toast.makeText(GameActivity.this, words_to_improve, Toast.LENGTH_LONG).show();
                         }
+                        Toast.makeText(GameActivity.this, message+fileContents, Toast.LENGTH_LONG).show();
+                        Log.d("message", message+fileContents);
                         FileOutputStream outputStream;
                         try {
                             outputStream = openFileOutput(filename, MODE_PRIVATE);
