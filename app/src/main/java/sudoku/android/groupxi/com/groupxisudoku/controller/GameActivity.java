@@ -171,15 +171,13 @@ public class GameActivity extends AppCompatActivity {
                     tmp = findViewById(numButtonsId[i]);
                     tmp.setVisibility(View.GONE);
                 }
-            }
-            else if (size == 6) {
+            } else if (size == 6) {
                 if (isTablet(GameActivity.this)) {
                     for (int i = size; i < import_size; i++) {
                         tmp = findViewById(numButtonsId[i]);
                         tmp.setVisibility(View.GONE);
                     }
-                }
-                else {
+                } else {
                     numButtonsId[3] = R.id.num_button6;
                     numButtonsId[4] = R.id.num_button7;
                     numButtonsId[5] = R.id.num_button8;
@@ -190,8 +188,7 @@ public class GameActivity extends AppCompatActivity {
                     tmp = findViewById(R.id.num_button9);
                     tmp.setVisibility(View.GONE);
                 }
-            }
-            else if (size == 9 && isTablet(GameActivity.this)) {
+            } else if (size == 9 && isTablet(GameActivity.this)) {
                 for (int i = 5; i < 9; i++) {
                     numButtonsId[i] = numButtonsId[i + 1];
                 }
@@ -215,8 +212,7 @@ public class GameActivity extends AppCompatActivity {
                     tmp = findViewById(GONE[i]);
                     tmp.setVisibility(View.GONE);
                 }
-            }
-            else if (size == 6) {
+            } else if (size == 6) {
                 int[] GONE = new int[] {R.id.num_button7, R.id.num_button8, R.id.num_button9,
                                     R.id.num_button10, R.id.num_button11, R.id.num_button12};
                 int n = isTablet(GameActivity.this) ? 6 : 3;
@@ -224,8 +220,7 @@ public class GameActivity extends AppCompatActivity {
                     tmp = findViewById(GONE[i]);
                     tmp.setVisibility(View.GONE);
                 }
-            }
-            else if (size == 9 && isTablet(GameActivity.this)) {
+            } else if (size == 9 && isTablet(GameActivity.this)) {
                 tmp = findViewById(R.id.num_button10);
                 tmp.setVisibility(View.GONE);
                 tmp = findViewById(R.id.num_button11);
@@ -262,7 +257,6 @@ public class GameActivity extends AppCompatActivity {
                     }
                     */
 
-
                     //check if a cell has been selected
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
@@ -280,7 +274,6 @@ public class GameActivity extends AppCompatActivity {
                             adapter.uncheckClickedCell();
                             int pos = row*size+(column);
                             adapter.updateBoardNumber(pos, -finalI);
-
                         }else{
                             Toast.makeText(GameActivity.this, R.string.board_incorrect, Toast.LENGTH_SHORT).show();
                             // increment incorrect count on that word pair
@@ -288,7 +281,6 @@ public class GameActivity extends AppCompatActivity {
                             String log = "Incremented count on pair " + native_strings[finalI-1] + " " + chinese_strings[finalI-1];
                             Log.d("incorrect count", log);
                         }
-
                     }
 
                     if(currentBoard.isBoardFull() == true){
@@ -296,7 +288,10 @@ public class GameActivity extends AppCompatActivity {
                         long time_passed = (System.nanoTime() - start_time) / 1000000000;
                         String minutes = Long.toString(time_passed / 60);
                         String seconds = Long.toString(time_passed % 60);
-                        String message = "You beat the game in: " + minutes + " minutes, " + seconds + " seconds.";
+                        String message = "You beat the game in: ";
+                        if (time_passed / 60 > 0)
+                            message += minutes + " minutes, ";
+                        message += seconds + " seconds.";
                         Toast t = Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG);
                         t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                         t.show();
