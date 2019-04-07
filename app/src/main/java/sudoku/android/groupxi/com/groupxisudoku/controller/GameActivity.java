@@ -161,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
                 R.id.num_button10, R.id.num_button11, R.id.num_button12};
 
-        hide_buttons(numButtonsId, size, import_size);
+        numButtonsId = hide_buttons(numButtonsId, size, import_size);
 
         // initialize buttons
         for(int i = 0; i < size; i++){
@@ -384,7 +384,7 @@ public class GameActivity extends AppCompatActivity {
         outState.putSerializable("currentBoard", currentBoard);
     }
 
-    public void hide_buttons(int numButtonsId[], int size, int import_size) {
+    public int[] hide_buttons(int numButtonsId[], int size, int import_size) {
         // check orientation and hide dead buttons
         Button tmp;
         int orientation = getResources().getConfiguration().orientation;
@@ -453,6 +453,7 @@ public class GameActivity extends AppCompatActivity {
                 tmp.setVisibility(View.GONE);
             }
         }
+        return numButtonsId;
     }
 
     public static boolean isTablet(Context context) {
