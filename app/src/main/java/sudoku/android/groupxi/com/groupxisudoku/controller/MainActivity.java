@@ -1,47 +1,39 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
 import android.app.Dialog;
-import android.util.Log;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     private int language = 0;
-    private int size = 9;
+    private int size = 4;
+    private int difficulty = 0;
     private boolean isListening = false;
+    Dialog selectionWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Pop up window for Info
-        Button info = (Button) findViewById(R.id.infoButton);
+        selectionWindow = new Dialog(this);
+        Button info = findViewById(R.id.infoButton);
         info.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
@@ -49,20 +41,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button languageButton = findViewById(R.id.languageButton);
-        languageButton.setText("English");
-        languageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(language == 0){
-                    language = 1;
-                    languageButton.setText("Chinese");
-                }else{
-                    language = 0;
-                    languageButton.setText("English");
-                }
-            }
-        });
 
         Button uploadButton = findViewById(R.id.Uploadbutton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
@@ -74,100 +52,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button difficultyButton = findViewById(R.id.difficultyButton);
-        difficultyButton.setText("  easy  ");
-        difficultyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(difficultyButton.getText() == "  easy  "){
-                    difficultyButton.setText("  medium  ");
-                }else if(difficultyButton.getText() == "  medium  "){
-                    difficultyButton.setText("  difficult  ");
-                }else if(difficultyButton.getText() == "  difficult  "){
-                    difficultyButton.setText("  easy  ");
-                }
-            }
-        });
 
-        final Button listeningButton = findViewById(R.id.Listening);
-        listeningButton.setText("Listening Mode: Off");
-        listeningButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listeningButton.getText() == "Listening Mode: Off"){
-                    listeningButton.setText("Listening Mode: On");
-                    isListening = true;
-                }else {
-                    listeningButton.setText("Listening Mode: Off");
-                    isListening = false;
-                }
-            }
-        });
     }
 
     // play
     public void playButton(View view) {
-        final Intent intent = new Intent(this, GameActivity.class);
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        //builder.setIcon(R.drawable.ic_launcher);
-        builder.setTitle("size of grids");
-        final String[] choices = {"4x4", "6x6", "9x9", "12x12"};
+        showPopupWindow();
+    }
 
-        builder.setSingleChoiceItems(choices, 2, new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-
-                if(which == 0){
-                    size = 4;
-                }else if(which == 1){
-                    size = 6;
-                }else if(which == 2){
-                    size = 9;
-                }else{
-                    size = 12;
-                }
-            }
-        });
-        builder.setPositiveButton("ok", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-
-
-                if(isTablet(MainActivity.this) == false && size == 12){
-                    Toast.makeText(MainActivity.this, "12x12 grid is only available on tablet", Toast.LENGTH_SHORT).show();
-                }else{
-                    intent.putExtra("size", size);
-                    intent.putExtra("language", language);
-                    intent.putExtra("source", 1);
-                    intent.putExtra("listening", isListening);
-                    startActivity(intent);
-                }
-
-            }
-        });
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-
-            }
-        });
-        builder.show();
+//    public void resumeButton(View view) {
 //        Intent intent = new Intent(this, GameActivity.class);
-//        intent.putExtra("language", language);
+//        intent.putExtra("resume_game", true);
 //        startActivity(intent);
-    }
-
-    public void resumeButton(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("resume_game", true);
-        startActivity(intent);
-    }
+//    }
 
     // settings
     public void settingsButton(View view) {
@@ -205,5 +102,117 @@ public class MainActivity extends AppCompatActivity {
             //resume tasks needing this permission
 
         }
+    }
+
+    private void showPopupWindow() {
+        final Button sizeButton;
+        final Button languageButton;
+        final Button difficultyButton;
+        final Button listeningButton;
+        Button cancelButton;
+        Button startButton;
+        final Intent intent = new Intent(this, GameActivity.class);
+
+        selectionWindow.setContentView(R.layout.selection_window);
+        selectionWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+
+
+        sizeButton = selectionWindow.findViewById(R.id.size_button);
+        sizeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(size == 4){
+                    sizeButton.setText("6x6");
+                    size = 6;
+                }else if(size == 6){
+                    sizeButton.setText("9x9");
+                    size = 9;
+                }else if (size == 9){
+
+                    if(isTablet(MainActivity.this)){
+                        sizeButton.setText("12x12");
+                        size = 12;
+                    }else{
+                        sizeButton.setText("4x4");
+                        size = 4;
+                    }
+
+                }else{
+                    sizeButton.setText("4x4");
+                    size = 4;
+                }
+            }
+        });
+
+        languageButton = selectionWindow.findViewById(R.id.language_button);
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(language == 0){
+                    language = 1;
+                    languageButton.setText("Chinese");
+                }else{
+                    language = 0;
+                    languageButton.setText("English");
+                }
+            }
+        });
+
+        difficultyButton = selectionWindow.findViewById(R.id.difficulty_button);
+        difficultyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(difficulty == 0){
+                    difficulty = 1;
+                    difficultyButton.setText("medium");
+                }else if(difficulty == 1){
+                    difficulty = 2;
+                    difficultyButton.setText("hard");
+                }else {
+                    difficulty = 0;
+                    difficultyButton.setText("easy");
+                }
+            }
+        });
+
+        listeningButton = selectionWindow.findViewById(R.id.listening_button);
+        listeningButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isListening == false){
+                    isListening = true;
+                    listeningButton.setText("Listening Mode: On");
+                }else {
+                    isListening = false;
+                    listeningButton.setText("Listening Mode: Off");
+                }
+            }
+        });
+
+        cancelButton = selectionWindow.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectionWindow.dismiss();
+            }
+        });
+
+        startButton = selectionWindow.findViewById(R.id.start_button);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectionWindow.dismiss();
+                intent.putExtra("size", size);
+                intent.putExtra("language", language);
+                intent.putExtra("source", 1);
+                intent.putExtra("listening", isListening);
+                startActivity(intent);
+
+            }
+        });
+        selectionWindow.show();
+
+
+
     }
 }
