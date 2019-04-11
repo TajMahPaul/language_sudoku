@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -57,54 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     // play
     public void playButton(View view) {
-        showPopupWindow();
-    }
-
-//    public void resumeButton(View view) {
-//        Intent intent = new Intent(this, GameActivity.class);
-//        intent.putExtra("resume_game", true);
-//        startActivity(intent);
-//    }
-
-    // settings
-    public void settingsButton(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-    public static boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
-    public  boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v("Permission","Permission is granted");
-                return true;
-            } else {
-
-                Log.v("Permission","Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("Permission","Permission is granted");
-            return true;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            Log.v("Permission","Permission: "+permissions[0]+ "was "+grantResults[0]);
-            //resume tasks needing this permission
-
-        }
-    }
-
-    private void showPopupWindow() {
         final Button sizeButton;
         final Button languageButton;
         final Button difficultyButton;
@@ -114,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, GameActivity.class);
 
         selectionWindow.setContentView(R.layout.selection_window);
-        selectionWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-
 
         sizeButton = selectionWindow.findViewById(R.id.size_button);
         sizeButton.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +160,46 @@ public class MainActivity extends AppCompatActivity {
         });
         selectionWindow.show();
 
-
-
     }
+
+    // settings
+    public void settingsButton(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v("Permission","Permission is granted");
+                return true;
+            } else {
+
+                Log.v("Permission","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("Permission","Permission is granted");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Log.v("Permission","Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+
+        }
+    }
+
+
 }
