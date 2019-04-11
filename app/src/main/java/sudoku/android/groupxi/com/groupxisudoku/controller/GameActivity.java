@@ -15,7 +15,6 @@ import android.widget.Toast;
 import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +45,7 @@ public class GameActivity extends AppCompatActivity {
     GridViewAdapter adapter;
     public String[] native_strings, chinese_strings;
     public long start_time;
+    int difficulty;
 
 
     @Override
@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", import_size);
         final boolean isListening = getIntent().getBooleanExtra("listening", false);
-        //final int difficulty = getIntent().getIntExtra("difficulty", 0);
+        difficulty = getIntent().getIntExtra("difficulty", 0);
         num_buttons = new Button [size];
 
         if(savedInstanceState!=null) {
@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
             currentBoard = (Board) savedInstanceState.getSerializable("currentBoard");
         }else {
             ArrayList<Board> boards = readGameBoards(size);
-            startBoard = chooseRandomBoard(boards);
+            startBoard = chooseBoard(boards);
             currentBoard = new Board(size);
             currentBoard.copyValues(startBoard.getGameCells());
 
@@ -76,7 +76,6 @@ public class GameActivity extends AppCompatActivity {
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        float density = metrics.density;
 
         width = Math.round(metrics.widthPixels);
         height = Math.round(metrics.heightPixels);
@@ -96,7 +95,6 @@ public class GameActivity extends AppCompatActivity {
         chinese_strings = new String[import_size];
 
         if(source == 2){
-            //Log.d("2",source);
             List<LanguageSample> word_list = (List<LanguageSample>) getIntent().getSerializableExtra("word_list");
             for (int i = 0; i < native_strings.length; i++){
                 native_strings[i] = word_list.get(i).getLang_a();
@@ -115,7 +113,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
         GridView gridView = findViewById(R.id.gridView);
-        //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
 
         // start timer
@@ -218,7 +215,6 @@ public class GameActivity extends AppCompatActivity {
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
                         String filename = "ranking.txt";
-                        File file = new File(getFilesDir(), filename);
                         String fileContents = "";
                         if (rank != null) {
                             fileContents += "\n\nWords to improve:\n";
@@ -310,9 +306,8 @@ public class GameActivity extends AppCompatActivity {
         return boards;
     }
 
-    private Board chooseRandomBoard(ArrayList<Board> boards) {
-        int randomNumber = (int) (Math.random() * boards.size());
-        return boards.get(randomNumber);
+    private Board chooseBoard(ArrayList<Board> boards) {
+        return boards.get(difficulty);
     }
 
     public void onGoBackButtonClicked() {
