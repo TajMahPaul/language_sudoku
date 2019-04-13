@@ -12,16 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,14 +39,13 @@ public class GameActivity extends AppCompatActivity {
 
 
     private Button[] num_buttons;
-    public int language = 0; // 0 for native and 1 for chinese on board
-    public int row, column;
     public int height, width;
     List<Integer> boardNumber = new ArrayList<>();
     List<Integer> currentNumber = new ArrayList<>();
     GridViewAdapter adapter;
     public String[] native_strings, chinese_strings;
     public long start_time;
+    int difficulty;
 
 
     @Override
@@ -60,6 +56,7 @@ public class GameActivity extends AppCompatActivity {
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", import_size);
         final boolean isListening = getIntent().getBooleanExtra("listening", false);
+        difficulty = getIntent().getIntExtra("difficulty", 0);
         num_buttons = new Button [size];
 
         if(savedInstanceState!=null) {
@@ -68,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
             currentBoard = (Board) savedInstanceState.getSerializable("currentBoard");
         }else {
             ArrayList<Board> boards = readGameBoards(size);
-            startBoard = chooseRandomBoard(boards);
+            startBoard = chooseBoard(boards);
             currentBoard = new Board(size);
             currentBoard.copyValues(startBoard.getGameCells());
 
@@ -79,7 +76,6 @@ public class GameActivity extends AppCompatActivity {
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        float density = metrics.density;
 
         width = Math.round(metrics.widthPixels);
         height = Math.round(metrics.heightPixels);
@@ -99,7 +95,6 @@ public class GameActivity extends AppCompatActivity {
         chinese_strings = new String[import_size];
 
         if(source == 2){
-            //Log.d("2",source);
             List<LanguageSample> word_list = (List<LanguageSample>) getIntent().getSerializableExtra("word_list");
             for (int i = 0; i < native_strings.length; i++){
                 native_strings[i] = word_list.get(i).getLang_a();
@@ -118,7 +113,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
         GridView gridView = findViewById(R.id.gridView);
-        //final ToggleButton toggle = (ToggleButton) findViewById(R.id.voice);
 
 
         // start timer
@@ -247,17 +241,6 @@ public class GameActivity extends AppCompatActivity {
                     Button temp_button = (Button) v;
                     String text = (String) temp_button.getText();
 
-                    /*
-                    if(toggle.isChecked()){
-                        if (language == 0){
-                            t1.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-                        }else{
-                            t2.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-                        }
-
-                    }
-                    */
-
                     //check if a cell has been selected
                     if(adapter.isClicked()){
                         int row = adapter.getRow();
@@ -300,7 +283,6 @@ public class GameActivity extends AppCompatActivity {
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
                         String filename = "ranking.txt";
-                        File file = new File(getFilesDir(), filename);
                         String fileContents = "";
                         if (rank != null) {
                             fileContents += "\n\nWords to improve:\n";
@@ -389,56 +371,11 @@ public class GameActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
-        //reading from internal storage (/data/data/<package-name>/files)
-//        String fileName = "boards-";
-//        if (difficulty == 0) {
-//            fileName += "easy";
-//        } else if (difficulty == 1) {
-//            fileName += "normal";
-//        } else {
-//            fileName += "hard";
-//        }
-
-//        FileInputStream fileInputStream;
-//        try {
-//            fileInputStream = this.openFileInput(fileName);
-//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-//            BufferedReader internalBufferedReader = new BufferedReader(inputStreamReader);
-//            String line = internalBufferedReader.readLine();
-//            line = internalBufferedReader.readLine();
-//            while (line != null) {
-//                Board board = new Board();
-//                // read all lines in the board
-//                for (int i = 0; i < 9; i++) {
-//                    String rowCells[] = line.split(" ");
-//                    for (int j = 0; j < 9; j++) {
-//                        if (rowCells[j].equals("-")) {
-//                            board.setValue(i, j, 0);
-//                        } else {
-//                            board.setValue(i, j, Integer.parseInt(rowCells[j]));
-//                        }
-//                    }
-//                    line = internalBufferedReader.readLine();
-//                    if (line == null) {
-//                        break;
-//                    }
-//                }
-//                boards.add(board);
-//                line = internalBufferedReader.readLine();
-//            }
-//            internalBufferedReader.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         return boards;
     }
 
-    private Board chooseRandomBoard(ArrayList<Board> boards) {
-        int randomNumber = (int) (Math.random() * boards.size());
-        return boards.get(randomNumber);
+    private Board chooseBoard(ArrayList<Board> boards) {
+        return boards.get(difficulty);
     }
 
     public void onGoBackButtonClicked() {
@@ -528,49 +465,4 @@ public class GameActivity extends AppCompatActivity {
         return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-
-    /*
-    public void swapButton(View view){
-        String[] chinese_strings = getResources().getStringArray(R.array.chinese_array);
-        String[] native_strings = getResources().getStringArray(R.array.native_array);
-        int cellGroupFragments[] = new int[]{R.id.cellGroupFragment, R.id.cellGroupFragment2, R.id.cellGroupFragment3, R.id.cellGroupFragment4,
-                R.id.cellGroupFragment5, R.id.cellGroupFragment6, R.id.cellGroupFragment7, R.id.cellGroupFragment8, R.id.cellGroupFragment9};
-        CellGroupFragment thisCellGroupFragment;
-        if(swap == 0){
-            for(int i = 0; i < 9; i++){
-                num_buttons[i].setText(native_strings[i]);
-            }
-            for(int i = 0; i < 9; i++){
-                for(int j = 0; j < 9; j++){
-                    if(startBoard.getValue(i,j) != 0){
-                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+j/3]);
-                        Log.i(TAG, "Clicked group ");
-                        thisCellGroupFragment.setValue((i%3)*3+(j%3), chinese_strings[startBoard.getValue(i,j)-1]);
-
-                    }else if(currentBoard.getValue(i,j) != 0){
-                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+j/3]);
-                        thisCellGroupFragment.setValue((i%3)*3+(j%3), native_strings[currentBoard.getValue(i,j)-1]);
-                    }
-                }
-            }
-            swap = 1;
-        }else{
-            for(int i = 0; i < 9; i++){
-                num_buttons[i].setText(chinese_strings[i]);
-            }
-            for(int i = 0; i < 9; i++){
-                for(int j = 0; j < 9; j++){
-                    if(startBoard.getValue(i,j) != 0){
-                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+(j/3)]);
-                        thisCellGroupFragment.setValue((i%3)*3+(j%3), native_strings[startBoard.getValue(i,j)-1]);
-
-                    }else if(currentBoard.getValue(i,j) != 0){
-                        thisCellGroupFragment = (CellGroupFragment) getSupportFragmentManager().findFragmentById(cellGroupFragments[(i/3)*3+(j/3)]);
-                        thisCellGroupFragment.setValue((i%3)*3+(j%3), chinese_strings[currentBoard.getValue(i,j)-1]);
-                    }
-                }
-            }
-            swap = 0;
-        }
-    }*/
 }
