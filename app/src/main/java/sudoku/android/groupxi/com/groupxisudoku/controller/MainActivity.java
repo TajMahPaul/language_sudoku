@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //Pop up window for Info
         selectionWindow = new Dialog(this);
         Button info = findViewById(R.id.infoButton);
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // Upload button for custom word pairs
         Button uploadButton = findViewById(R.id.Uploadbutton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     // play
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         sizeButton.setText("4x4");
                         size = 4;
                     }
-
                 }else{
                     sizeButton.setText("4x4");
                     size = 4;
@@ -173,22 +171,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v("Permission","Permission is granted");
-                return true;
-            } else {
-
-                Log.v("Permission","Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
+        // permission is automatically granted on SDK < 23 upon installation
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             Log.v("Permission","Permission is granted");
             return true;
         }
+        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Log.v("Permission", "Permission is granted");
+            return true;
+        }
+        Log.v("Permission","Permission is revoked");
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        return false;
     }
 
     @Override
@@ -197,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             Log.v("Permission","Permission: "+permissions[0]+ "was "+grantResults[0]);
             //resume tasks needing this permission
-
         }
     }
 

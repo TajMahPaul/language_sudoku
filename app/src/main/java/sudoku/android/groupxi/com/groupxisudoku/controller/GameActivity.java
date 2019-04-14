@@ -37,7 +37,6 @@ public class GameActivity extends AppCompatActivity {
     public Board startBoard;
     public Board currentBoard;
 
-
     private Button[] num_buttons;
     public int height, width;
     List<Integer> boardNumber = new ArrayList<>();
@@ -79,18 +78,10 @@ public class GameActivity extends AppCompatActivity {
 
         width = Math.round(metrics.widthPixels);
         height = Math.round(metrics.heightPixels);
-
-        if (width < height){
-            height = Math.round((height*6)/10);
-        }else{
-            height = Math.round((height*7)/10);
-        }
-
-
+        height = width < height ? Math.round(height*6/10) : Math.round(height*7/10);
 
         int source = getIntent().getIntExtra("source",1);
 
-        //Log.d("1",source);
         native_strings = new String[import_size];
         chinese_strings = new String[import_size];
 
@@ -155,7 +146,6 @@ public class GameActivity extends AppCompatActivity {
                 R.id.num_button5, R.id.num_button6, R.id.num_button7, R.id.num_button8,R.id.num_button9,
                 R.id.num_button10, R.id.num_button11, R.id.num_button12};
 
-        //numButtonsId = hide_buttons(numButtonsId, size, import_size);
         // check orientation and hide dead buttons
         Button tmp;
         int orientation = getResources().getConfiguration().orientation;

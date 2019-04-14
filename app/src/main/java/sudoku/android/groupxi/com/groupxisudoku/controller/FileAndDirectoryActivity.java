@@ -30,21 +30,20 @@ import sudoku.android.groupxi.com.groupxisudoku.R;
 
 public class FileAndDirectoryActivity extends ListActivity {
 
-    ListView listview ;
+    ListView listview;
     private List<String> fileList = new ArrayList<String>();
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_directory);
-
         listview = findViewById(android.R.id.list) ;
         File root_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         ListDir(root_path);
-
-
     }
+
     @Override
-    protected void onListItemClick(ListView l , View v , int position , long id)
-    {
+    protected void onListItemClick(ListView l , View v , int position , long id) {
         String value = (String) l.getItemAtPosition(position);
         ArrayList<LanguageSample> word_list = readLanguageData(value);
         //Log.d("gy", "onListItemClick: 1");
@@ -57,6 +56,7 @@ public class FileAndDirectoryActivity extends ListActivity {
         startActivity(intent);
 
     }
+
     void ListDir(File f) {
         File[] files = f.listFiles();
         if (files != null ){
@@ -94,7 +94,6 @@ public class FileAndDirectoryActivity extends ListActivity {
                 LanguageSamples.add(sample);
 
                 Log.d("MyActivity" , "Added: " + sample);
-
             }
         } catch (IOException e) {
             Log.e("MyActivity" , "Error reading data file on line" + line, e);
@@ -102,5 +101,4 @@ public class FileAndDirectoryActivity extends ListActivity {
         }
         return LanguageSamples;
     }
-
 }
