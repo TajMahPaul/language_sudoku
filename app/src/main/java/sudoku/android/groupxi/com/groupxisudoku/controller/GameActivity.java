@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.speech.tts.TextToSpeech;
 
@@ -104,10 +105,33 @@ public class GameActivity extends AppCompatActivity {
         }
 
         GridView gridView = findViewById(R.id.gridView);
-
+        final TextView timer = findViewById(R.id.timer);
 
         // start timer
         start_time = System.nanoTime();
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                long time_passed = (System.nanoTime() - start_time) / 1000000000;
+                                String minutes = Long.toString(time_passed / 60);
+                                String seconds = Long.toString(time_passed % 60);
+                                String message = minutes + ":" + seconds;
+                                timer.setText(message);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        thread.start();
 
         //initialize text to speech
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -257,7 +281,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(currentBoard.isBoardFull() == true){
+                    if(currentBoard.isBoardFull()){
                         // compute and display amount of time taken to beat the game
                         long time_passed = (System.nanoTime() - start_time) / 1000000000;
                         String minutes = Long.toString(time_passed / 60);
@@ -266,10 +290,6 @@ public class GameActivity extends AppCompatActivity {
                         if (time_passed / 60 > 0)
                             message += minutes + " minutes, ";
                         message += seconds + " seconds.";
-                        Toast t = Toast.makeText(GameActivity.this, message, Toast.LENGTH_LONG);
-                        t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
-                        t.show();
-                        Log.d("message", message);
                         // compute top three words the user answered incorrectly and save it to a file
                         WordPair[] rank = myList.createRanking(size);
                         String filename = "ranking.txt";
@@ -377,78 +397,6 @@ public class GameActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putSerializable("originalBoard", startBoard);
         outState.putSerializable("currentBoard", currentBoard);
-    }
-
-    public int[] hide_buttons(int numButtonsId[], int size, int import_size) {
-        // check orientation and hide dead buttons
-        Button tmp;
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // In portrait
-            if (size == 4) {
-                for (int i = size; i < import_size; i++) {
-                    tmp = findViewById(numButtonsId[i]);
-                    tmp.setVisibility(View.GONE);
-                }
-            } else if (size == 6) {
-                if (isTablet(GameActivity.this)) {
-                    for (int i = size; i < import_size; i++) {
-                        tmp = findViewById(numButtonsId[i]);
-                        tmp.setVisibility(View.GONE);
-                    }
-                } else {
-                    numButtonsId[3] = R.id.num_button6;
-                    numButtonsId[4] = R.id.num_button7;
-                    numButtonsId[5] = R.id.num_button8;
-                    tmp = findViewById(R.id.num_button4);
-                    tmp.setVisibility(View.GONE);
-                    tmp = findViewById(R.id.num_button5);
-                    tmp.setVisibility(View.INVISIBLE);
-                    tmp = findViewById(R.id.num_button9);
-                    tmp.setVisibility(View.GONE);
-                }
-            } else if (size == 9 && isTablet(GameActivity.this)) {
-                for (int i = 5; i < 9; i++) {
-                    numButtonsId[i] = numButtonsId[i + 1];
-                }
-                tmp = findViewById(R.id.num_button6);
-                tmp.setVisibility(View.GONE);
-                tmp = findViewById(R.id.num_button11);
-                tmp.setVisibility(View.INVISIBLE);
-                tmp = findViewById(R.id.num_button12);
-                tmp.setVisibility(View.GONE);
-            }
-        } else {
-            // In landscape
-            if (size == 4) {
-                numButtonsId[2] = R.id.num_button4;
-                numButtonsId[3] = R.id.num_button5;
-                int[] GONE = new int[] {R.id.num_button3, R.id.num_button6,
-                        R.id.num_button7, R.id.num_button8, R.id.num_button9,
-                        R.id.num_button10, R.id.num_button11, R.id.num_button12};
-                int n = isTablet(GameActivity.this) ? 8 : 5;
-                for (int i = 0; i < n; i++){
-                    tmp = findViewById(GONE[i]);
-                    tmp.setVisibility(View.GONE);
-                }
-            } else if (size == 6) {
-                int[] GONE = new int[] {R.id.num_button7, R.id.num_button8, R.id.num_button9,
-                        R.id.num_button10, R.id.num_button11, R.id.num_button12};
-                int n = isTablet(GameActivity.this) ? 6 : 3;
-                for (int i = 0; i < n; i++){
-                    tmp = findViewById(GONE[i]);
-                    tmp.setVisibility(View.GONE);
-                }
-            } else if (size == 9 && isTablet(GameActivity.this)) {
-                tmp = findViewById(R.id.num_button10);
-                tmp.setVisibility(View.GONE);
-                tmp = findViewById(R.id.num_button11);
-                tmp.setVisibility(View.GONE);
-                tmp = findViewById(R.id.num_button12);
-                tmp.setVisibility(View.GONE);
-            }
-        }
-        return numButtonsId;
     }
 
     public static boolean isTablet(Context context) {
