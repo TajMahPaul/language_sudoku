@@ -11,7 +11,7 @@ public class Board implements Serializable {
 
     public Board(int size) {
         this.size = size;
-        this.gameCells = new int [size][size];
+        this.gameCells = new  int [size][size];
         //Log.e(TAG, "Board: "+ String.valueOf(size));
 
     }
