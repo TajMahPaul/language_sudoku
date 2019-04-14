@@ -1,7 +1,5 @@
 package sudoku.android.groupxi.com.groupxisudoku.model;
 
-import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
-
 public class WordList {
 
     private static final int INITIAL_LIST_CAPACITY = 16;
@@ -9,6 +7,7 @@ public class WordList {
     private int current_list_capacity, word_count;
 
     private WordPair list[];
+
 
     private int findWordPairIndex(String native_word, String foreign_word) {
         for (int i = 0; i < word_count; i++) {
@@ -26,12 +25,6 @@ public class WordList {
 
     public int getWordCount() { return word_count; }
 
-    public void appendWordPair(String native_word, String foreign_word) {
-        if (findWordPairIndex(native_word, foreign_word) == -1)
-            list[word_count++] = new WordPair(native_word, foreign_word);
-        if (word_count >= current_list_capacity)
-            expandWordList();
-    }
 
     public void incrementWordPairIncorrectCount(String native_word, String foreign_word) {
         int index = findWordPairIndex(native_word, foreign_word);

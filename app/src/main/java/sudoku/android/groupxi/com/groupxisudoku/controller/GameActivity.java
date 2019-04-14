@@ -1,9 +1,13 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -13,7 +17,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.speech.tts.TextToSpeech;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -24,13 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.Board;
+import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.model.WordList;
 import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
+import sudoku.android.groupxi.com.groupxisudoku.model.WordPairViewModel;
 
 public class GameActivity extends AppCompatActivity {
+
+    private WordPairViewModel mWordViewModel;
 
     TextToSpeech t1;
     TextToSpeech t2;
@@ -46,10 +52,19 @@ public class GameActivity extends AppCompatActivity {
     public String[] native_strings, chinese_strings;
     public long start_time;
     int difficulty;
-
+    public List<WordPair> word_list1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mWordViewModel = ViewModelProviders.of(this).get(WordPairViewModel.class);
+        mWordViewModel.getAllWords().observe(this, new Observer<List<WordPair>>() {
+            @Override
+            public void onChanged(@Nullable final List<WordPair> words) {
+                // Update the cached copy of the words in the adapter.
+               word_list1 = words;
+            }
+        });
+
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
         int import_size = isTablet(GameActivity.this) ? 12 : 9;
@@ -58,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
         final boolean isListening = getIntent().getBooleanExtra("listening", false);
         difficulty = getIntent().getIntExtra("difficulty", 0);
         num_buttons = new Button [size];
+
 
         if(savedInstanceState!=null) {
             Log.d(TAG, "onCreate: load saved data");
@@ -94,15 +110,14 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }else{
+
             native_strings = res.getStringArray(R.array.native_array);
             chinese_strings = res.getStringArray(R.array.chinese_array);
         }
 
         // create WordList
         final WordList myList = new WordList();
-        for (int i = 0; i < size; i++) {
-            myList.appendWordPair(native_strings[i], chinese_strings[i]);
-        }
+
 
         GridView gridView = findViewById(R.id.gridView);
         final TextView timer = findViewById(R.id.timer);
