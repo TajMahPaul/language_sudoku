@@ -1,15 +1,12 @@
 package sudoku.android.groupxi.com.groupxisudoku.model;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 
 public class Board implements Serializable {
+
     private int[][] gameCells;
+
     private int size;
 
     public Board(int size) {
