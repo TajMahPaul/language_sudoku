@@ -7,13 +7,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.app.Dialog;
-
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 
@@ -25,10 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean isListening = false;
     Dialog selectionWindow;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         //Pop up window for Info
         selectionWindow = new Dialog(this);
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PopupInfo.class));
             }
         });
+
 
         // Upload button for custom word pairs
         Button uploadButton = findViewById(R.id.Uploadbutton);
