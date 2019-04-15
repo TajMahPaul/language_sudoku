@@ -1,6 +1,7 @@
 package sudoku.android.groupxi.com.groupxisudoku.model;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
+import sudoku.android.groupxi.com.groupxisudoku.controller.GameActivity;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,6 +37,7 @@ public class GridViewAdapter extends BaseAdapter {
 
     boolean emptyClicked = false; // if a empty cell has been emptyClicked
     boolean isListening = false;
+    boolean isScrolling = false;
     Button clickedCell = null;
     int clickedPosition = 0;// reference of the emptyClicked cell
 
@@ -45,7 +48,7 @@ public class GridViewAdapter extends BaseAdapter {
     int height;
     int width;
 
-    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, boolean isListening, Context context) {
+    public GridViewAdapter(List<Integer> isSource1, List<Integer> isSource2, String[] native_strings, String[] chinese_strings, int language, int size, int height, int width, boolean isListening, boolean isScrolling,Context context) {
         this.originalNumber = new ArrayList<Integer>(isSource1);
         this.currentNumber = new ArrayList<Integer>(isSource2);
         this.native_strings = native_strings;
@@ -55,6 +58,7 @@ public class GridViewAdapter extends BaseAdapter {
         this.mContext = context;
         this.height = height;
         this.width = width;
+        this.isScrolling = isScrolling;
         this.isListening = isListening;
 
         if(language == 0){
@@ -176,7 +180,11 @@ public class GridViewAdapter extends BaseAdapter {
                 //uncheck selected cell
                 if(clickedCell != null){
 
-                    setRCSBackground(clickedRow, clickedColumn, parent);
+                    if(isScrolling){
+                        setCellBackground(clickedCell, clickedRow, clickedColumn);
+                    }else {
+                        setRCSBackground(clickedRow, clickedColumn, parent);
+                    }
 
                     clickedCell = null;
                 }
@@ -190,7 +198,13 @@ public class GridViewAdapter extends BaseAdapter {
                 }
 
 
-                setSelectedRCSBackground(position, parent);
+                if(isScrolling){
+                    setSelectedCellBackground(button, position);
+                }else {
+                    setSelectedRCSBackground(position, parent);
+                    setSelectedCenterBackground(position, button);
+                }
+
                 clickedCell = button;
                 clickedPosition = position;
                 clickedRow = position / size;
@@ -228,9 +242,6 @@ public class GridViewAdapter extends BaseAdapter {
         return clickedColumn;
     }
 
-    public void setEmptyClicked(boolean emptyClicked) {
-        this.emptyClicked = emptyClicked;
-    }
 
     private void setCellBackground(Button button, int row, int column){
         if( ( (row+1)%square_height == 0 && (row+1)%size != 0) && (column+1)%square_width == 0 && (column+1)%size != 0) {
@@ -249,16 +260,16 @@ public class GridViewAdapter extends BaseAdapter {
 
     private void setSelectedCellBackground(Button button, int position){
         if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
-            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom_right);
+            button.setBackgroundResource(R.drawable.table_border_cell_rcs_bottom_right);
         }
         else if ((position+1)%square_width == 0 && (position+1)%size != 0 ){
-            button.setBackgroundResource(R.drawable.table_border_cell_selected_right);
+            button.setBackgroundResource(R.drawable.table_border_cell_rcs_right);
         }
         else if( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0){
-            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom);
+            button.setBackgroundResource(R.drawable.table_border_cell_rcs_bottom);
         }
         else{
-            button.setBackgroundResource(R.drawable.table_border_cell_selected);
+            button.setBackgroundResource(R.drawable.table_border_cell_rcs);
         }
     }
 
@@ -295,6 +306,22 @@ public class GridViewAdapter extends BaseAdapter {
 
     }
 
+    private void setSelectedCenterBackground(int position, Button button){
+        if( ( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0) && (position+1)%square_width == 0 && (position+1)%size!= 0) {
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom_right);
+        }
+        else if ((position+1)%square_width == 0 && (position+1)%size != 0 ){
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_right);
+        }
+        else if( (position/size + 1)%square_height == 0 && (position/size+1)%size != 0){
+            button.setBackgroundResource(R.drawable.table_border_cell_selected_bottom);
+        }
+        else{
+            button.setBackgroundResource(R.drawable.table_border_cell_selected);
+        }
+
+    }
+
     private void setRCSBackground(int selectedRow, int selectedColumn, ViewGroup parent){
 
         for(int i = 0; i < size; i++){
@@ -314,17 +341,20 @@ public class GridViewAdapter extends BaseAdapter {
 
     public void uncheckClickedCell(GridView gridView) {
         if(clickedCell != null){
+            if(isScrolling){
+                setCellBackground(clickedCell, clickedRow, clickedColumn);
+            }else {
+                for(int i = 0; i < size; i++){
+                    setCellBackground((Button)gridView.getChildAt(clickedRow*size+i), clickedRow*size+i);
 
-            for(int i = 0; i < size; i++){
-                setCellBackground((Button)gridView.getChildAt(clickedRow*size+i), clickedRow*size+i);
+                    setCellBackground((Button)gridView.getChildAt(clickedColumn+size*i), clickedColumn+size*i);
+                }
 
-                setCellBackground((Button)gridView.getChildAt(clickedColumn+size*i), clickedColumn+size*i);
-            }
-
-            int startPosition = (clickedRow-(clickedRow%square_height))*size + clickedColumn - (clickedColumn%square_width);
-            for(int j = 0; j < square_height; j++){
-                for(int k = 0; k < square_width; k++){
-                    setCellBackground((Button)gridView.getChildAt(startPosition + j * size + k), startPosition + j * size + k);
+                int startPosition = (clickedRow-(clickedRow%square_height))*size + clickedColumn - (clickedColumn%square_width);
+                for(int j = 0; j < square_height; j++){
+                    for(int k = 0; k < square_width; k++){
+                        setCellBackground((Button)gridView.getChildAt(startPosition + j * size + k), startPosition + j * size + k);
+                    }
                 }
             }
 
@@ -336,7 +366,6 @@ public class GridViewAdapter extends BaseAdapter {
     public void updateBoardNumber(int position, int value){
         currentNumber.set(position, value);
     }
-
 
 
 }

@@ -39,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
     private Button[] num_buttons;
     public int height, width;
+    public boolean isScrolling;
     List<Integer> boardNumber = new ArrayList<>();
     List<Integer> currentNumber = new ArrayList<>();
     GridViewAdapter adapter;
@@ -47,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
     int difficulty;
     public List<WordPair> word_list1;
     private WordDao mWordDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
         final int size = getIntent().getIntExtra("size", import_size);
         final boolean isListening = getIntent().getBooleanExtra("listening", false);
         difficulty = getIntent().getIntExtra("difficulty", 0);
+        isScrolling = (!(isTablet(GameActivity.this)) && size == 9);
         num_buttons = new Button [size];
 
 
@@ -170,7 +173,7 @@ public class GameActivity extends AppCompatActivity {
 
         // set up gridView adapter
         gridView.setNumColumns(size);
-        adapter = new GridViewAdapter(boardNumber, currentNumber, native_strings, chinese_strings, language, size,height,width, isListening, this);
+        adapter = new GridViewAdapter(boardNumber, currentNumber, native_strings, chinese_strings, language, size,height,width, isListening, isScrolling,this);
         gridView.setAdapter(adapter);
 
         //add function to number buttons
