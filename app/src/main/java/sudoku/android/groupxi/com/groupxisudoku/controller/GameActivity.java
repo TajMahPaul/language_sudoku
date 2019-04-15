@@ -112,7 +112,7 @@ public class GameActivity extends AppCompatActivity {
         final WordList myList = new WordList();
 
 
-        GridView gridView = findViewById(R.id.gridView);
+        final GridView gridView = findViewById(R.id.gridView);
         final TextView timer = findViewById(R.id.timer);
 
         // start timer
@@ -264,9 +264,9 @@ public class GameActivity extends AppCompatActivity {
                     String text = (String) temp_button.getText();
 
                     //check if a cell has been selected
-                    if(adapter.isClicked()){
-                        int row = adapter.getRow();
-                        int column = adapter.getColumn();
+                    if(adapter.isEmptyClicked()){
+                        int row = adapter.getClickedRow();
+                        int column = adapter.getClickedColumn();
 
                         //check if the number can fill in this cell
                         if(currentBoard.isBoardCorrect(row,column, finalI) == true){
@@ -274,10 +274,11 @@ public class GameActivity extends AppCompatActivity {
 
                             Button clickedButton = adapter.getClickedCell();
                             clickedButton.setText(text);
-                            row = adapter.getRow();
-                            column = adapter.getColumn();
-                            adapter.setClicked(false);
-                            adapter.uncheckClickedCell();
+                            row = adapter.getClickedRow();
+                            column = adapter.getClickedColumn();
+
+                            adapter.uncheckClickedCell(gridView);
+
                             int pos = row*size+(column);
                             adapter.updateBoardNumber(pos, -finalI);
                         }else{
@@ -287,6 +288,8 @@ public class GameActivity extends AppCompatActivity {
                             String log = "Incremented count on pair " + native_strings[finalI-1] + " " + chinese_strings[finalI-1];
                             Log.d("incorrect count", log);
                         }
+                    }else {
+                        Toast.makeText(GameActivity.this, R.string.start_piece_error, Toast.LENGTH_SHORT).show();
                     }
 
                     if(currentBoard.isBoardFull()){
@@ -331,13 +334,13 @@ public class GameActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(adapter.isClicked()){
+                if(adapter.isEmptyClicked()){
                     Log.d(TAG, "onClick: delete");
                     Button clickedButton = adapter.getClickedCell();
                     clickedButton.setText("");
-                    adapter.uncheckClickedCell();
-                    int row = adapter.getRow();
-                    int column = adapter.getColumn();
+                    adapter.uncheckClickedCell(gridView);
+                    int row = adapter.getClickedRow();
+                    int column = adapter.getClickedColumn();
                     currentBoard.setValue(row,column, 0);
 
                 }
