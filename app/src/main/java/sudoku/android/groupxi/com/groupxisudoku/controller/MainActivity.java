@@ -8,11 +8,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.app.Dialog;
 
 import sudoku.android.groupxi.com.groupxisudoku.R;
 import sudoku.android.groupxi.com.groupxisudoku.model.WordRoomDatabase;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private int difficulty = 0;
     private boolean isListening = false;
     Dialog selectionWindow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PopupInfo.class));
             }
         });
+
 
         // Upload button for custom word pairs
         Button uploadButton = findViewById(R.id.Uploadbutton);
