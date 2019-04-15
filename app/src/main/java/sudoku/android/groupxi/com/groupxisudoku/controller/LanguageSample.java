@@ -3,7 +3,7 @@ package sudoku.android.groupxi.com.groupxisudoku.controller;
 import java.io.Serializable;
 
 class LanguageSample implements Serializable {
-    
+
     private String lang_a;
     private String lang_b;
 

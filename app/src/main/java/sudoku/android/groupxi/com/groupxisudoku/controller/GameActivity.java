@@ -1,17 +1,13 @@
 package sudoku.android.groupxi.com.groupxisudoku.controller;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -32,12 +28,9 @@ import sudoku.android.groupxi.com.groupxisudoku.model.Board;
 import sudoku.android.groupxi.com.groupxisudoku.model.GridViewAdapter;
 import sudoku.android.groupxi.com.groupxisudoku.model.WordList;
 import sudoku.android.groupxi.com.groupxisudoku.model.WordPair;
-import sudoku.android.groupxi.com.groupxisudoku.model.WordPairViewModel;
+import sudoku.android.groupxi.com.groupxisudoku.model.WordRoomDatabase;
 
 public class GameActivity extends AppCompatActivity {
-
-    private WordPairViewModel mWordViewModel;
-
     TextToSpeech t1;
     TextToSpeech t2;
     private final String TAG = "GameActivity";
@@ -53,20 +46,19 @@ public class GameActivity extends AppCompatActivity {
     public long start_time;
     int difficulty;
     public List<WordPair> word_list1;
+    private WordDao mWordDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mWordViewModel = ViewModelProviders.of(this).get(WordPairViewModel.class);
-        mWordViewModel.getAllWords().observe(this, new Observer<List<WordPair>>() {
-            @Override
-            public void onChanged(@Nullable final List<WordPair> words) {
-                // Update the cached copy of the words in the adapter.
-               word_list1 = words;
-            }
-        });
-
         // make sure you do this first!!
         super.onCreate(savedInstanceState);
+
+        WordRoomDatabase db = WordRoomDatabase.getDatabase(this);
+        mWordDao = db.wordDao();
+
+        word_list1 = mWordDao.getAllWords();
+
+
         int import_size = isTablet(GameActivity.this) ? 12 : 9;
         final int language = getIntent().getIntExtra("language", 0);
         final int size = getIntent().getIntExtra("size", import_size);
@@ -107,12 +99,13 @@ public class GameActivity extends AppCompatActivity {
             for (int i = 0; i < native_strings.length; i++){
                 native_strings[i] = word_list.get(i).getLang_a();
                 chinese_strings[i] = word_list.get(i).getLang_b();
-
             }
         }else{
+            for (int i = 0; i < native_strings.length; i++){
+                native_strings[i] = word_list1.get(i).getNativeWord();
+                chinese_strings[i] = word_list1.get(i).getForeignWord();
+            }
 
-            native_strings = res.getStringArray(R.array.native_array);
-            chinese_strings = res.getStringArray(R.array.chinese_array);
         }
 
         // create WordList
