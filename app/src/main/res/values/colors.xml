@@ -6,4 +6,5 @@
     <color name="lightBackgroundColor">#FFFFFF</color>
     <color name="darkBackgroundColor">#000000</color>
     <color name="accent2">#76FF03</color>
+    <color name="selected">#01579B</color>
 </resources>
